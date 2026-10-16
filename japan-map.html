@@ -112,6 +112,15 @@
   .pintip::before{display:none}
   .wtip{background:#161a21;color:#fff;border:none;font:700 11px 'Zen Kaku Gothic New',sans-serif;padding:2px 8px;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
   .wtip::before{display:none}
+  .wtip{white-space:normal;width:max-content;max-width:270px;line-height:1.4;padding:.5rem .7rem;font:500 12px 'Zen Kaku Gothic New',sans-serif}
+  .wtip b{font:800 14px 'Shippori Mincho',serif}
+  .wtip .tj{opacity:.7;font:500 12px 'Shippori Mincho',serif;margin-left:.2rem}
+  .wtip .tt{font:700 12px 'Shippori Mincho',serif;color:#f1a89d;margin:.15rem 0 .2rem}
+  .wtip .tb{opacity:.92}
+  .wtip .tf{margin-top:.3rem;opacity:.75;font-size:11px}
+  .wtip .tc{margin-top:.35rem;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+  [data-band="detail"] .wtip.wardtip,[data-band="street"] .wtip.wardtip{display:none}
+  [data-band="overview"] .wtip.hoodtip{display:none}
   p.para{margin:.35rem 0;max-width:62ch}
   .srcs{font-size:.74rem;line-height:1.5;color:var(--soft);margin:1rem 0 0}
   .srcs a{color:var(--soft)}
@@ -825,6 +834,23 @@ function buildLines(){
   });
 }
 
+function firstSentence(s,max){
+  s=String(s||"");var m=s.match(/^.*?[.!?](\s|$)/);var t=m?m[0].trim():s;
+  if(t.length>max)t=t.slice(0,max-1).replace(/\s+\S*$/,"")+"…";return t;
+}
+function wardTip(w){
+  var h="<b>"+w.en+"</b>"+(w.ja?" <span class='tj'>"+w.ja+"</span>":"");
+  if(w.info){h+="<div class='tt'>"+w.info.tag+"</div><div class='tb'>"+firstSentence(w.info.t,170)+"</div>"}
+  else h+="<div class='tb'>Not on the route.</div>";
+  if(w.hoods.length)h+="<div class='tf'>"+w.hoods.length+" area"+(w.hoods.length>1?"s":"")+": "+w.hoods.slice(0,4).map(function(x){return x.short}).join(", ")+(w.hoods.length>4?"…":"")+"</div>";
+  return h+"<div class='tc'>Click for the full summary</div>";
+}
+function hoodTip(h){
+  var lo=(typeof LORE!=="undefined"&&LORE[h.id])||{};
+  var h2="<b>"+h.name+"</b> <span class='tj'>"+h.jp+"</span><div class='tt'>"+h.tag+"</div>";
+  h2+="<div class='tb'>"+firstSentence(lo.h&&lo.h[0]||h.intro,170)+"</div>";
+  return h2+"<div class='tc'>Click for history, food and craft</div>";
+}
 function buildLayers(){
   var c=prep(state.city);
   Object.keys(G).forEach(function(k){if(k!=="line")G[k].clearLayers()});
@@ -832,12 +858,13 @@ function buildLayers(){
   c.W.forEach(function(w){
     var has=w.hoods.length||w.info;
     w.layer=L.polygon(w.polys,{className:"ward"+(has?" has":""),interactive:true}).addTo(G.ward);
-    w.layer.bindTooltip(w.en+(w.ja?" · "+w.ja:""),{sticky:true,className:"wtip",direction:"top"});
+    w.layer.bindTooltip(wardTip(w),{sticky:true,className:"wtip wardtip",direction:"auto",offset:[18,0]});
     w.layer.on("click",function(){selectWard(w.code)});
     L.marker(w.label,{interactive:false,keyboard:false,icon:L.divIcon({className:"wlabel"+(w.hoods.length?" main":""),html:"<span>"+w.en+"</span>",iconSize:[0,0]})}).addTo(G.ward);
   });
   c.hoods.forEach(function(h){
     h.circle=L.circle([h.lat,h.lng],{radius:(h.r||.5)*1000,className:"hood"}).addTo(G.hood);
+    h.circle.bindTooltip(hoodTip(h),{sticky:true,className:"wtip hoodtip",direction:"auto",offset:[18,0]});
     h.circle.on("click",function(){selectHood(h.id)});
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
