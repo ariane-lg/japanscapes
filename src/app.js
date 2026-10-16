@@ -24,7 +24,7 @@ var CITIES={
   tag:"The nation's kitchen",bounds:[[34.58,135.38],[34.78,135.62]],wards:WARDS.osaka,hoods:OS_HOODS,places:OS_PLACES,
   intro:"Osaka's wards, with the central Chuo, Kita and Naniwa wards carrying most of what you would come for."}
 };
-if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
+if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
 var ORDER=["tokyo","nakasendo","kyoto","osaka"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
 function C(){return CITIES[state.city]}
@@ -149,7 +149,7 @@ function buildLayers(){
   if(c.hotel){
     var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
     m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
-    m.on("click",function(){selectHood("akasaka")});
+    m.on("click",function(){if(c.hotel.hood)selectHood(c.hotel.hood)});
   }
   if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}
 }
