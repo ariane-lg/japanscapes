@@ -37,9 +37,10 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
+  hotel:'<path d="M3 19V6.5"/><path d="M3 14.5h18V19"/><path d="M21 14.5v-3a2.5 2.5 0 0 0-2.5-2.5H11v5.5"/><circle cx="6.6" cy="11" r="1.7"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
-function ico(n){return "<svg class='ico c-"+n+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
+function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
 
 /* ---------- geometry helpers ---------- */
 function ringArea(r){var a=0;for(var i=0;i<r.length;i++){var p=r[i],q=r[(i+1)%r.length];a+=p[0]*q[1]-q[0]*p[1]}return a/2}
@@ -140,14 +141,14 @@ function buildLayers(){
   c.places.forEach(function(p){
     var mine=p.src==="research"||p.src==="list";
     p.mine=mine;
-    p.m=L.circleMarker([p.lat,p.lng],{radius:mine?7:5.5,className:"pin pin-"+p.cat+(mine?" mine":""),bubblingMouseEvents:false});
-    p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[9,0],className:"pintip"});
+    p.m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:"pin pinb pin-"+p.cat+(mine?" mine":""),html:ico(p.cat,true),iconSize:[28,28],iconAnchor:[14,14]}),riseOnHover:true,keyboard:false});
+    p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[16,0],className:"pintip"});
     p.m.on("click",function(){selectPlace(p)});
   });
   refreshPins();
   if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"",html:"<div class='hotel'></div>",iconSize:[0,0]})}).addTo(G.hotel);
-    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[16,0],className:"hoteltip"});
+    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false}).addTo(G.hotel);
+    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[15,0],className:"hoteltip"});
     m.on("click",function(){selectHood("akasaka")});
   }
   if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}

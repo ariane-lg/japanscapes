@@ -12,7 +12,7 @@
   :root{
     --paper:#ecece7; --surface:#f8f8f4; --raise:#ffffff;
     --ink:#161a21; --soft:#5a606b; --line:rgba(22,26,33,.13);
-    --shu:#c23a2b; --shu-soft:rgba(194,58,43,.12);
+    --shu:#25428f; --shu-soft:rgba(37,66,143,.1); --eat:#c8452d;
     --ai:#27405e; --matcha:#5f7a3f; --kin:#a8842c;
     --shadow:0 1px 2px rgba(22,26,33,.08),0 10px 28px rgba(22,26,33,.10);
   }
@@ -20,7 +20,7 @@
     :root:not([data-theme="light"]){
       --paper:#101319; --surface:#171b23; --raise:#1e232d;
       --ink:#e9e8e1; --soft:#a3a9b5; --line:rgba(233,232,225,.14);
-      --shu:#e5604f; --shu-soft:rgba(229,96,79,.16);
+      --shu:#8fa6ee; --shu-soft:rgba(143,166,238,.16); --eat:#e5714f;
       --ai:#9db4d4; --matcha:#a1b87e; --kin:#d1b061;
       --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.45);
     }
@@ -28,7 +28,7 @@
   :root[data-theme="dark"]{
     --paper:#101319; --surface:#171b23; --raise:#1e232d;
     --ink:#e9e8e1; --soft:#a3a9b5; --line:rgba(233,232,225,.14);
-    --shu:#e5604f; --shu-soft:rgba(229,96,79,.16);
+    --shu:#8fa6ee; --shu-soft:rgba(143,166,238,.16); --eat:#e5714f;
     --ai:#9db4d4; --matcha:#a1b87e; --kin:#d1b061;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.45);
   }
@@ -86,11 +86,11 @@
   path.ward{fill:rgba(255,255,255,.35);stroke:#27405e;stroke-opacity:.55;stroke-width:1;cursor:pointer;transition:fill .15s}
   path.ward.has{fill:rgba(39,64,94,.09)}
   path.ward:hover{fill:rgba(194,58,43,.12)}
-  path.ward.sel{fill:rgba(194,58,43,.16);stroke:#c23a2b;stroke-opacity:1;stroke-width:2.2}
+  path.ward.sel{fill:rgba(37,66,143,.12);stroke:#25428f;stroke-opacity:1;stroke-width:2.2}
   [data-band="detail"] path.ward,[data-band="street"] path.ward{fill:transparent}
   [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill:rgba(194,58,43,.05)}
   path.hood{fill:rgba(39,64,94,.08);stroke:#27405e;stroke-opacity:.5;stroke-width:1.2;stroke-dasharray:4 4;cursor:pointer}
-  path.hood:hover,path.hood.sel{fill:rgba(194,58,43,.14);stroke:#c23a2b;stroke-opacity:.9;stroke-dasharray:none}
+  path.hood:hover,path.hood.sel{fill:rgba(37,66,143,.12);stroke:#25428f;stroke-opacity:.9;stroke-dasharray:none}
   .mline{pointer-events:stroke}
 
   .wlabel span,.hlabel span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;color:#2a2f3a;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 5px #fff;pointer-events:none}
@@ -115,7 +115,7 @@
   .wtip{white-space:normal;width:max-content;max-width:270px;line-height:1.4;padding:.5rem .7rem;font:500 12px 'Zen Kaku Gothic New',sans-serif}
   .wtip b{font:800 14px 'Shippori Mincho',serif}
   .wtip .tj{opacity:.7;font:500 12px 'Shippori Mincho',serif;margin-left:.2rem}
-  .wtip .tt{font:700 12px 'Shippori Mincho',serif;color:#f1a89d;margin:.15rem 0 .2rem}
+  .wtip .tt{font:700 12px 'Shippori Mincho',serif;color:#aebcf2;margin:.15rem 0 .2rem}
   .wtip .tb{opacity:.92}
   .wtip .tf{margin-top:.3rem;opacity:.75;font-size:11px}
   .wtip .tc{margin-top:.35rem;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;opacity:.6}
@@ -163,7 +163,7 @@
   /* custom line icons */
   .ico{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.22em}
   .row .ico{align-self:center;width:1.35em;height:1.35em}
-  .c-sight{color:var(--ai)} .c-eat{color:var(--shu)} .c-make{color:var(--kin)} .c-green{color:var(--matcha)} .c-mine,.c-line,.c-history,.c-craft,.c-tips{color:var(--ink)}
+  .c-sight{color:var(--ai)} .c-eat{color:var(--eat)} .c-make{color:var(--kin)} .c-green{color:var(--matcha)} .c-mine,.c-line,.c-history,.c-craft,.c-tips{color:var(--ink)}
   h4 .ico{color:var(--shu)}
   .chip{gap:.45rem}
   .chip[aria-pressed="false"] .ico{opacity:.4}
@@ -172,10 +172,20 @@
   /* map wards: ink strokes, red on hover/selected */
   path.ward{fill:rgba(255,255,255,.3);stroke:#14161a;stroke-opacity:.5;stroke-width:1}
   path.ward.has{fill:rgba(20,22,26,.045)}
-  path.ward:hover{fill:rgba(214,52,42,.1)}
-  path.ward.sel{fill:rgba(214,52,42,.12);stroke:#d6342a;stroke-opacity:1;stroke-width:2.2}
+  path.ward:hover{fill:rgba(37,66,143,.1)}
+  path.ward.sel{fill:rgba(37,66,143,.12);stroke:#25428f;stroke-opacity:1;stroke-width:2.2}
   [data-band="detail"] path.ward.has,[data-band="street"] path.ward.has{fill:transparent}
-  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill:rgba(214,52,42,.04)}
+  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill:rgba(37,66,143,.04)}
+  /* icon pins on the map */
+  .pinb{width:28px;height:28px;border-radius:50%;background:#fff;border:1.7px solid currentColor;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:pointer;transition:transform .12s}
+  .pinb:hover{transform:scale(1.12)}
+  .pinb .ico{width:17px;height:17px;vertical-align:0}
+  .pinb.pin-sight{color:#25428f} .pinb.pin-eat{color:#c8452d} .pinb.pin-make{color:#a8842c} .pinb.pin-green{color:#5f7a3f}
+  .pinb.mine{box-shadow:0 0 0 2px #fff,0 0 0 3.2px #14161a}
+  .pinb.sel{background:currentColor;transform:scale(1.18)}
+  .pinb.sel .ico{color:#fff}
+  .pinb.hotelb{width:26px;height:26px;background:#14161a;color:#14161a;border-color:#fff}
+  .pinb.hotelb .ico{color:#fff;width:16px;height:16px}
   .row.wide .sub{grid-column:1}
   .hotel{width:22px;height:22px;background:#161a21;color:#fff;border:2px solid #fff;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 1px 5px rgba(0,0,0,.4)}
   .hoteltip{background:#161a21;color:#fff;border:none;font:700 11px 'Zen Kaku Gothic New',sans-serif;padding:2px 8px;border-radius:3px}
@@ -830,9 +840,10 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
+  hotel:'<path d="M3 19V6.5"/><path d="M3 14.5h18V19"/><path d="M21 14.5v-3a2.5 2.5 0 0 0-2.5-2.5H11v5.5"/><circle cx="6.6" cy="11" r="1.7"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
-function ico(n){return "<svg class='ico c-"+n+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
+function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
 
 /* ---------- geometry helpers ---------- */
 function ringArea(r){var a=0;for(var i=0;i<r.length;i++){var p=r[i],q=r[(i+1)%r.length];a+=p[0]*q[1]-q[0]*p[1]}return a/2}
@@ -933,14 +944,14 @@ function buildLayers(){
   c.places.forEach(function(p){
     var mine=p.src==="research"||p.src==="list";
     p.mine=mine;
-    p.m=L.circleMarker([p.lat,p.lng],{radius:mine?7:5.5,className:"pin pin-"+p.cat+(mine?" mine":""),bubblingMouseEvents:false});
-    p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[9,0],className:"pintip"});
+    p.m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:"pin pinb pin-"+p.cat+(mine?" mine":""),html:ico(p.cat,true),iconSize:[28,28],iconAnchor:[14,14]}),riseOnHover:true,keyboard:false});
+    p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[16,0],className:"pintip"});
     p.m.on("click",function(){selectPlace(p)});
   });
   refreshPins();
   if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"",html:"<div class='hotel'></div>",iconSize:[0,0]})}).addTo(G.hotel);
-    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[16,0],className:"hoteltip"});
+    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false}).addTo(G.hotel);
+    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[15,0],className:"hoteltip"});
     m.on("click",function(){selectHood("akasaka")});
   }
   if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}
