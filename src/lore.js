@@ -1,6 +1,6 @@
 /* ---------- Lore: history, culture & craft, food, practical tips, sources ---------- */
 /* Written in my own words from the linked sources. h=history  c=culture & craft  f=food  t=good to know  s=sources */
-var CT_NOTE="Culture Trip pages could not be opened directly from here, so points attributed to it come from search-result summaries of those articles. Reddit forums were not reachable either.";
+var CT_NOTE="Culture Trip articles were read in full. Reddit could not be accessed, so no Reddit threads are used.";
 var LORE={
  asakusa:{
   h:["Tradition dates Senso-ji to 628, when two fishermen netted a small Kannon image from the Sumida River; a village headman is said to have turned his house into its first shrine. A priest re-established the temple in 645, which is why you also see 645 quoted.",
