@@ -28,6 +28,18 @@ if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.dates).forEach(function(k
 var ORDER=["tokyo","nakasendo","kyoto","osaka"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
 function C(){return CITIES[state.city]}
+var ICON={
+ sight:'<path d="M2.5 6.2c3-1.3 6-1.9 9.5-1.9s6.5.6 9.5 1.9"/><path d="M5 9.6h14"/><path d="M7.2 6v14.5M16.8 6v14.5"/>',
+ eat:'<path d="M3.5 11.5h17a8.5 7.5 0 0 1-17 0z"/><path d="M15 3.5l-3 7.5M18.5 4.5l-3 6.5"/>',
+ make:'<path d="M6.5 4.5h11M6.5 19.5h11"/><path d="M8 4.5v15M16 4.5v15"/><path d="M8 8.5l8 2.5M8 12.5l8 2.5"/>',
+ green:'<path d="M12 21v-7"/><path d="M12 14C7 14 4 10 4 5.5c2.5 1.6 5 2.2 8 .5 3-1.7 5.5-1 8-.5 0 4.5-3 8.5-8 8.5z"/>',
+ mine:'<circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.2"/>',
+ line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
+ history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
+ craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
+ tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
+};
+function ico(n){return "<svg class='ico c-"+n+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
 
 /* ---------- geometry helpers ---------- */
 function ringArea(r){var a=0;for(var i=0;i<r.length;i++){var p=r[i],q=r[(i+1)%r.length];a+=p[0]*q[1]-q[0]*p[1]}return a/2}
@@ -188,7 +200,7 @@ function tagsHTML(a){return "<div class='tags'>"+(a||[]).map(function(t){return 
 function lis(a){return "<ul class='dots'>"+a.map(function(s){return "<li>"+s+"</li>"}).join("")+"</ul>"}
 function gq(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
 function badge(id){var l=LINE[id];return l?"<span class='lb' style='--c:"+l.c+"' title='"+l.name+" line'>"+id+"</span>":""}
-function placeRow(p){return "<li><button class='row' data-place='"+C().places.indexOf(p)+"'><span class='dot d-"+p.cat+"'></span><span class='nm'>"+p.name+(p.mine?" <span class='cnt'>yours</span>":"")+"</span><span class='sub'>"+p.note+"</span></button></li>"}
+function placeRow(p){return "<li><button class='row' data-place='"+C().places.indexOf(p)+"'>"+ico(p.cat)+"<span class='nm'>"+p.name+(p.mine?" <span class='cnt'>yours</span>":"")+"</span><span class='sub'>"+p.note+"</span></button></li>"}
 function hoodRow(h){var n=C().places.filter(function(p){return p.hood===h.id}).length;
   return "<li><button class='row wide' data-hood='"+h.id+"'><span class='nm'>"+h.name+" <span class='cnt'>"+h.jp+(n?" · "+n+" place"+(n>1?"s":""):"")+"</span></span><span class='sub'>"+h.tag+"</span></button></li>"}
 function crumbs(parts){
@@ -200,6 +212,11 @@ function crumbs(parts){
   return "<nav class='crumbs'>"+out.join(" › ")+"</nav>";
 }
 
+function hero(ja,en,sub){
+  var n=ja.length,fs=n<=1?7.5:n===2?5.6:n===3?4.4:3.4,st=ja.slice(0,3);
+  var hs=st.length>2?15:st.length===2?21:32;
+  return "<div class='hero'><div class='brush' style='font-size:"+fs+"rem'>"+ja+"</div><div class='rule'></div><div class='hrow'><div><div class='rom'>"+en+"</div><div class='hsub'>"+sub+"</div></div><div class='hanko' style='font-size:"+hs+"px'><span>"+st+"</span></div></div></div>";
+}
 function paras(a){return a.map(function(s){return "<p class='para'>"+s+"</p>"}).join("")}
 function srcs(a){return "<p class='srcs'>Sources: "+a.map(function(s){return "<a target='_blank' rel='noopener' href='"+s[1]+"'>"+s[0]+"</a>"}).join(" · ")+"</p>"}
 function themesHTML(){
@@ -208,8 +225,8 @@ function themesHTML(){
     return "<details class='theme'><summary>"+x.t+"</summary><p class='para'>"+x.d+"</p><p class='srcs'>Source: <a target='_blank' rel='noopener' href='"+x.s[1]+"'>"+x.s[0]+"</a></p></details>"}).join("");
 }
 function cityHTML(){
-  var c=C(),h="<p class='eyebrow'>"+(c.dates||"City guide")+"</p><h2 class='ptitle'>"+c.label+"</h2><span class='kanji'>"+c.ja+"</span><p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
-  h+="<div class='legend'><span><i class='ring'></i>Yours: research and Maps lists</span><span><i class='dot d-sight'></i>Sights</span><span><i class='dot d-eat'></i>Eat</span><span><i class='dot d-make'></i>Shops &amp; craft</span><span><i class='dot d-green'></i>Parks</span></div>";
+  var c=C(),h=hero(c.ja,c.label,c.dates||"city guide")+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
+  h+="<div class='legend'>"+ico('mine')+"Yours</span><span>"+ico('sight')+"Sights</span><span>"+ico('eat')+"Eat</span><span>"+ico('make')+"Shops &amp; craft</span><span>"+ico('green')+"Parks</span></div>";
   var ws=c.W.filter(function(w){return w.hoods.length||w.info}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
   if(ws.length){
     h+="<h4>Wards on the route</h4><ul class='list'>"+ws.map(function(w){
@@ -222,7 +239,7 @@ function cityHTML(){
 }
 function wardHTML(){
   var w=C().wardBy[state.ward];
-  var h=crumbs(1)+"<p class='eyebrow'>Ward · "+C().label+"</p><h2 class='ptitle'>"+w.en+"</h2><span class='kanji'>"+w.ja+"</span>";
+  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase());
   h+="<p class='ptag'>"+(w.info?w.info.tag:"Not on the route")+"</p><p class='lead'>"+(w.info?w.info.t:WARD_GENERIC)+"</p>";
   if(w.hoods.length)h+="<h4>Neighbourhoods here</h4><ul class='list'>"+w.hoods.map(hoodRow).join("")+"</ul>";
   var pl=w.places.filter(pinVisible);
@@ -232,16 +249,16 @@ function wardHTML(){
 }
 function hoodHTML(){
   var c=C(),hd=c.hoodBy[state.hood];
-  var h=crumbs(2)+"<p class='eyebrow'>Neighbourhood"+(hd.ward?" · "+hd.ward.en:"")+"</p><h2 class='ptitle'>"+hd.name+"</h2><span class='kanji'>"+hd.jp+"</span>";
+  var h=crumbs(2)+hero(hd.jp,hd.name,"neighbourhood"+(hd.ward?" · "+hd.ward.en.toLowerCase():""));
   h+="<p class='ptag'>"+hd.tag+"</p>"+tagsHTML(hd.tags)+"<p class='lead'>"+hd.intro+"</p>";
   var lo=LORE[hd.id]||{};
-  if(hd.see&&hd.see.length)h+="<h4>See</h4>"+lis(hd.see);
-  if(lo.h)h+="<h4>History</h4>"+paras(lo.h);
-  if(lo.c)h+="<h4>Culture &amp; craft</h4>"+paras(lo.c);
-  if(lo.f)h+="<h4>Food</h4>"+paras(lo.f);
-  if(hd.eat&&hd.eat.length)h+="<h4>Eat &amp; drink</h4>"+lis(hd.eat);
-  if(hd.picks)h+="<h4>Worth doing</h4><p style='margin:0'>"+hd.picks+"</p>";
-  if(lo.t)h+="<h4>Good to know</h4>"+lis(lo.t);
+  if(hd.see&&hd.see.length)h+="<h4>"+ico("sight")+"See</h4>"+lis(hd.see);
+  if(lo.h)h+="<h4>"+ico("history")+"History</h4>"+paras(lo.h);
+  if(lo.c)h+="<h4>"+ico("craft")+"Culture &amp; craft</h4>"+paras(lo.c);
+  if(lo.f)h+="<h4>"+ico("eat")+"Food</h4>"+paras(lo.f);
+  if(hd.eat&&hd.eat.length)h+="<h4>"+ico("eat")+"Eat &amp; drink</h4>"+lis(hd.eat);
+  if(hd.picks)h+="<h4>"+ico("tips")+"Worth doing</h4><p style='margin:0'>"+hd.picks+"</p>";
+  if(lo.t)h+="<h4>"+ico("tips")+"Good to know</h4>"+lis(lo.t);
   if(hd.yours&&hd.yours.length)h+="<div class='yours'><h4>From your research</h4>"+lis(hd.yours)+"</div>";
   var f="";
   if(hd.t&&c.hotel)f+="<div><dt>From the hotel</dt><dd>"+(hd.l||[]).map(badge).join("")+" "+hd.t+"</dd></div>";
@@ -290,9 +307,9 @@ $("#panel").addEventListener("click",function(e){
 function buildTools(){
   var t=$("#maptools");
   var h="<div class='seg' role='group' aria-label='Base map'><button data-base='auto' aria-pressed='"+(state.base==="auto")+"'>Auto</button><button data-base='clean' aria-pressed='"+(state.base==="clean")+"'>Clean</button><button data-base='streets' aria-pressed='"+(state.base==="streets")+"'>Streets</button></div>";
-  CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'><span class='sw' style='background:"+CATCOL[k.id]+"'></span>"+k.name+"</button>"});
-  h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'><span class='sw' style='background:#161a21'></span>Only mine</button>";
-  if(state.city==="tokyo")h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'><span class='sw'></span>Metro lines</button>";
+  CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+ico(k.id)+k.name+"</button>"});
+  h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
+  if(state.city==="tokyo")h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   t.innerHTML=h;
 }
 $("#maptools").addEventListener("click",function(e){

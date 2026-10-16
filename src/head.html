@@ -6,7 +6,7 @@
 <title>Japanscapes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Dela+Gothic+One&family=Yuji+Boku&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root{
@@ -128,6 +128,54 @@
   details.theme summary{cursor:pointer;font:800 .98rem/1.3 'Shippori Mincho',serif}
   details.theme[open] summary{margin-bottom:.2rem}
   .row.wide{grid-template-columns:1fr}
+
+  /* ===== Minimal poster theme: white field, ink strokes, one red accent, brush kanji ===== */
+  .stripe{flex:none;height:0;border-bottom:1px solid var(--ink);opacity:.75}
+  .seal{filter:url(#rough);border-radius:2px}
+  .brand b{font:italic 800 1.25rem/1 'Shippori Mincho',serif}
+  .brand small{letter-spacing:.24em}
+  .top{padding:.7rem 1.4rem}
+  .tabs{gap:.2rem}
+  .tab{border-radius:0;padding:.55rem .7rem;border-bottom:1.5px solid transparent}
+  .tab[aria-selected="true"]{border-bottom-color:var(--shu);color:var(--ink)}
+  .pwrap{padding:2.1rem 2.3rem 4rem}
+  .crumbs{margin-bottom:1.8rem;padding-right:0}
+  .hero{margin:.2rem 0 1.5rem}
+  .brush{font:400 5.2rem/1.05 'Yuji Boku','Shippori Mincho',serif;color:var(--ink);letter-spacing:.02em;margin:.1rem 0 .7rem;overflow-wrap:anywhere}
+  .hero .rule{height:0;border-top:1px solid var(--ink);opacity:.5}
+  .hrow{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin-top:.8rem}
+  .rom{font:italic 600 1.8rem/1.1 'Shippori Mincho',serif}
+  .hsub{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin-top:.35rem}
+  .hanko{flex:none;width:58px;height:58px;display:grid;place-items:center;border:2.5px solid var(--shu);color:var(--shu);border-radius:3px;transform:rotate(-4deg);filter:url(#rough)}
+  .hanko span{writing-mode:vertical-rl;font-family:'Yuji Boku','Shippori Mincho',serif;line-height:1}
+  .ptag{color:var(--shu);font-style:italic;margin:.5rem 0 1rem;padding-right:0}
+  .lead{margin-bottom:1.6rem}
+  h4{border-top:none;padding-top:0;margin:2.2rem 0 .8rem;display:flex;align-items:center;gap:.55rem}
+  h4::after{content:"";flex:1;height:0;border-top:1px solid var(--line)}
+  ul.dots li::before{background:transparent!important;border:1.2px solid var(--shu);width:6px;height:6px;border-radius:50%;transform:none;top:.55em}
+  .yours{background:none;border:1px solid var(--shu);border-radius:2px;padding:.8rem 1rem}
+  /* hairline lists instead of boxed cards */
+  .row{background:transparent;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:.8rem .1rem}
+  .row:hover{border-bottom-color:var(--ink)}
+  .row:hover .nm{color:var(--shu)}
+  .list{gap:0}
+  details.theme{background:none;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:.7rem .1rem;margin:0}
+  /* custom line icons */
+  .ico{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.22em}
+  .row .ico{align-self:center;width:1.35em;height:1.35em}
+  .c-sight{color:var(--ai)} .c-eat{color:var(--shu)} .c-make{color:var(--kin)} .c-green{color:var(--matcha)} .c-mine,.c-line,.c-history,.c-craft,.c-tips{color:var(--ink)}
+  h4 .ico{color:var(--shu)}
+  .chip{gap:.45rem}
+  .chip[aria-pressed="false"] .ico{opacity:.4}
+  .legend{gap:1.1rem}
+  .legend span{gap:.4rem}
+  /* map wards: ink strokes, red on hover/selected */
+  path.ward{fill:rgba(255,255,255,.3);stroke:#14161a;stroke-opacity:.5;stroke-width:1}
+  path.ward.has{fill:rgba(20,22,26,.045)}
+  path.ward:hover{fill:rgba(214,52,42,.1)}
+  path.ward.sel{fill:rgba(214,52,42,.12);stroke:#d6342a;stroke-opacity:1;stroke-width:2.2}
+  [data-band="detail"] path.ward.has,[data-band="street"] path.ward.has{fill:transparent}
+  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill:rgba(214,52,42,.04)}
   .row.wide .sub{grid-column:1}
   .hotel{width:22px;height:22px;background:#161a21;color:#fff;border:2px solid #fff;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 1px 5px rgba(0,0,0,.4)}
   .hoteltip{background:#161a21;color:#fff;border:none;font:700 11px 'Zen Kaku Gothic New',sans-serif;padding:2px 8px;border-radius:3px}
@@ -177,6 +225,8 @@
   <div class="brand"><span class="seal" aria-hidden="true">旅</span><div><b>japanscapes</b><small>JAPAN FIELD GUIDE</small></div></div>
   <nav class="tabs" id="tabs" role="tablist" aria-label="Destination"></nav>
 </header>
+<div class="stripe" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/></filter></svg>
 <div class="app">
   <section class="mapcol">
     <div id="map" aria-label="Map"></div>
