@@ -46,6 +46,30 @@ var WARDINFO={
  "27103":{tag:"Compact dining wards",t:"Fukushima is a compact district of neighbourhood restaurants and izakaya just west of Umeda."}
 };
 
+/* Outer wards: short orientation notes so every ward on the map has a summary */
+WARDINFO["13117"]={tag:"The northern edge, river and rail",t:"Kita sits at the top of the 23 wards along the Arakawa and Sumida rivers. Asukayama Park was planted with cherry trees in the 1720s for the shogun Yoshimune, Oji Inari shrine hosts a New Year's Eve parade of people dressed as foxes, and Akabane's station streets are known for cheap, lively izakaya."};
+WARDINFO["13118"]={tag:"Old working-class Tokyo by the river",t:"Arakawa is a compact shitamachi ward. The Toden Arakawa line, Tokyo's last surviving tram, runs through it, and the Nippori fabric street sits on its western edge."};
+WARDINFO["13119"]={tag:"The first stop on the Nakasendo",t:"Itabashi was the first post town on the Nakasendo leaving Edo, so the road you will walk in the Kiso valley begins here. Today it is a quiet residential ward with the Itabashi Art Museum."};
+WARDINFO["13120"]={tag:"Green suburbs and anime studios",t:"Nerima is often called the birthplace of Japanese TV animation: Toei Animation is based in Oizumi, with a small gallery by the station. It is also known for its radishes and for the Warner Bros. Studio Tour Tokyo, the Making of Harry Potter, on the former Toshimaen amusement park site."};
+WARDINFO["13121"]={tag:"Fireworks and an Edo post town",t:"Adachi's Kita-Senju grew from Senju-juku, the first post station on the Nikko and Oshu roads out of Edo, and is now a major rail hub. The ward's big summer fireworks festival is held over the Arakawa river."};
+WARDINFO["13122"]={tag:"Tora-san country",t:"Katsushika is the setting of the long-running film series Otoko wa Tsurai yo. Shibamata has a temple approach, Taishakuten, a Tora-san museum and old-town snacks, and Kameari is known for the manga hero Kochikame, whose statues stand outside the station."};
+WARDINFO["13123"]={tag:"Tokyo's eastern edge along the Edo River",t:"Edogawa has Kasai Rinkai Park, with a large Ferris wheel and an aquarium by the bay, and a thriving Indian community around Nishi-Kasai that locals call Little India."};
+WARDINFO["27102"]={tag:"Riverside residential",t:"Miyakojima lies along the Yodo river. Kema Sakuranomiya Park is a long riverside stretch of cherry trees, a popular spring picnic spot."};
+WARDINFO["27104"]={tag:"The bay and the theme park",t:"Konohana is where Universal Studios Japan sits on the bay, and its Yumeshima island hosted the Osaka-Kansai Expo in 2025."};
+WARDINFO["27107"]={tag:"Aquarium and harbour",t:"Minato ward holds Osaka's bayside Tempozan harbour village, with the Kaiyukan aquarium and the Tempozan Ferris wheel."};
+WARDINFO["27108"]={tag:"Osaka's Okinawan quarter",t:"Taisho is home to one of the largest Okinawan communities outside Okinawa, and you can find Okinawan food and shops in its streets."};
+WARDINFO["27113"]={tag:"Residential and industrial, bay side",t:"Nishiyodogawa is a residential and light-industrial ward on the bay side of the Yodo river, mostly of interest to locals."};
+WARDINFO["27114"]={tag:"Residential north",t:"Higashiyodogawa is a residential ward in north Osaka, north of the Yodo river."};
+WARDINFO["27123"]={tag:"Shin-Osaka and the Shinkansen",t:"Yodogawa contains Shin-Osaka Station, where the Shinkansen arrives. Most visitors only pass through it on the way to the city centre."};
+WARDINFO["27115"]={tag:"Quiet east Osaka",t:"Higashinari is a small, mostly residential ward east of the centre."};
+WARDINFO["27116"]={tag:"Osaka's Korea Town",t:"Ikuno is home to Japan's largest Korean community. The Tsuruhashi and Miyuki-dori area is known for yakiniku restaurants, kimchi shops and a busy market street."};
+WARDINFO["27117"]={tag:"Residential north-east",t:"Asahi is a quiet residential ward in north-east Osaka."};
+WARDINFO["27118"]={tag:"Residential east",t:"Joto is a mostly residential ward east of Osaka Castle."};
+WARDINFO["27120"]={tag:"One of Japan's oldest shrines",t:"Sumiyoshi ward is named for Sumiyoshi Taisha, a shrine traditionally dated to the 3rd century, known for its steep arched Sorihashi bridge and for being the head shrine of 2,000 Sumiyoshi shrines across Japan."};
+WARDINFO["27121"]={tag:"Parks and neighbourhood Osaka",t:"Higashisumiyoshi is residential, with the big Nagai Park (stadium, botanical garden and the natural history museum) on its edge."};
+WARDINFO["27124"]={tag:"Expo '90 park",t:"Tsurumi hosted the 1990 International Garden and Greenery Exposition, and Tsurumi Ryokuchi Park is its legacy."};
+WARDINFO["27125"]={tag:"Port and bay",t:"Suminoe is Osaka's port and bayfront, with Sakishima's Cosmo Tower and the Nanko wild bird sanctuary."};
+WARDINFO["27126"]={tag:"A moated medieval merchant town",t:"Hirano was a self-governing merchant town surrounded by moats in the Middle Ages, and traces of that layout and old temples still stand in the ward."};
 /* Short generic note for wards with nothing specific */
 var WARD_GENERIC="A residential ward. Nothing saved falls inside it.";
 

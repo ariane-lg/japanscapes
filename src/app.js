@@ -37,7 +37,7 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
-  hotel:'<path d="M3.5 17.5c4.5-1 7.5-4.8 8.5-11 1 6.2 4 10 8.5 11"/><path d="M18.6 2.9a2.9 2.9 0 1 0 2.3 3.8"/>',
+  hotel:'<path d="M2.8 12.6c4.2-.9 7.2-3.9 9.2-8.3 2 4.4 5 7.4 9.2 8.3"/><path d="M6 12.2V20M18 12.2V20M4 20h16"/><circle cx="12" cy="15.4" r="1.2"/><path d="M18.9 2.2a2.2 2.2 0 1 0 1.8 3"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
 function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
@@ -126,7 +126,7 @@ function buildLayers(){
   Object.keys(G).forEach(function(k){if(k!=="line")G[k].clearLayers()});
   map.removeLayer(G.line);
   c.W.forEach(function(w){
-    var has=w.hoods.length||w.info;
+    var has=w.hoods.length;
     w.layer=L.polygon(w.polys,{className:"ward"+(has?" has":""),interactive:true}).addTo(G.ward);
     w.layer.bindTooltip(wardTip(w),{sticky:true,className:"wtip wardtip",direction:"auto",offset:[18,0]});
     w.layer.on("click",function(){selectWard(w.code)});
@@ -147,8 +147,8 @@ function buildLayers(){
   });
   refreshPins();
   if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false}).addTo(G.hotel);
-    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[15,0],className:"hoteltip"});
+    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
+    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
     m.on("click",function(){selectHood("akasaka")});
   }
   if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}
@@ -228,7 +228,7 @@ function themesHTML(){
 function cityHTML(){
   var c=C(),h=hero(c.ja,c.label,c.dates||"city guide")+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
   h+="<div class='legend'>"+ico('mine')+"Yours</span><span>"+ico('sight')+"Sights</span><span>"+ico('eat')+"Eat</span><span>"+ico('make')+"Shops &amp; craft</span><span>"+ico('green')+"Parks</span></div>";
-  var ws=c.W.filter(function(w){return w.hoods.length||w.info}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
+  var ws=c.W.filter(function(w){return w.hoods.length}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
   if(ws.length){
     h+="<h4>Wards on the route</h4><ul class='list'>"+ws.map(function(w){
       return "<li><button class='row wide' data-ward='"+w.code+"'><span class='nm'>"+w.en+" <span class='cnt'>"+w.ja+(w.hoods.length?" · "+w.hoods.length+" area"+(w.hoods.length>1?"s":""):"")+"</span></span><span class='sub'>"+(w.info?w.info.tag:"")+"</span></button></li>"}).join("")+"</ul>";
@@ -240,7 +240,7 @@ function cityHTML(){
 }
 function wardHTML(){
   var w=C().wardBy[state.ward];
-  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase());
+  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase()+(w.hoods.length?"":" · off the main route"));
   h+="<p class='ptag'>"+(w.info?w.info.tag:"Not on the route")+"</p><p class='lead'>"+(w.info?w.info.t:WARD_GENERIC)+"</p>";
   if(w.hoods.length)h+="<h4>Neighbourhoods here</h4><ul class='list'>"+w.hoods.map(hoodRow).join("")+"</ul>";
   var pl=w.places.filter(pinVisible);

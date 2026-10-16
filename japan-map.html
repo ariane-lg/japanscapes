@@ -189,8 +189,8 @@
   /* subtler marks: thin-stroked circles instead of filled squares */
   .seal{width:36px;height:36px;background:transparent;color:var(--shu);border:1.3px solid var(--shu);border-radius:50%;filter:none;transform:none;font:400 19px/1 'Yuji Boku','Shippori Mincho',serif}
   .hanko{width:50px;height:50px;border:1.3px solid var(--shu);border-radius:50%;opacity:.85;filter:none;transform:rotate(-4deg)}
-  .pinb.hotelb{width:28px;height:28px;background:#fff;color:#14161a;border:1.4px solid #14161a;box-shadow:0 0 0 5px rgba(37,66,143,.14)}
-  .pinb.hotelb .ico{color:#14161a;width:18px;height:18px}
+  .pinb.hotelb{width:32px;height:32px;background:#fff;color:#14161a;border:1.4px solid #14161a;box-shadow:0 0 0 5px rgba(37,66,143,.14)}
+  .pinb.hotelb .ico{color:#14161a;width:21px;height:21px}
   .leaflet-tooltip.hoteltip{background:rgba(255,255,255,.95);color:#14161a;box-shadow:0 1px 4px rgba(0,0,0,.2);font:italic 600 12px 'Shippori Mincho',serif;padding:1px 8px}
   .row.wide .sub{grid-column:1}
   .hotel{width:22px;height:22px;background:#161a21;color:#fff;border:2px solid #fff;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 1px 5px rgba(0,0,0,.4)}
@@ -483,6 +483,30 @@ var WARDINFO={
  "27103":{tag:"Compact dining wards",t:"Fukushima is a compact district of neighbourhood restaurants and izakaya just west of Umeda."}
 };
 
+/* Outer wards: short orientation notes so every ward on the map has a summary */
+WARDINFO["13117"]={tag:"The northern edge, river and rail",t:"Kita sits at the top of the 23 wards along the Arakawa and Sumida rivers. Asukayama Park was planted with cherry trees in the 1720s for the shogun Yoshimune, Oji Inari shrine hosts a New Year's Eve parade of people dressed as foxes, and Akabane's station streets are known for cheap, lively izakaya."};
+WARDINFO["13118"]={tag:"Old working-class Tokyo by the river",t:"Arakawa is a compact shitamachi ward. The Toden Arakawa line, Tokyo's last surviving tram, runs through it, and the Nippori fabric street sits on its western edge."};
+WARDINFO["13119"]={tag:"The first stop on the Nakasendo",t:"Itabashi was the first post town on the Nakasendo leaving Edo, so the road you will walk in the Kiso valley begins here. Today it is a quiet residential ward with the Itabashi Art Museum."};
+WARDINFO["13120"]={tag:"Green suburbs and anime studios",t:"Nerima is often called the birthplace of Japanese TV animation: Toei Animation is based in Oizumi, with a small gallery by the station. It is also known for its radishes and for the Warner Bros. Studio Tour Tokyo, the Making of Harry Potter, on the former Toshimaen amusement park site."};
+WARDINFO["13121"]={tag:"Fireworks and an Edo post town",t:"Adachi's Kita-Senju grew from Senju-juku, the first post station on the Nikko and Oshu roads out of Edo, and is now a major rail hub. The ward's big summer fireworks festival is held over the Arakawa river."};
+WARDINFO["13122"]={tag:"Tora-san country",t:"Katsushika is the setting of the long-running film series Otoko wa Tsurai yo. Shibamata has a temple approach, Taishakuten, a Tora-san museum and old-town snacks, and Kameari is known for the manga hero Kochikame, whose statues stand outside the station."};
+WARDINFO["13123"]={tag:"Tokyo's eastern edge along the Edo River",t:"Edogawa has Kasai Rinkai Park, with a large Ferris wheel and an aquarium by the bay, and a thriving Indian community around Nishi-Kasai that locals call Little India."};
+WARDINFO["27102"]={tag:"Riverside residential",t:"Miyakojima lies along the Yodo river. Kema Sakuranomiya Park is a long riverside stretch of cherry trees, a popular spring picnic spot."};
+WARDINFO["27104"]={tag:"The bay and the theme park",t:"Konohana is where Universal Studios Japan sits on the bay, and its Yumeshima island hosted the Osaka-Kansai Expo in 2025."};
+WARDINFO["27107"]={tag:"Aquarium and harbour",t:"Minato ward holds Osaka's bayside Tempozan harbour village, with the Kaiyukan aquarium and the Tempozan Ferris wheel."};
+WARDINFO["27108"]={tag:"Osaka's Okinawan quarter",t:"Taisho is home to one of the largest Okinawan communities outside Okinawa, and you can find Okinawan food and shops in its streets."};
+WARDINFO["27113"]={tag:"Residential and industrial, bay side",t:"Nishiyodogawa is a residential and light-industrial ward on the bay side of the Yodo river, mostly of interest to locals."};
+WARDINFO["27114"]={tag:"Residential north",t:"Higashiyodogawa is a residential ward in north Osaka, north of the Yodo river."};
+WARDINFO["27123"]={tag:"Shin-Osaka and the Shinkansen",t:"Yodogawa contains Shin-Osaka Station, where the Shinkansen arrives. Most visitors only pass through it on the way to the city centre."};
+WARDINFO["27115"]={tag:"Quiet east Osaka",t:"Higashinari is a small, mostly residential ward east of the centre."};
+WARDINFO["27116"]={tag:"Osaka's Korea Town",t:"Ikuno is home to Japan's largest Korean community. The Tsuruhashi and Miyuki-dori area is known for yakiniku restaurants, kimchi shops and a busy market street."};
+WARDINFO["27117"]={tag:"Residential north-east",t:"Asahi is a quiet residential ward in north-east Osaka."};
+WARDINFO["27118"]={tag:"Residential east",t:"Joto is a mostly residential ward east of Osaka Castle."};
+WARDINFO["27120"]={tag:"One of Japan's oldest shrines",t:"Sumiyoshi ward is named for Sumiyoshi Taisha, a shrine traditionally dated to the 3rd century, known for its steep arched Sorihashi bridge and for being the head shrine of 2,000 Sumiyoshi shrines across Japan."};
+WARDINFO["27121"]={tag:"Parks and neighbourhood Osaka",t:"Higashisumiyoshi is residential, with the big Nagai Park (stadium, botanical garden and the natural history museum) on its edge."};
+WARDINFO["27124"]={tag:"Expo '90 park",t:"Tsurumi hosted the 1990 International Garden and Greenery Exposition, and Tsurumi Ryokuchi Park is its legacy."};
+WARDINFO["27125"]={tag:"Port and bay",t:"Suminoe is Osaka's port and bayfront, with Sakishima's Cosmo Tower and the Nanko wild bird sanctuary."};
+WARDINFO["27126"]={tag:"A moated medieval merchant town",t:"Hirano was a self-governing merchant town surrounded by moats in the Middle Ages, and traces of that layout and old temples still stand in the ward."};
 /* Short generic note for wards with nothing specific */
 var WARD_GENERIC="A residential ward. Nothing saved falls inside it.";
 
@@ -846,7 +870,7 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
-  hotel:'<path d="M3.5 17.5c4.5-1 7.5-4.8 8.5-11 1 6.2 4 10 8.5 11"/><path d="M18.6 2.9a2.9 2.9 0 1 0 2.3 3.8"/>',
+  hotel:'<path d="M2.8 12.6c4.2-.9 7.2-3.9 9.2-8.3 2 4.4 5 7.4 9.2 8.3"/><path d="M6 12.2V20M18 12.2V20M4 20h16"/><circle cx="12" cy="15.4" r="1.2"/><path d="M18.9 2.2a2.2 2.2 0 1 0 1.8 3"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
 function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
@@ -935,7 +959,7 @@ function buildLayers(){
   Object.keys(G).forEach(function(k){if(k!=="line")G[k].clearLayers()});
   map.removeLayer(G.line);
   c.W.forEach(function(w){
-    var has=w.hoods.length||w.info;
+    var has=w.hoods.length;
     w.layer=L.polygon(w.polys,{className:"ward"+(has?" has":""),interactive:true}).addTo(G.ward);
     w.layer.bindTooltip(wardTip(w),{sticky:true,className:"wtip wardtip",direction:"auto",offset:[18,0]});
     w.layer.on("click",function(){selectWard(w.code)});
@@ -956,8 +980,8 @@ function buildLayers(){
   });
   refreshPins();
   if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false}).addTo(G.hotel);
-    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[15,0],className:"hoteltip"});
+    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
+    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
     m.on("click",function(){selectHood("akasaka")});
   }
   if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}
@@ -1037,7 +1061,7 @@ function themesHTML(){
 function cityHTML(){
   var c=C(),h=hero(c.ja,c.label,c.dates||"city guide")+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
   h+="<div class='legend'>"+ico('mine')+"Yours</span><span>"+ico('sight')+"Sights</span><span>"+ico('eat')+"Eat</span><span>"+ico('make')+"Shops &amp; craft</span><span>"+ico('green')+"Parks</span></div>";
-  var ws=c.W.filter(function(w){return w.hoods.length||w.info}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
+  var ws=c.W.filter(function(w){return w.hoods.length}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
   if(ws.length){
     h+="<h4>Wards on the route</h4><ul class='list'>"+ws.map(function(w){
       return "<li><button class='row wide' data-ward='"+w.code+"'><span class='nm'>"+w.en+" <span class='cnt'>"+w.ja+(w.hoods.length?" · "+w.hoods.length+" area"+(w.hoods.length>1?"s":""):"")+"</span></span><span class='sub'>"+(w.info?w.info.tag:"")+"</span></button></li>"}).join("")+"</ul>";
@@ -1049,7 +1073,7 @@ function cityHTML(){
 }
 function wardHTML(){
   var w=C().wardBy[state.ward];
-  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase());
+  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase()+(w.hoods.length?"":" · off the main route"));
   h+="<p class='ptag'>"+(w.info?w.info.tag:"Not on the route")+"</p><p class='lead'>"+(w.info?w.info.t:WARD_GENERIC)+"</p>";
   if(w.hoods.length)h+="<h4>Neighbourhoods here</h4><ul class='list'>"+w.hoods.map(hoodRow).join("")+"</ul>";
   var pl=w.places.filter(pinVisible);
