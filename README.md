@@ -24,5 +24,5 @@ Without a key it falls back to the free Esri street map.
 
 - Ward boundaries: MLIT National Land Numerical Information (国土数値情報), via [niiyz/JapanCityGeoJson](https://github.com/niiyz/JapanCityGeoJson), simplified for the web.
 - Basemap tiles: Esri (Light Gray Canvas, World Street Map). Map library: Leaflet.
-- Neighbourhood history and culture notes are written from the sources linked beside each entry (`src/lore.js`). Culture Trip pages could not be opened directly, so points attributed to it come from search summaries. Some dates differ between sources and are flagged in the text.
+- Neighbourhood history and culture notes are written from the sources linked beside each entry (`src/lore.js` and `src/lore2.js`). Culture Trip pages could not be opened directly, so points attributed to it come from search summaries. Some dates differ between sources and are flagged in the text.
 - `src/akasaka-data.js` holds hotel, neighbourhood and place data carried over from the earlier "Tokyo from Akasaka" guide.
