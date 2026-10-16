@@ -1310,15 +1310,15 @@ function firstSentence(s,max){
 }
 function wardTip(w){
   var h="<b>"+w.en+"</b>"+(w.ja?" <span class='tj'>"+w.ja+"</span>":"");
-  if(w.info){h+="<div class='tt'>"+w.info.tag+"</div><div class='tb'>"+firstSentence(w.info.t,170)+"</div>"}
-  else h+="<div class='tb'>Not on the route.</div>";
+  if(w.info){h+="<div class='tt'>"+w.info.tag+"</div>"}
+  else h+="<div class='tt'>Not on the route</div>";
   if(w.hoods.length)h+="<div class='tf'>"+w.hoods.length+" area"+(w.hoods.length>1?"s":"")+": "+w.hoods.slice(0,4).map(function(x){return x.short}).join(", ")+(w.hoods.length>4?"…":"")+"</div>";
   return h+"<div class='tc'>Click for the full summary</div>";
 }
 function hoodTip(h){
   var lo=(typeof LORE!=="undefined"&&LORE[h.id])||{};
   var h2="<b>"+h.name+"</b> <span class='tj'>"+h.jp+"</span><div class='tt'>"+h.tag+"</div>";
-  h2+="<div class='tb'>"+firstSentence(lo.h&&lo.h[0]||h.intro,170)+"</div>";
+  h2+="<div class='tf'>"+(h.tags||[]).map(function(t){return TAGS[t]||t}).join(" · ")+"</div>";
   return h2+"<div class='tc'>Click for history, food and craft</div>";
 }
 function buildLayers(){
