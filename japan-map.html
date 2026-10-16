@@ -186,6 +186,12 @@
   .pinb.sel .ico{color:#fff}
   .pinb.hotelb{width:26px;height:26px;background:#14161a;color:#14161a;border-color:#fff}
   .pinb.hotelb .ico{color:#fff;width:16px;height:16px}
+  /* subtler marks: thin-stroked circles instead of filled squares */
+  .seal{width:36px;height:36px;background:transparent;color:var(--shu);border:1.3px solid var(--shu);border-radius:50%;filter:none;transform:none;font:400 19px/1 'Yuji Boku','Shippori Mincho',serif}
+  .hanko{width:50px;height:50px;border:1.3px solid var(--shu);border-radius:50%;opacity:.85;filter:none;transform:rotate(-4deg)}
+  .pinb.hotelb{width:28px;height:28px;background:#fff;color:#14161a;border:1.4px solid #14161a;box-shadow:0 0 0 5px rgba(37,66,143,.14)}
+  .pinb.hotelb .ico{color:#14161a;width:18px;height:18px}
+  .leaflet-tooltip.hoteltip{background:rgba(255,255,255,.95);color:#14161a;box-shadow:0 1px 4px rgba(0,0,0,.2);font:italic 600 12px 'Shippori Mincho',serif;padding:1px 8px}
   .row.wide .sub{grid-column:1}
   .hotel{width:22px;height:22px;background:#161a21;color:#fff;border:2px solid #fff;transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 1px 5px rgba(0,0,0,.4)}
   .hoteltip{background:#161a21;color:#fff;border:none;font:700 11px 'Zen Kaku Gothic New',sans-serif;padding:2px 8px;border-radius:3px}
@@ -840,7 +846,7 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
-  hotel:'<path d="M3 19V6.5"/><path d="M3 14.5h18V19"/><path d="M21 14.5v-3a2.5 2.5 0 0 0-2.5-2.5H11v5.5"/><circle cx="6.6" cy="11" r="1.7"/>',
+  hotel:'<path d="M3.5 15.5c3.8-1.1 6-3.6 8.5-7 2.5 3.4 4.7 5.9 8.5 7"/><path d="M6.5 15.5V20M17.5 15.5V20M4.5 20h15"/><path d="M19 2.8a3 3 0 1 0 2.4 4.7 2.4 2.4 0 0 1-2.4-4.7z"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
 function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
