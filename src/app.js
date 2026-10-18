@@ -133,7 +133,7 @@ function buildLayers(){
     L.marker(w.label,{interactive:false,keyboard:false,icon:L.divIcon({className:"wlabel"+(w.hoods.length?" main":""),html:"<span>"+w.en+"</span>",iconSize:[0,0]})}).addTo(G.ward);
   });
   c.hoods.forEach(function(h){
-    h.circle=L.circle([h.lat,h.lng],{radius:(h.r||.5)*1000,className:"hood"}).addTo(G.hood);
+    h.circle=L.circle([h.lat,h.lng],{radius:(h.r||.5)*1000,className:"hood c"+washIdx(h.name)}).addTo(G.hood);
     h.circle.bindTooltip(hoodTip(h),{sticky:true,className:"wtip hoodtip",direction:"auto",offset:[18,0]});
     h.circle.on("click",function(){selectHood(h.id)});
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
@@ -214,6 +214,7 @@ function crumbs(parts){
 }
 
 var WASH=[["#bfe3d3","#bfe0e6","#f6d5c0"],["#f3c9d2","#c9e4de","#e9e3b8"],["#bfe0e6","#d9d2ef","#f3c9d2"],["#cfe6da","#f7d9c4","#bfe0e6"],["#f6d5c0","#f3c9d2","#cfe6da"]];
+function washIdx(en){var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;return hv%WASH.length}
 function hero(ja,en,sub){
   var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;
   var w=WASH[hv%WASH.length],n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;

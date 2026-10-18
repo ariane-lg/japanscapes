@@ -243,7 +243,7 @@
      hangs from two axes: the rail line and the 40px text axis inside the sheet.
      ===================================================================== */
   :root{
-    --paper:#f4f3ee; --surface:#fbfaf6; --raise:#ffffff;
+    --paper:#fdfdfb; --surface:#ffffff; --raise:#ffffff;
     --ink:#1e2527; --soft:#667073; --line:rgba(30,37,39,.12);
     --shu:#2e6f68; --shu-soft:rgba(46,111,104,.08); --eat:#d2566e;
     --ai:#3f7a99; --matcha:#5b9a78; --kin:#b8863f;
@@ -300,20 +300,23 @@
   .figline::after{content:"";flex:1;height:1px;background:var(--line);align-self:center;max-width:260px}
   .maptools{position:static;display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);padding:0 calc(var(--u)*13) 0 0;z-index:auto}
   .maptools>*{pointer-events:auto}
-  .seg,.chip{background:transparent;border:1px solid var(--line);box-shadow:none;border-radius:999px;backdrop-filter:none;transition:background .3s var(--ease),border-color .3s}
-  .chip:hover,.seg:hover{border-color:var(--shu)}
-  .seg button{font-weight:500;letter-spacing:.04em}
-  .seg button[aria-pressed="true"]{background:var(--shu);color:#fff}
-  .chip{font-weight:500;letter-spacing:.02em;padding:.28rem .8rem}
-  .chip[aria-pressed="true"]{background:var(--shu-soft);border-color:transparent}
-  .chip[aria-pressed="false"] .ico{opacity:.4}
+  /* controls: quiet tracked text, an underline for the active state, no pills */
+  .maptools{gap:calc(var(--u)*.5) calc(var(--u)*3);align-items:center}
+  .seg,.chip{background:none;border:none;box-shadow:none;border-radius:0;backdrop-filter:none;padding:0}
+  .seg{display:inline-flex;gap:calc(var(--u)*2)}
+  .seg button,.chip{font:500 .62rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);background:none;border:none;border-radius:0;padding:.35rem 0;border-bottom:1px solid transparent;transition:color .3s var(--ease),border-color .4s var(--ease)}
+  .seg button:hover,.chip:hover{color:var(--ink)}
+  .seg button[aria-pressed="true"],.chip[aria-pressed="true"]{color:var(--ink);background:none;border-bottom-color:var(--shu)}
+  .chip{display:inline-flex;align-items:center;gap:.5rem}
+  .chip[aria-pressed="false"] .ico{opacity:.35}
+  .chip .ico{width:1.15em;height:1.15em}
   .leaflet-right .leaflet-control{margin-right:calc(var(--u)*13)}
   .leaflet-control-zoom{border:none!important;box-shadow:none!important}
   .leaflet-control-zoom a{border:1px solid var(--line)!important;border-radius:0!important;background:var(--raise);margin-bottom:-1px}
 
   /* --- map style --- */
   .leaflet-tile-pane{opacity:.5;filter:grayscale(1) contrast(.9)}
-  #map{background:#f8f7f2}
+  #map{background:#fff}
   [data-band="detail"] .leaflet-tile-pane,[data-band="street"] .leaflet-tile-pane{opacity:.9;filter:grayscale(.3)}
   .leaflet-tile-pane{transition:opacity .6s}
   /* wards as pen line-drawing: ink outline, paper fill, no colour */
@@ -325,8 +328,11 @@
   path.ward.sel{fill-opacity:.9;stroke:#1e2527;stroke-opacity:1;stroke-width:2}
   [data-band="detail"] path.ward,[data-band="street"] path.ward{fill-opacity:0;stroke-opacity:.45;stroke-width:1}
   [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill-opacity:0;stroke-opacity:.9;stroke-width:1.8}
-  path.hood{fill:rgba(244,205,213,.35);stroke:#2e6f68;stroke-opacity:.55;stroke-width:1;stroke-dasharray:2 5}
-  path.hood:hover,path.hood.sel{fill:rgba(244,190,203,.5);stroke:#2e6f68;stroke-opacity:1;stroke-dasharray:none}
+  /* neighbourhood discs echo the sheet's overlapping circles: same palette, blended where they meet */
+  path.hood{stroke:none;fill-opacity:.62;mix-blend-mode:multiply;stroke-dasharray:none;transition:fill-opacity .4s var(--ease)}
+  path.hood.c0{fill:#bfe3d3} path.hood.c1{fill:#f3c9d2} path.hood.c2{fill:#bfe0e6} path.hood.c3{fill:#d9d2ef} path.hood.c4{fill:#f6d5c0}
+  path.hood:hover{fill-opacity:.85}
+  path.hood.sel{fill-opacity:.8;stroke:#1e2527;stroke-opacity:.8;stroke-width:1}
   .wlabel.main span,.hlabel span{font:500 12px 'Shippori Mincho',serif;color:#1e2527;text-shadow:0 0 4px rgba(255,255,255,.9),0 0 2px #fff}
   .wlabel span{font:400 9.5px 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;color:#55625f}
   .pinb{border-width:1.3px;box-shadow:0 0 0 4px rgba(255,255,255,.6),0 2px 6px rgba(30,37,39,.18);animation:fadein .7s var(--ease) both}
