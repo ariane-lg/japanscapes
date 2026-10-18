@@ -127,7 +127,7 @@ function buildLayers(){
   map.removeLayer(G.line);
   c.W.forEach(function(w){
     var has=w.hoods.length;
-    w.layer=L.polygon(w.polys,{className:"ward"+(has?" has":""),interactive:true}).addTo(G.ward);
+    w.layer=L.polygon(w.polys,{className:"ward w"+(parseInt(w.code,10)%5)+(has?" has":""),interactive:true}).addTo(G.ward);
     w.layer.bindTooltip(wardTip(w),{sticky:true,className:"wtip wardtip",direction:"auto",offset:[18,0]});
     w.layer.on("click",function(){selectWard(w.code)});
     L.marker(w.label,{interactive:false,keyboard:false,icon:L.divIcon({className:"wlabel"+(w.hoods.length?" main":""),html:"<span>"+w.en+"</span>",iconSize:[0,0]})}).addTo(G.ward);
@@ -177,7 +177,7 @@ function applySel(){
 function selectWard(code){
   var w=C().wardBy[code];if(!w)return;
   state.ward=code;state.hood=null;state.place=null;
-  map.flyToBounds(w.layer.getBounds(),{padding:[40,40],maxZoom:13.5,duration:.7});
+  map.flyToBounds(w.layer.getBounds(),{paddingTopLeft:[40,40],paddingBottomRight:[innerWidth>900?150:40,40],maxZoom:13.5,duration:.7});
   applySel();render();
 }
 function selectHood(id){
@@ -216,9 +216,8 @@ function crumbs(parts){
 var WASH=[["#bfe3d3","#bfe0e6","#f6d5c0"],["#f3c9d2","#c9e4de","#e9e3b8"],["#bfe0e6","#d9d2ef","#f3c9d2"],["#cfe6da","#f7d9c4","#bfe0e6"],["#f6d5c0","#f3c9d2","#cfe6da"]];
 function hero(ja,en,sub){
   var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;
-  var w=WASH[hv%WASH.length],n=Math.max(ja.length,1),fs=Math.max(26,Math.min(60,Math.floor(230/n)));
-  var st=ja.slice(0,3),hs=st.length>2?12:st.length===2?17:26;
-  return "<div class='hero' style='--a:"+w[0]+";--b:"+w[1]+";--c:"+w[2]+"'><div class='wash'><span class='fig'>"+sub+"</span></div><i class='blk'></i><div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='rom'>"+en+"</div><div class='hanko' style='font-size:"+hs+"px'><span>"+st+"</span></div></div></div>";
+  var w=WASH[hv%WASH.length],n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;
+  return "<div class='hero' style='--a:"+w[0]+";--b:"+w[1]+";--c:"+w[2]+"'><i class='sun'></i><i class='sun s2'></i><i class='sun s3'></i><div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='sub'>"+sub+"</div><div class='rom' style='font-size:"+rs+"rem'>"+en+"</div></div></div>";
 }
 function paras(a){return a.map(function(s){return "<p class='para'>"+s+"</p>"}).join("")}
 function srcs(a){return "<p class='srcs'>Sources: "+a.map(function(s){return "<a target='_blank' rel='noopener' href='"+s[1]+"'>"+s[0]+"</a>"}).join(" · ")+"</p>"}
@@ -298,6 +297,13 @@ function render(){
   var el=$("#panel");
   el.innerHTML="<div class='pwrap'>"+(state.place?placeHTML():state.hood?hoodHTML():state.ward?wardHTML():cityHTML())+"</div>";
   el.scrollTop=0;
+  plateTitle();
+}
+function plateTitle(){
+  var c=C(),w=state.ward&&c.wardBy[state.ward],h=state.hood&&c.hoodBy[state.hood],p=state.place;
+  var ja=h?h.jp:w?w.ja:c.ja,en=p?p.name:h?h.name:w?w.en:c.label,n=ORDER.indexOf(state.city)+1;
+  var g=$("#ghost");if(g&&g.textContent!==ja){g.textContent=ja;g.style.animation="none";void g.offsetWidth;g.style.animation=""}
+  var f=$("#figline");if(f)f.innerHTML="<b>Fig. 0"+n+"</b>"+en+(h||w||p?"":" · "+c.tag);
 }
 $("#panel").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
@@ -331,12 +337,12 @@ $("#maptools").addEventListener("click",function(e){
   buildTools();
 });
 function buildTabs(){
-  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(k===state.city)+"'>"+c.label+" <i>"+c.ja+"</i></button>"}).join("");
+  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(k===state.city)+"' aria-label='"+c.label+"'><i>"+c.ja+"</i><span>"+c.short+"</span></button>"}).join("");
 }
 $("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setCity(b.dataset.city)});
 
 var fitted=false,touched=false;
-function fitCity(){var s=map.getSize();if(s.x>80&&s.y>80){map.fitBounds(C().bounds,{animate:false});band();fitted=true}}
+function fitCity(){var s=map.getSize();if(s.x>80&&s.y>80){map.fitBounds(C().bounds,{animate:false,paddingBottomRight:[innerWidth>900?112:0,0]});band();fitted=true}}
 ["pointerdown","wheel","keydown"].forEach(function(ev){$("#map").addEventListener(ev,function(){touched=true},{passive:true})});
 function setCity(k){
   state.city=k;state.ward=null;state.hood=null;state.place=null;touched=false;
