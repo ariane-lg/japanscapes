@@ -225,6 +225,10 @@ function themesHTML(){
   return "<h4>Threads running through "+C().label+"</h4>"+t.map(function(x){
     return "<details class='theme'><summary>"+x.t+"</summary><p class='para'>"+x.d+"</p><p class='srcs'>Source: <a target='_blank' rel='noopener' href='"+x.s[1]+"'>"+x.s[0]+"</a></p></details>"}).join("");
 }
+function readingHTML(){
+  if(typeof READING==="undefined")return "";
+  return "<h4>"+ico("history")+"Go deeper</h4><ul class='dots'>"+READING.map(function(r){return "<li><a target='_blank' rel='noopener' href='"+r.u+"'>"+r.t+"</a></li>"}).join("")+"</ul>";
+}
 function cityHTML(){
   var c=C(),h=hero(c.ja,c.label,c.dates||"city guide")+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
   h+="<div class='legend'>"+ico('mine')+"Yours</span><span>"+ico('sight')+"Sights</span><span>"+ico('eat')+"Eat</span><span>"+ico('make')+"Shops &amp; craft</span><span>"+ico('green')+"Parks</span></div>";
@@ -234,6 +238,7 @@ function cityHTML(){
       return "<li><button class='row wide' data-ward='"+w.code+"'><span class='nm'>"+w.en+" <span class='cnt'>"+w.ja+(w.hoods.length?" · "+w.hoods.length+" area"+(w.hoods.length>1?"s":""):"")+"</span></span><span class='sub'>"+(w.info?w.info.tag:"")+"</span></button></li>"}).join("")+"</ul>";
   }
   h+=themesHTML();
+  h+=readingHTML();
   h+="<h4>All neighbourhoods</h4><ul class='list'>"+c.hoods.map(hoodRow).join("")+"</ul>";
   h+="<p class='srcs' style='margin-top:1.2rem'>"+CT_NOTE+"</p>";
   return h;
