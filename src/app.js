@@ -8,7 +8,7 @@ var USE_GOOGLE=__USE_GOOGLE__;
 function $(s,r){return (r||document).querySelector(s)}
 var ESRI_GRAY="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
 var ESRI_ST="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
-var CATCOL={sight:"#27405e",eat:"#c23a2b",make:"#a8842c",green:"#5f7a3f"};
+var CATCOL={sight:"#3f7a99",eat:"#d2566e",make:"#b8863f",green:"#5b9a78"};
 
 var CITIES={
  tokyo:{label:"Tokyo",ja:"東京",short:"Tokyo",dates:"",
@@ -213,10 +213,12 @@ function crumbs(parts){
   return "<nav class='crumbs'>"+out.join(" › ")+"</nav>";
 }
 
+var WASH=[["#bfe3d3","#bfe0e6","#f6d5c0"],["#f3c9d2","#c9e4de","#e9e3b8"],["#bfe0e6","#d9d2ef","#f3c9d2"],["#cfe6da","#f7d9c4","#bfe0e6"],["#f6d5c0","#f3c9d2","#cfe6da"]];
 function hero(ja,en,sub){
-  var n=ja.length,fs=n<=1?7.5:n===2?5.6:n===3?4.4:3.4,st=ja.slice(0,3);
-  var hs=st.length>2?15:st.length===2?21:32;
-  return "<div class='hero'><div class='brush' style='font-size:"+fs+"rem'>"+ja+"</div><div class='rule'></div><div class='hrow'><div><div class='rom'>"+en+"</div><div class='hsub'>"+sub+"</div></div><div class='hanko' style='font-size:"+hs+"px'><span>"+st+"</span></div></div></div>";
+  var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;
+  var w=WASH[hv%WASH.length],n=Math.max(ja.length,1),fs=Math.max(26,Math.min(60,Math.floor(230/n)));
+  var st=ja.slice(0,3),hs=st.length>2?12:st.length===2?17:26;
+  return "<div class='hero' style='--a:"+w[0]+";--b:"+w[1]+";--c:"+w[2]+"'><div class='wash'><span class='fig'>"+sub+"</span></div><i class='blk'></i><div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='rom'>"+en+"</div><div class='hanko' style='font-size:"+hs+"px'><span>"+st+"</span></div></div></div>";
 }
 function paras(a){return a.map(function(s){return "<p class='para'>"+s+"</p>"}).join("")}
 function srcs(a){return "<p class='srcs'>Sources: "+a.map(function(s){return "<a target='_blank' rel='noopener' href='"+s[1]+"'>"+s[0]+"</a>"}).join(" · ")+"</p>"}
