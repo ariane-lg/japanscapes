@@ -300,16 +300,23 @@
   .figline::after{content:"";flex:1;height:1px;background:var(--line);align-self:center;max-width:260px}
   .maptools{position:static;display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);padding:0 calc(var(--u)*13) 0 0;z-index:auto}
   .maptools>*{pointer-events:auto}
-  /* controls: quiet tracked text, an underline for the active state, no pills */
-  .maptools{gap:calc(var(--u)*.5) calc(var(--u)*3);align-items:center}
+  /* controls read as the map's key: a hairline, then coloured discs with italic captions */
+  .maptools{gap:calc(var(--u)*1) calc(var(--u)*3);align-items:center;border-top:1px solid var(--line);padding:calc(var(--u)*1.5) calc(var(--u)*13) 0 0}
   .seg,.chip{background:none;border:none;box-shadow:none;border-radius:0;backdrop-filter:none;padding:0}
-  .seg{display:inline-flex;gap:calc(var(--u)*2)}
-  .seg button,.chip{font:500 .62rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);background:none;border:none;border-radius:0;padding:.35rem 0;border-bottom:1px solid transparent;transition:color .3s var(--ease),border-color .4s var(--ease)}
+  .seg{display:inline-flex;gap:calc(var(--u)*1.5);margin-right:calc(var(--u)*1)}
+  .seg button,.chip{font:italic 500 .86rem/1 'Shippori Mincho',serif;letter-spacing:.01em;text-transform:none;color:var(--soft);background:none;border:none;border-radius:0;padding:.3rem 0;transition:color .3s var(--ease)}
+  .seg button+button::before{content:"/";margin-right:calc(var(--u)*1.5);color:var(--line);font-style:normal}
+  .seg button{border-bottom:1px solid transparent}
   .seg button:hover,.chip:hover{color:var(--ink)}
-  .seg button[aria-pressed="true"],.chip[aria-pressed="true"]{color:var(--ink);background:none;border-bottom-color:var(--shu)}
-  .chip{display:inline-flex;align-items:center;gap:.5rem}
+  .seg button[aria-pressed="true"]{color:var(--shu);background:none}
+  .chip{display:inline-flex;align-items:center;gap:.55rem}
+  .chip[aria-pressed="true"]{color:var(--ink);background:none;border:none}
+  .dsc{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 30%,#fff);mix-blend-mode:multiply;transition:background .4s var(--ease),transform .4s var(--ease),box-shadow .3s}
+  .dsc .ico{width:15px;height:15px;vertical-align:0}
+  .chip:hover .dsc{transform:scale(1.1)}
+  .chip[aria-pressed="false"] .dsc{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
   .chip[aria-pressed="false"] .ico{opacity:.35}
-  .chip .ico{width:1.15em;height:1.15em}
+  .chip.line-chip .sw{display:none}
   .leaflet-right .leaflet-control{margin-right:calc(var(--u)*13)}
   .leaflet-control-zoom{border:none!important;box-shadow:none!important}
   .leaflet-control-zoom a{border:1px solid var(--line)!important;border-radius:0!important;background:var(--raise);margin-bottom:-1px}
@@ -355,10 +362,12 @@
 
   /* hero: type and two overlapping discs, no boxes */
   .hero{position:relative;display:grid;grid-template-columns:1fr auto;column-gap:calc(var(--u)*2);min-height:236px;margin:0 0 calc(var(--u)*4)}
-  .sun{position:absolute;border-radius:50%;mix-blend-mode:multiply;pointer-events:none;animation:pop 1.2s var(--ease) both}
-  .sun{right:calc(var(--u)*5);top:calc(var(--u)*-1);width:168px;height:168px;background:var(--a);opacity:.7}
-  .sun.s2{right:calc(var(--u)*1);top:calc(var(--u)*7);width:120px;height:120px;background:var(--b);opacity:.75;animation-delay:.2s}
-  .sun.s3{right:calc(var(--u)*11);top:calc(var(--u)*14.5);width:56px;height:56px;background:var(--c);opacity:.8;animation-delay:.35s}
+  .sun{position:absolute;border:none;padding:0;border-radius:50%;mix-blend-mode:multiply;opacity:.78;cursor:pointer;display:grid;place-items:center;animation:pop 1.2s var(--ease) both;transition:opacity .3s,transform .5s var(--ease)}
+  .sun.s1{animation-delay:.2s}.sun.s2{animation-delay:.35s}
+  .sun:hover{opacity:1;transform:scale(1.05)}
+  .sun span{font:italic 500 .68rem 'Shippori Mincho',serif;color:var(--ink);opacity:.75;max-width:72%;text-align:center;line-height:1.2;pointer-events:none}
+  .sun.s2 span{font-size:.6rem}
+  path.hood.glow{fill-opacity:.95;stroke:#1e2527;stroke-opacity:.7;stroke-width:1.2}
   .ttl{grid-column:2;grid-row:1;position:relative;z-index:1;justify-self:end;padding-right:calc(var(--u)*1)}
   .brush{writing-mode:vertical-rl;font:400 56px/1.2 'Shippori Mincho',serif;letter-spacing:.2em;color:var(--ink);margin:0;max-height:236px;animation:inkin 1.2s .25s var(--ease) both}
   .cap{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1;padding-bottom:2px}

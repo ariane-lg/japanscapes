@@ -215,11 +215,23 @@ function crumbs(parts){
 
 var WASH=[["#bfe3d3","#bfe0e6","#f6d5c0"],["#f3c9d2","#c9e4de","#e9e3b8"],["#bfe0e6","#d9d2ef","#f3c9d2"],["#cfe6da","#f7d9c4","#bfe0e6"],["#f6d5c0","#f3c9d2","#cfe6da"]];
 function washIdx(en){var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;return hv%WASH.length}
-function hero(ja,en,sub){
-  var hv=0;for(var i=0;i<en.length;i++)hv=(hv*31+en.charCodeAt(i))%997;
-  var w=WASH[hv%WASH.length],n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;
-  return "<div class='hero' style='--a:"+w[0]+";--b:"+w[1]+";--c:"+w[2]+"'><i class='sun'></i><i class='sun s2'></i><i class='sun s3'></i><div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='sub'>"+sub+"</div><div class='rom' style='font-size:"+rs+"rem'>"+en+"</div></div></div>";
+var HOODCOL=["#bfe3d3","#f3c9d2","#bfe0e6","#d9d2ef","#f6d5c0"];
+function nearHoods(hd,n){
+  var c=C();return c.hoods.filter(function(x){return x!==hd}).sort(function(a,b){
+    function d(p){return Math.pow(p.lat-hd.lat,2)+Math.pow(p.lng-hd.lng,2)}return d(a)-d(b)}).slice(0,n);
 }
+/* the sheet's circles are the map's neighbourhood circles: same colour, relative size and name */
+function discsHTML(list){
+  var pos=[[40,-8,170],[6,58,124],[92,116,78]];
+  return list.slice(0,3).map(function(h,i){
+    var p=pos[i],d=Math.round(p[2]*(.78+Math.min(h.r||.5,1.1)*.2));
+    return "<button class='sun s"+i+"' data-hood='"+h.id+"' title='"+h.name+"' style='right:"+p[0]+"px;top:"+p[1]+"px;width:"+d+"px;height:"+d+"px;background:"+HOODCOL[washIdx(h.name)]+"'><span>"+h.short+"</span></button>"}).join("");
+}
+function hero(ja,en,sub,list){
+  var n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;
+  return "<div class='hero'>"+(list&&list.length?discsHTML(list):"")+"<div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='sub'>"+sub+"</div><div class='rom' style='font-size:"+rs+"rem'>"+en+"</div></div></div>";
+}
+function dsc(n){return "<span class='dsc' style='--c:"+(CATCOL[n]||"#1e2527")+"'>"+ico(n)+"</span>"}
 function paras(a){return a.map(function(s){return "<p class='para'>"+s+"</p>"}).join("")}
 function srcs(a){return "<p class='srcs'>Sources: "+a.map(function(s){return "<a target='_blank' rel='noopener' href='"+s[1]+"'>"+s[0]+"</a>"}).join(" · ")+"</p>"}
 function themesHTML(){
@@ -232,7 +244,7 @@ function readingHTML(){
   return "<h4>"+ico("history")+"Go deeper</h4><ul class='dots'>"+READING.map(function(r){return "<li><a target='_blank' rel='noopener' href='"+r.u+"'>"+r.t+"</a></li>"}).join("")+"</ul>";
 }
 function cityHTML(){
-  var c=C(),h=hero(c.ja,c.label,c.dates||"city guide")+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
+  var c=C(),h=hero(c.ja,c.label,c.dates||"city guide",c.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}))+"<p class='ptag'>"+c.tag+"</p><p class='lead'>"+c.intro+"</p>";
   h+="<div class='legend'>"+ico('mine')+"Yours</span><span>"+ico('sight')+"Sights</span><span>"+ico('eat')+"Eat</span><span>"+ico('make')+"Shops &amp; craft</span><span>"+ico('green')+"Parks</span></div>";
   var ws=c.W.filter(function(w){return w.hoods.length}).sort(function(a,b){return b.hoods.length-a.hoods.length||a.en.localeCompare(b.en)});
   if(ws.length){
@@ -247,7 +259,7 @@ function cityHTML(){
 }
 function wardHTML(){
   var w=C().wardBy[state.ward];
-  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase()+(w.hoods.length?"":" · off the main route"));
+  var h=crumbs(1)+hero(w.ja,w.en,"ward · "+C().label.toLowerCase()+(w.hoods.length?"":" · off the main route"),w.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}));
   h+="<p class='ptag'>"+(w.info?w.info.tag:"Not on the route")+"</p><p class='lead'>"+(w.info?w.info.t:WARD_GENERIC)+"</p>";
   if(w.hoods.length)h+="<h4>Neighbourhoods here</h4><ul class='list'>"+w.hoods.map(hoodRow).join("")+"</ul>";
   var pl=w.places.filter(pinVisible);
@@ -257,7 +269,7 @@ function wardHTML(){
 }
 function hoodHTML(){
   var c=C(),hd=c.hoodBy[state.hood];
-  var h=crumbs(2)+hero(hd.jp,hd.name,"neighbourhood"+(hd.ward?" · "+hd.ward.en.toLowerCase():""));
+  var h=crumbs(2)+hero(hd.jp,hd.name,"neighbourhood"+(hd.ward?" · "+hd.ward.en.toLowerCase():""),[hd].concat(nearHoods(hd,2)));
   h+="<p class='ptag'>"+hd.tag+"</p>"+tagsHTML(hd.tags)+"<p class='lead'>"+hd.intro+"</p>";
   var lo=LORE[hd.id]||{};
   if(hd.see&&hd.see.length)h+="<h4>"+ico("sight")+"See</h4>"+lis(hd.see);
@@ -306,6 +318,9 @@ function plateTitle(){
   var g=$("#ghost");if(g&&g.textContent!==ja){g.textContent=ja;g.style.animation="none";void g.offsetWidth;g.style.animation=""}
   var f=$("#figline");if(f)f.innerHTML="<b>Fig. 0"+n+"</b>"+en+(h||w||p?"":" · "+c.tag);
 }
+function hoodGlow(id,on){var h=C().hoodBy[id],e=h&&h.circle&&h.circle.getElement&&h.circle.getElement();if(e)e.classList.toggle("glow",on)}
+$("#panel").addEventListener("mouseover",function(e){var b=e.target.closest(".sun");if(b)hoodGlow(b.dataset.hood,true)});
+$("#panel").addEventListener("mouseout",function(e){var b=e.target.closest(".sun");if(b)hoodGlow(b.dataset.hood,false)});
 $("#panel").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
   var c=C();
@@ -322,7 +337,7 @@ $("#panel").addEventListener("click",function(e){
 function buildTools(){
   var t=$("#maptools");
   var h="<div class='seg' role='group' aria-label='Base map'><button data-base='auto' aria-pressed='"+(state.base==="auto")+"'>Auto</button><button data-base='clean' aria-pressed='"+(state.base==="clean")+"'>Clean</button><button data-base='streets' aria-pressed='"+(state.base==="streets")+"'>Streets</button></div>";
-  CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+ico(k.id)+k.name+"</button>"});
+  CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
   if(state.city==="tokyo")h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   t.innerHTML=h;
