@@ -312,14 +312,19 @@
   .leaflet-control-zoom a{border:1px solid var(--line)!important;border-radius:0!important;background:var(--raise);margin-bottom:-1px}
 
   /* --- map style --- */
-  .leaflet-tile-pane{filter:grayscale(.35) brightness(1.04) contrast(.92)}
-  path.ward{stroke:#fff;stroke-opacity:.95;stroke-width:1.6;fill-opacity:.6;transition:fill-opacity .4s var(--ease),fill .4s var(--ease),stroke .3s}
-  path.ward.w0{fill:#bfe3d3} path.ward.w1{fill:#f3c9d2} path.ward.w2{fill:#bfdde6} path.ward.w3{fill:#f6d5c0} path.ward.w4{fill:#dfe8b8}
-  path.ward:not(.has){fill-opacity:.28}
-  path.ward:hover{fill-opacity:.9;stroke:var(--shu)}
-  path.ward.sel{fill-opacity:.95;stroke:#2e6f68;stroke-opacity:1;stroke-width:2.4}
-  [data-band="detail"] path.ward,[data-band="street"] path.ward{fill-opacity:.08;stroke:#2e6f68;stroke-opacity:.35;stroke-width:1}
-  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill-opacity:.1;stroke-opacity:.9;stroke-width:2}
+  .leaflet-tile-pane{opacity:.5;filter:grayscale(1) contrast(.9)}
+  #map{background:#f8f7f2}
+  [data-band="detail"] .leaflet-tile-pane,[data-band="street"] .leaflet-tile-pane{opacity:.9;filter:grayscale(.3)}
+  .leaflet-tile-pane{transition:opacity .6s}
+  /* wards as pen line-drawing: ink outline, paper fill, no colour */
+  path.ward{fill:#fbfaf6;fill-opacity:.5;stroke:#1e2527;stroke-opacity:.72;stroke-width:1.05;stroke-linejoin:round;filter:url(#rough);transition:fill-opacity .35s var(--ease),stroke-opacity .3s,stroke-width .3s}
+  path.ward.has{fill:#fbfaf6;fill-opacity:.72}
+  path.ward:not(.has){fill:#fbfaf6;stroke-opacity:.4}
+  path.ward:hover{fill:#fff}
+  path.ward:hover{fill-opacity:.85;stroke-opacity:1;stroke-width:1.6}
+  path.ward.sel{fill-opacity:.9;stroke:#1e2527;stroke-opacity:1;stroke-width:2}
+  [data-band="detail"] path.ward,[data-band="street"] path.ward{fill-opacity:0;stroke-opacity:.45;stroke-width:1}
+  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{fill-opacity:0;stroke-opacity:.9;stroke-width:1.8}
   path.hood{fill:rgba(244,205,213,.35);stroke:#2e6f68;stroke-opacity:.55;stroke-width:1;stroke-dasharray:2 5}
   path.hood:hover,path.hood.sel{fill:rgba(244,190,203,.5);stroke:#2e6f68;stroke-opacity:1;stroke-dasharray:none}
   .wlabel.main span,.hlabel span{font:500 12px 'Shippori Mincho',serif;color:#1e2527;text-shadow:0 0 4px rgba(255,255,255,.9),0 0 2px #fff}
@@ -441,6 +446,7 @@
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></svg>
 <div class="page">
   <aside class="rail">
     <div class="brand"><span class="seal" aria-hidden="true">旅</span><div><b>japanscapes</b><small>Japan field guide</small></div></div>
