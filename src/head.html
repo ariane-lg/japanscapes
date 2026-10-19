@@ -553,6 +553,10 @@
   .hb .ico{width:19px;height:19px;color:#1e2527;stroke-width:1.2}
   [data-band="area"] .hb{transform:scale(.92)}
   [data-band="detail"] .hb,[data-band="street"] .hb{transform:scale(1.12)}
+  /* links, not buttons: plain text with a single line underneath */
+  .btn,.btn.ghost{background:none!important;border:none!important;border-bottom:1px solid var(--ink)!important;border-radius:0;color:var(--ink)!important;padding:0 0 3px!important;font:500 .8rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.06em;box-shadow:none!important;transform:none!important;transition:border-color .3s,opacity .3s}
+  .btn:hover,.btn.ghost:hover{box-shadow:none!important;transform:none!important;opacity:.55}
+  .actions{gap:calc(var(--u)*3)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}

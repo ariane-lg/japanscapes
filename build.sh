@@ -13,7 +13,7 @@ build() {  # out key use personal(0/1)
     cat src/lore.js; echo
     cat src/lore2.js; echo
     cat src/lore3.js; echo
-    cat src/lore4.js; echo
+    cat src/lore4.js; echo; cat src/pins.js; echo
     if [ "$4" = "1" ] && [ -f local/personal.js ]; then cat local/personal.js; echo; fi
     sed -e "s|__GOOGLE_KEY__|$2|" -e "s|__USE_GOOGLE__|$3|" src/app.js
     printf '\n</script>\n</body>\n</html>\n'
