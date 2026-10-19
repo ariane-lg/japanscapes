@@ -332,7 +332,7 @@ function render(){
 function plateTitle(){
   var c=C(),w=state.ward&&c.wardBy[state.ward],h=state.hood&&c.hoodBy[state.hood],p=state.place;
   var ja=h?h.jp:w?w.ja:c.ja,n=ORDER.indexOf(state.city)+1;
-  var f=$("#figline");if(f)f.innerHTML="<b>Fig. 0"+n+"</b>"+c.label+" · "+c.tag;
+
 }
 function hoodGlow(id,on){var h=C().hoodBy[id],e=h&&h.circle&&h.circle.getElement&&h.circle.getElement();if(e)e.classList.toggle("glow",on)}
 $("#panel").addEventListener("mouseover",function(e){var b=e.target.closest(".sun");if(b)hoodGlow(b.dataset.hood,true)});

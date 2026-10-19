@@ -454,7 +454,7 @@
   .leaflet-control-attribution{background:transparent!important;font-size:9px;opacity:.55}
   /* key: active choice gets a hairline underline */
   .seg button[aria-pressed="true"]{border-bottom:1px solid var(--shu)}
-  .maptools{gap:calc(var(--u)*1.25) calc(var(--u)*3.5)}
+  .maptools{gap:calc(var(--u)*1.25) calc(var(--u)*3.5);padding-top:calc(var(--u)*2.5)}
   .dsc{width:24px;height:24px}
   .chip[aria-pressed="true"] .dsc{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 55%,#fff)}
   /* three map buttons as one hairline capsule: zoom in, zoom out, back to main view */
@@ -512,7 +512,6 @@
     <div class="plate">
       <div id="map" aria-label="Map"></div>
     </div>
-    <div class="figline" id="figline"></div>
     <div class="maptools" id="maptools"></div>
   </section>
   <aside class="panel" id="panel" aria-live="polite"></aside>
