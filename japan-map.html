@@ -469,6 +469,14 @@
   .hlabel.ha-r span{transform:translate(34px,-50%);text-align:left}
   .hlabel.ha-l span{transform:translate(calc(-100% - 34px),-50%);text-align:right}
   .hlabel span em{display:block;font:italic 400 .64rem 'Shippori Mincho',serif;letter-spacing:.06em;color:var(--soft);text-shadow:inherit;margin-top:1px}
+  /* rail: no lines, the selected city is simply fuller */
+  .rail::after{display:none}
+  .tab::after{display:none}
+  .tab{opacity:.42;transition:opacity .4s var(--ease)}
+  .tab:hover{opacity:.8}
+  .tab[aria-selected="true"]{opacity:1}
+  .tab i,.tab[aria-selected="true"] i{color:var(--ink)}
+  .tab[aria-selected="true"] i{color:var(--shu)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
