@@ -557,6 +557,19 @@
   .btn,.btn.ghost{background:none!important;border:none!important;border-bottom:1px solid var(--ink)!important;border-radius:0;color:var(--ink)!important;padding:0 0 3px!important;font:500 .8rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.06em;box-shadow:none!important;transform:none!important;transition:border-color .3s,opacity .3s}
   .btn:hover,.btn.ghost:hover{box-shadow:none!important;transform:none!important;opacity:.55}
   .actions{gap:calc(var(--u)*3)}
+  /* place card: source tag as a dot and a line of text; links sweep in italic on hover */
+  .hero.place{min-height:176px}
+  .hero.place .ttl{display:none}
+  .hero.place .cap{grid-column:1/-1;padding-right:150px}
+  p.src{margin:calc(var(--u)*.5) 0 calc(var(--u)*2.5)}
+  .badge,.badge.mine,.badge.guide{display:inline-flex;align-items:center;background:none;border-radius:0;padding:0;margin:0;color:var(--soft);font:italic 500 .84rem 'Shippori Mincho',serif;letter-spacing:.02em}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#1e2527;margin-right:.6rem;flex:none}
+  .badge.guide::before{background:#aab1b8}
+  button.lnk{border:none;background:none;padding:0 0 2px;color:var(--ink);font:500 .92rem 'Shippori Mincho',serif;border-bottom:1px solid var(--ink)}
+  .btn,.btn.ghost{position:relative;isolation:isolate}
+  .btn::before{content:"";position:absolute;inset:-3px -7px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(154,162,170,.34),rgba(154,162,170,0) 92%);transform:scaleX(0);transform-origin:left center;transition:transform .6s var(--ease)}
+  .btn:hover::before{transform:scaleX(1)}
+  .btn:hover,.btn.ghost:hover{opacity:1!important;font-style:italic}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}

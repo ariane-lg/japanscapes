@@ -314,13 +314,11 @@ function hoodHTML(){
 }
 function placeHTML(){
   var c=C(),p=state.place,hd=p.hoodObj;
-  var h=crumbs(3)+"<p class='eyebrow'>"+catName(p.cat)+"</p><h2 class='ptitle'>"+p.name+"</h2>";
-  h+="<div style='margin:.5rem 0 .2rem'>";
-  if(p.src==="list")h+="<span class='badge mine'>From your Maps list: "+p.list+"</span>";
-  else if(p.src==="research")h+="<span class='badge mine'>From your research</span>";
-  else h+="<span class='badge guide'>Suggested landmark</span>";
-  h+="</div><p class='lead'>"+p.note+"</p>";
-  if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='crumbbtn' data-hood='"+hd.id+"' style='border:none;background:none;padding:0;color:var(--ai);font-weight:700;text-decoration:underline'>"+hd.name+"</button></dd></div></dl>";
+  var list=hd?(hd.ward&&hd.ward.hoods.length>1?hd.ward.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}):[hd].concat(nearHoods(hd,2))):[];
+  var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"").replace("class='hero","class='hero place");
+  var tag=p.src==="list"?"<span class='badge mine'>From your Maps list: "+p.list+"</span>":p.src==="research"?"<span class='badge mine'>From your research</span>":"<span class='badge guide'>Suggested landmark</span>";
+  h+="<p class='src'>"+tag+"</p><p class='lead'>"+p.note+"</p>";
+  if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='lnk' data-hood='"+hd.id+"'>"+hd.name+"</button></dd></div></dl>";
   h+="<div class='actions'><a class='btn' target='_blank' rel='noopener' href='"+gq(p.q)+"'>Open in Google Maps</a>";
   h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&destination="+p.lat+","+p.lng+"'>Directions</a>";
   if(c.hotel)h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(c.hotel.name)+"&destination="+p.lat+","+p.lng+"&travelmode=transit'>From the hotel</a>";

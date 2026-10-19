@@ -557,6 +557,19 @@
   .btn,.btn.ghost{background:none!important;border:none!important;border-bottom:1px solid var(--ink)!important;border-radius:0;color:var(--ink)!important;padding:0 0 3px!important;font:500 .8rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.06em;box-shadow:none!important;transform:none!important;transition:border-color .3s,opacity .3s}
   .btn:hover,.btn.ghost:hover{box-shadow:none!important;transform:none!important;opacity:.55}
   .actions{gap:calc(var(--u)*3)}
+  /* place card: source tag as a dot and a line of text; links sweep in italic on hover */
+  .hero.place{min-height:176px}
+  .hero.place .ttl{display:none}
+  .hero.place .cap{grid-column:1/-1;padding-right:150px}
+  p.src{margin:calc(var(--u)*.5) 0 calc(var(--u)*2.5)}
+  .badge,.badge.mine,.badge.guide{display:inline-flex;align-items:center;background:none;border-radius:0;padding:0;margin:0;color:var(--soft);font:italic 500 .84rem 'Shippori Mincho',serif;letter-spacing:.02em}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#1e2527;margin-right:.6rem;flex:none}
+  .badge.guide::before{background:#aab1b8}
+  button.lnk{border:none;background:none;padding:0 0 2px;color:var(--ink);font:500 .92rem 'Shippori Mincho',serif;border-bottom:1px solid var(--ink)}
+  .btn,.btn.ghost{position:relative;isolation:isolate}
+  .btn::before{content:"";position:absolute;inset:-3px -7px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(154,162,170,.34),rgba(154,162,170,0) 92%);transform:scaleX(0);transform-origin:left center;transition:transform .6s var(--ease)}
+  .btn:hover::before{transform:scaleX(1)}
+  .btn:hover,.btn.ghost:hover{opacity:1!important;font-style:italic}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -2038,13 +2051,11 @@ function hoodHTML(){
 }
 function placeHTML(){
   var c=C(),p=state.place,hd=p.hoodObj;
-  var h=crumbs(3)+"<p class='eyebrow'>"+catName(p.cat)+"</p><h2 class='ptitle'>"+p.name+"</h2>";
-  h+="<div style='margin:.5rem 0 .2rem'>";
-  if(p.src==="list")h+="<span class='badge mine'>From your Maps list: "+p.list+"</span>";
-  else if(p.src==="research")h+="<span class='badge mine'>From your research</span>";
-  else h+="<span class='badge guide'>Suggested landmark</span>";
-  h+="</div><p class='lead'>"+p.note+"</p>";
-  if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='crumbbtn' data-hood='"+hd.id+"' style='border:none;background:none;padding:0;color:var(--ai);font-weight:700;text-decoration:underline'>"+hd.name+"</button></dd></div></dl>";
+  var list=hd?(hd.ward&&hd.ward.hoods.length>1?hd.ward.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}):[hd].concat(nearHoods(hd,2))):[];
+  var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"").replace("class='hero","class='hero place");
+  var tag=p.src==="list"?"<span class='badge mine'>From your Maps list: "+p.list+"</span>":p.src==="research"?"<span class='badge mine'>From your research</span>":"<span class='badge guide'>Suggested landmark</span>";
+  h+="<p class='src'>"+tag+"</p><p class='lead'>"+p.note+"</p>";
+  if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='lnk' data-hood='"+hd.id+"'>"+hd.name+"</button></dd></div></dl>";
   h+="<div class='actions'><a class='btn' target='_blank' rel='noopener' href='"+gq(p.q)+"'>Open in Google Maps</a>";
   h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&destination="+p.lat+","+p.lng+"'>Directions</a>";
   if(c.hotel)h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(c.hotel.name)+"&destination="+p.lat+","+p.lng+"&travelmode=transit'>From the hotel</a>";
