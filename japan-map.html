@@ -498,6 +498,16 @@
   .btn.ghost{color:var(--ink)!important}
   .crumbs button,.cnt{color:var(--soft)}
   .ptag,.eyebrow{color:#7d858d}
+  /* silver with a gradient: brushed-metal sheen on text, lines and buttons */
+  :root{--sheen:linear-gradient(120deg,#5d656d 0%,#98a0a7 45%,#69717a 72%,#a2a9b0 100%);--sheen-fill:linear-gradient(120deg,#cfd4d9 0%,#a9b0b7 42%,#dfe3e6 62%,#aeb5bc 100%)}
+  .ptag,.eyebrow,h4::before,.tab::before,.cap .sub::before{background:var(--sheen);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .cap .sub::before{-webkit-text-fill-color:initial;background:var(--sheen-fill);-webkit-background-clip:border-box;background-clip:border-box}
+  h4::after{background:linear-gradient(90deg,#aab1b8,rgba(170,177,184,0))}
+  .plate::before{border:1px solid transparent;border-image:linear-gradient(135deg,#c3c9ce,#8e969d 50%,#d6dade) 1;opacity:.6}
+  .btn{background:var(--sheen-fill)!important;border-color:transparent!important;color:#1e2527!important}
+  .btn.ghost{background:transparent!important;border:1px solid #aab1b8!important}
+  .btn:hover{box-shadow:0 8px 18px rgba(120,128,136,.28)}
+  .yours{border-left:2px solid #aab1b8}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
