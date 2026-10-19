@@ -457,6 +457,12 @@
   .maptools{gap:calc(var(--u)*1.25) calc(var(--u)*3.5)}
   .dsc{width:24px;height:24px}
   .chip[aria-pressed="true"] .dsc{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 55%,#fff)}
+  /* three map buttons as one hairline capsule: zoom in, zoom out, back to main view */
+  .leaflet-control-zoom.leaflet-bar{border:1px solid rgba(30,37,39,.3)!important;border-radius:999px!important;background:rgba(255,255,255,.94)!important;overflow:hidden;box-shadow:none!important}
+  .leaflet-control-zoom a{border:none!important;border-radius:0!important;margin:0!important;background:transparent!important;width:34px!important;height:34px!important;line-height:32px!important;display:grid;place-items:center;transform:none!important}
+  .leaflet-control-zoom a+a{border-top:1px solid rgba(30,37,39,.14)!important}
+  .leaflet-control-zoom a:hover{background:rgba(46,111,104,.08)!important;color:var(--shu)}
+  .leaflet-control-zoom .zhome svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}

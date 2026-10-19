@@ -77,7 +77,13 @@ function prep(key){
 
 /* ---------- map ---------- */
 var map=L.map("map",{zoomControl:false,zoomSnap:.5,zoomDelta:.5,wheelPxPerZoomLevel:100});
-L.control.zoom({position:"bottomright"}).addTo(map);
+var zc=L.control.zoom({position:"bottomright"}).addTo(map);
+(function(){
+  var b=L.DomUtil.create("a","zhome",zc.getContainer());
+  b.href="#";b.setAttribute("role","button");b.title="Back to main view";b.setAttribute("aria-label","Back to main view");
+  b.innerHTML="<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5'/><circle cx='12' cy='12' r='2'/></svg>";
+  L.DomEvent.on(b,"click",function(e){L.DomEvent.preventDefault(e);L.DomEvent.stopPropagation(e);goCity()});
+})();
 var tiles={
   clean:L.tileLayer(ESRI_GRAY,{maxNativeZoom:16,maxZoom:19,attribution:"Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ · Ward boundaries: MLIT National Land Numerical Information"}),
   streets:L.tileLayer(ESRI_ST,{maxZoom:19,attribution:"Tiles &copy; Esri &mdash; Esri, HERE, Garmin, OpenStreetMap contributors · Ward boundaries: MLIT National Land Numerical Information"})
