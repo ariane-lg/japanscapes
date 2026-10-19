@@ -37,7 +37,7 @@ var ICON={
  line:'<path d="M3 17c4-8 8 4 12-4s4-2 6-6"/><circle cx="3" cy="17" r="1.6"/><circle cx="21" cy="7" r="1.6"/>',
  history:'<path d="M2.5 12.5c4.5-1.2 7-4.5 9.5-8.5 2.5 4 5 7.3 9.5 8.5"/><path d="M6 12.5V20M18 12.5V20M3.5 20h17"/>',
  craft:'<path d="M20.5 3.5c-5 1.2-9 4.8-11 10l1.8 1.8c5.2-2 8.8-6 10-11z"/><path d="M8.5 14c-2.5.2-4 1.8-4.2 5.2 3.4-.2 5-1.7 5.2-4.2"/>',
-  hotel:'<path d="M2 14.4c4.2-.6 7-3.4 9-6.8 2 3.4 4.8 6.2 9 6.8"/><path d="M5.6 14.6V20M16.4 14.6V20M3.4 20h15.2"/><path d="M20.6 1.8a4.8 4.8 0 1 0 2.6 8.6 3.9 3.9 0 0 1-2.6-8.6z"/><circle cx="11" cy="17.1" r=".9" fill="currentColor" stroke="none"/><circle cx="4.6" cy="5" r=".65" fill="currentColor" stroke="none"/><circle cx="8.4" cy="2.6" r=".5" fill="currentColor" stroke="none"/>',
+  hotel:'<path d="M12 1.6v2M9.6 3.6h4.8v1.2H9.6z"/><path d="M8.4 4.8c-3.4 2.2-3.4 10.8 0 13h7.2c3.4-2.2 3.4-10.8 0-13"/><path d="M7.4 8.6c3 1.1 6.2 1.1 9.2 0M7.2 11.4c3.2 1.2 6.4 1.2 9.6 0M7.4 14.2c3 1.1 6.2 1.1 9.2 0"/><path d="M9.6 17.8h4.8V19H9.6zM12 19v2.4M11 22h2"/><path d="M21 2.4a3.2 3.2 0 1 0 1.8 5.8 2.6 2.6 0 0 1-1.8-5.8z"/><circle cx="3.6" cy="4.6" r=".6" fill="currentColor" stroke="none"/>',
  tips:'<ellipse cx="12" cy="12.5" rx="5.2" ry="6.5"/><path d="M8.5 6.5h7M8.5 18.5h7M12 3v3.5M12 19v2.5"/>'
 };
 function ico(n,plain){return "<svg class='ico"+(plain?"":" c-"+n)+"' viewBox='0 0 24 24' aria-hidden='true'>"+(ICON[n]||"")+"</svg>"}
@@ -162,7 +162,7 @@ function buildLayers(){
   });
   refreshPins();
   if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:ico("hotel",true),iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
+    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:"<span class='hb'>"+ico("hotel",true)+"</span>",iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
     m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
     m.on("click",function(){if(c.hotel.hood)selectHood(c.hotel.hood)});
   }
