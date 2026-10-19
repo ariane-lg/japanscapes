@@ -597,6 +597,9 @@
   .plate::before{display:none!important}
   /* option 3: white page, a very pale grey card */
   .panel{background:#ffffff!important}
+  /* basemap tiles multiply onto the page grey, so the land is exactly the page colour */
+  .leaflet-tile-pane{opacity:.7!important;mix-blend-mode:multiply;filter:grayscale(1) brightness(1.1)!important}
+  [data-band="detail"] .leaflet-tile-pane,[data-band="street"] .leaflet-tile-pane{opacity:.92!important;filter:grayscale(.3) brightness(1.04)!important}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
