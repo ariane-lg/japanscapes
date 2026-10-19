@@ -245,7 +245,7 @@
   :root{
     --paper:#fdfdfb; --surface:#ffffff; --raise:#ffffff;
     --ink:#1e2527; --soft:#667073; --line:rgba(30,37,39,.12);
-    --shu:#3a63a8; --shu-soft:rgba(58,99,168,.08); --eat:#d2566e;
+    --shu:#3f93c2; --shu-soft:rgba(63,147,194,.08); --eat:#d2566e;
     --ai:#3f7a99; --matcha:#5b9a78; --kin:#b8863f;
     --rose:#f4cdd5; --mint:#cfe6da; --aqua:#c4e1e8; --peach:#f7d9c4;
     --u:8px; --ax:40px; --ease:cubic-bezier(.22,.7,.2,1);
@@ -255,14 +255,14 @@
     :root:not([data-theme="light"]){
       --paper:#0e1314; --surface:#151b1c; --raise:#1a2224;
       --ink:#e8ebe6; --soft:#9aa6a6; --line:rgba(232,235,230,.14);
-      --shu:#8fb0ea; --shu-soft:rgba(143,176,234,.12); --eat:#ee8aa0;
+      --shu:#8cc8e8; --shu-soft:rgba(140,200,232,.12); --eat:#ee8aa0;
       --ai:#86b9d3; --matcha:#98c8ae; --kin:#d6ad6c;
     }
   }
   :root[data-theme="dark"]{
     --paper:#0e1314; --surface:#151b1c; --raise:#1a2224;
     --ink:#e8ebe6; --soft:#9aa6a6; --line:rgba(232,235,230,.14);
-    --shu:#8fb0ea; --shu-soft:rgba(143,176,234,.12); --eat:#ee8aa0;
+    --shu:#8cc8e8; --shu-soft:rgba(140,200,232,.12); --eat:#ee8aa0;
     --ai:#86b9d3; --matcha:#98c8ae; --kin:#d6ad6c;
   }
   body{display:block;height:100vh;overflow:hidden;background:var(--paper);font-size:14.5px;line-height:1.7}
@@ -343,9 +343,9 @@
   .wlabel span{font:400 9.5px 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;color:#55625f}
   .pinb{border-width:1.3px;box-shadow:0 0 0 4px rgba(255,255,255,.6),0 2px 6px rgba(30,37,39,.18);animation:fadein .7s var(--ease) both}
   .pinb.pin-sight{color:#3f7a99} .pinb.pin-eat{color:#d2566e} .pinb.pin-make{color:#b8863f} .pinb.pin-green{color:#5b9a78}
-  .pinb.hotelb{color:#1e2527;box-shadow:0 0 0 7px rgba(58,99,168,.2)}
+  .pinb.hotelb{color:#1e2527;box-shadow:0 0 0 7px rgba(63,147,194,.2)}
   .wtip{background:rgba(255,255,255,.98);color:var(--ink);border:none;border-radius:0;box-shadow:0 14px 36px rgba(30,37,39,.16)}
-  .wtip .tt{color:#3a63a8;font-style:italic;font-weight:500}
+  .wtip .tt{color:#3f93c2;font-style:italic;font-weight:500}
   .wtip .tj,.wtip .tf,.wtip .tc{color:#667073;opacity:1}
   .wtip .tb{opacity:1}
   .pintip{border-radius:0;font-weight:500}
@@ -410,7 +410,7 @@
   details.theme:hover summary{color:var(--shu)}
   details.theme[open] .para,details.theme[open] .srcs{animation:rise .6s var(--ease) both}
   .btn{border-radius:0;background:var(--shu);border-color:var(--shu);color:#fff;font-weight:500;letter-spacing:.06em;padding:.65rem 1.2rem;transition:transform .35s var(--ease),box-shadow .35s}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(58,99,168,.25)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(63,147,194,.25)}
   .btn.ghost{background:transparent;color:var(--shu);border-color:var(--shu)}
   .legend{margin-top:calc(var(--u)*2);font-size:.7rem;letter-spacing:.1em}
   .srcs{line-height:1.7;margin-top:calc(var(--u)*3)}
@@ -461,7 +461,7 @@
   .leaflet-control-zoom.leaflet-bar{border:1px solid rgba(30,37,39,.3)!important;border-radius:999px!important;background:rgba(255,255,255,.94)!important;overflow:hidden;box-shadow:none!important}
   .leaflet-control-zoom a{border:none!important;border-radius:0!important;margin:0!important;background:transparent!important;width:34px!important;height:34px!important;line-height:32px!important;display:grid;place-items:center;transform:none!important}
   .leaflet-control-zoom a+a{border-top:1px solid rgba(30,37,39,.14)!important}
-  .leaflet-control-zoom a:hover{background:rgba(58,99,168,.08)!important;color:var(--shu)}
+  .leaflet-control-zoom a:hover{background:rgba(63,147,194,.08)!important;color:var(--shu)}
   .leaflet-control-zoom .zhome svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
   /* the trail: a fine pen line over a soft wash, like the hand-drawn route maps */
   path.trail{fill:none}
