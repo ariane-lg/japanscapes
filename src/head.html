@@ -508,6 +508,13 @@
   .btn.ghost{background:transparent!important;border:1px solid #aab1b8!important}
   .btn:hover{box-shadow:0 8px 18px rgba(120,128,136,.28)}
   .yours{border-left:2px solid #aab1b8}
+  /* wards in neutral greys, no beige */
+  path.ward,path.ward.has,path.ward:not(.has){fill:#f1f2f3}
+  path.ward.has{fill:#e9ebed;fill-opacity:.85}
+  path.ward:not(.has){fill:#f3f4f5;fill-opacity:.6}
+  path.ward:hover{fill:#fafafa;fill-opacity:.95}
+  path.ward.sel{fill:#f7f7f8;fill-opacity:.95}
+  #map{background:#f4f5f6}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
