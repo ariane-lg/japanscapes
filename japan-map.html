@@ -1982,7 +1982,7 @@ $("#panel").addEventListener("click",function(e){
 /* ---------- toolbar & tabs ---------- */
 function buildTools(){
   var t=$("#maptools");
-  var h="<div class='seg' role='group' aria-label='Base map'><button data-base='auto' aria-pressed='"+(state.base==="auto")+"'>Auto</button><button data-base='clean' aria-pressed='"+(state.base==="clean")+"'>Clean</button><button data-base='streets' aria-pressed='"+(state.base==="streets")+"'>Streets</button></div>";
+  var h="";
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
   if(state.city==="tokyo")h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
