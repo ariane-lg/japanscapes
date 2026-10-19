@@ -96,7 +96,7 @@ function useTiles(name){
 }
 tiles.clean.addTo(map);
 var G={ward:L.layerGroup().addTo(map),hood:L.layerGroup().addTo(map),line:L.layerGroup(),pin:L.layerGroup().addTo(map),hotel:L.layerGroup().addTo(map)};
-var lineBuilt=false;
+var CITYLINES={tokyo:LINES,kyoto:KY_LINES,osaka:OS_LINES};
 function band(){
   var z=map.getZoom(),flat=C().wards===null;map.getContainer().setAttribute("data-band",z<(flat?9:12.5)?"overview":z<14?"area":z<15.5?"detail":"street");
   if(state.base==="auto")useTiles(z>=14.5?"streets":"clean");
@@ -104,8 +104,8 @@ function band(){
 map.on("zoomend",band);
 
 function buildLines(){
-  if(lineBuilt)return;lineBuilt=true;
-  LINES.forEach(function(l){
+  G.line.clearLayers();
+  CITYLINES[state.city].forEach(function(l){
     var arr=l.st.map(function(s){return [s[1],s[2]]});if(l.loop)arr.push(arr[0]);
     L.polyline(arr,{color:l.c,weight:.8,opacity:.9,className:"mline"}).bindTooltip(l.name+" line",{sticky:true,className:"wtip"}).addTo(G.line);
     l.st.forEach(function(s){
@@ -169,7 +169,7 @@ function buildLayers(){
     m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
     m.on("click",function(){if(c.hotel.hood)selectHood(c.hotel.hood)});
   }
-  if(state.city==="tokyo"){buildLines();if(state.lines)G.line.addTo(map)}
+  if(CITYLINES[state.city]){buildLines();if(state.lines)G.line.addTo(map)}
 }
 
 function pinVisible(p){return state.cats[p.cat]&&(!state.mine||p.mine)}
@@ -359,7 +359,7 @@ function buildTools(){
   var h="";
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
-  if(state.city==="tokyo")h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
+  if(CITYLINES[state.city])h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   t.innerHTML=h;
 }
 $("#maptools").addEventListener("click",function(e){
