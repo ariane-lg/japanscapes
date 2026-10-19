@@ -364,6 +364,9 @@
   .sun{position:absolute;border:none;padding:0;border-radius:50%;mix-blend-mode:multiply;opacity:.78;cursor:pointer;display:grid;place-items:center;animation:pop 1.2s var(--ease) both;transition:opacity .3s,transform .5s var(--ease)}
   .sun.s1{animation-delay:.2s}.sun.s2{animation-delay:.35s}
   .sun:hover{opacity:1;transform:scale(1.05)}
+  .hero.still .sun,.hero.still .brush{animation:none}
+  .hero.pick .sun{opacity:.38}
+  .hero.pick .sun.on{opacity:.95;transform:scale(1.03)}
   .sun span{font:italic 500 .68rem 'Shippori Mincho',serif;color:var(--ink);opacity:.75;max-width:72%;text-align:center;line-height:1.2;pointer-events:none}
   .sun.s2 span{font-size:.6rem}
   path.hood.glow{fill-opacity:.95;stroke:#1e2527;stroke-opacity:.7;stroke-width:1.2}
@@ -435,8 +438,10 @@
   path.ward.sel{stroke-width:1.5}
   [data-band="detail"] path.ward,[data-band="street"] path.ward{stroke-width:.6}
   [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{stroke-width:1.2}
-  path.hood.sel,path.hood.glow{stroke-width:.8}
+  path.hood.sel,path.hood.glow{stroke:none}
   path.hood.sel{fill-opacity:.95}
+  path.hood.glow{fill-opacity:.9}
+  path.hood:hover{stroke:none}
   .wlabel span{font-weight:300;letter-spacing:.22em}
   .wlabel.main span,.hlabel span{font-weight:400}
   .pinb{border-width:1px;width:26px;height:26px}
