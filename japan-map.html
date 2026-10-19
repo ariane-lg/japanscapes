@@ -517,6 +517,12 @@
   #map{background:#f4f5f6}
   .brand::before{content:"";display:block;width:7px;height:7px;border-radius:50%;background:#1e2527;flex:none}
   @media (max-width:900px){.brand::before{margin-right:2px}}
+  /* brand mark: black dot overlapping a soft rose disc, with a hairline stem down to the name */
+  .brand::before{width:22px;height:16px;border-radius:0;background:radial-gradient(circle at 34% 50%,#1e2527 0 3.6px,transparent 3.8px),radial-gradient(circle at 66% 50%,rgba(243,201,210,.95) 0 7px,transparent 7.2px);mix-blend-mode:normal}
+  .brand{gap:0}
+  .brand b{position:relative;padding-top:34px}
+  .brand b::before{content:"";position:absolute;left:50%;top:6px;width:1px;height:22px;background:rgba(30,37,39,.35)}
+  @media (max-width:900px){.brand{gap:8px}.brand b{padding-top:0}.brand b::before{display:none}}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
