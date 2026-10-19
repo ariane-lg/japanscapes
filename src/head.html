@@ -426,6 +426,31 @@
   ul.list>li:nth-child(5),ul.dots>li:nth-child(5){animation-delay:.49s}
   ul.list>li:nth-child(n+6),ul.dots>li:nth-child(n+6){animation-delay:.55s}
   .panel,.plate::before{animation:fadein .8s var(--ease) both}
+  /* --- thin pass: hairlines everywhere on the map --- */
+  #map{border:1px solid rgba(30,37,39,.3)}
+  .plate::before{opacity:.22}
+  path.ward{stroke-width:.7;stroke-opacity:.62}
+  path.ward:not(.has){stroke-opacity:.34}
+  path.ward:hover{stroke-width:1.1}
+  path.ward.sel{stroke-width:1.5}
+  [data-band="detail"] path.ward,[data-band="street"] path.ward{stroke-width:.6}
+  [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{stroke-width:1.2}
+  path.hood.sel,path.hood.glow{stroke-width:.8}
+  .wlabel span{font-weight:300;letter-spacing:.22em}
+  .wlabel.main span,.hlabel span{font-weight:400}
+  .pinb{border-width:1px;width:26px;height:26px}
+  .pinb .ico{width:15px;height:15px;stroke-width:1.1}
+  .pinb.hotelb{border-width:1px}
+  /* zoom: two hairline circles, no block */
+  .leaflet-bar{border:none!important;box-shadow:none!important;background:none!important}
+  .leaflet-control-zoom a{width:30px!important;height:30px!important;line-height:28px!important;border:1px solid rgba(30,37,39,.3)!important;border-radius:50%!important;background:rgba(255,255,255,.92)!important;color:var(--ink);font:200 18px/28px 'Shippori Mincho',serif!important;margin:0 0 8px!important;box-shadow:none;transition:border-color .3s,background .3s,transform .3s var(--ease)}
+  .leaflet-control-zoom a:hover{border-color:var(--shu)!important;color:var(--shu);transform:scale(1.06)}
+  .leaflet-control-attribution{background:transparent!important;font-size:9px;opacity:.55}
+  /* key: active choice gets a hairline underline */
+  .seg button[aria-pressed="true"]{border-bottom:1px solid var(--shu)}
+  .maptools{gap:calc(var(--u)*1.25) calc(var(--u)*3.5)}
+  .dsc{width:24px;height:24px}
+  .chip[aria-pressed="true"] .dsc{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 55%,#fff)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
