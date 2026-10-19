@@ -540,6 +540,12 @@
   details.theme summary,details.theme:hover summary{color:var(--ink)}
   details.theme{transition:background .5s var(--ease)}
   details.theme:hover{background:linear-gradient(90deg,var(--shu-soft),transparent 70%)}
+  /* hover: no movement, the gradient sweeps in from the left */
+  .row:hover,.row{transform:none!important;background:none!important}
+  details.theme:hover,details.theme{background:none!important}
+  .row,details.theme{position:relative;isolation:isolate}
+  .row::before,details.theme::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,var(--shu-soft),transparent 70%);transform:scaleX(0);transform-origin:left center;transition:transform .7s var(--ease)}
+  .row:hover::before,details.theme:hover::before{transform:scaleX(1)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
