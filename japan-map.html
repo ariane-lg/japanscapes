@@ -243,7 +243,7 @@
      hangs from two axes: the rail line and the 40px text axis inside the sheet.
      ===================================================================== */
   :root{
-    --paper:#eef0f1; --surface:#ffffff; --raise:#ffffff;
+    --paper:#ffffff; --surface:#ffffff; --raise:#ffffff;
     --ink:#1e2527; --soft:#667073; --line:rgba(30,37,39,.12);
     --shu:#9aa2aa; --shu-soft:rgba(154,162,170,.16); --eat:#d2566e;
     --ai:#3f7a99; --matcha:#5b9a78; --kin:#b8863f;
@@ -509,12 +509,12 @@
   .btn:hover{box-shadow:0 8px 18px rgba(120,128,136,.28)}
   .yours{border-left:2px solid #aab1b8}
   /* wards in neutral greys, no beige */
-  path.ward,path.ward.has,path.ward:not(.has){fill:#f7f8f8}
-  path.ward.has{fill:#f7f8f8;fill-opacity:.74}
-  path.ward:not(.has){fill:#f7f8f8;fill-opacity:.5}
+  path.ward,path.ward.has,path.ward:not(.has){fill:#f9fafa}
+  path.ward.has{fill:#f9fafa;fill-opacity:.74}
+  path.ward:not(.has){fill:#f9fafa;fill-opacity:.5}
   path.ward:hover{fill:#fff;fill-opacity:.95}
   path.ward.sel{fill:#fff;fill-opacity:.95}
-  #map{background:#e2e5e7}
+  #map{background:#eef0f1}
   .brand::before{content:"";display:block;width:7px;height:7px;border-radius:50%;background:#1e2527;flex:none}
   @media (max-width:900px){.brand::before{margin-right:2px}}
   /* brand mark: black dot overlapping a soft rose disc, with a hairline stem down to the name */
@@ -595,6 +595,8 @@
   /* map plate: no outline, no offset frame */
   #map{border:none!important}
   .plate::before{display:none!important}
+  /* option 3: white page, a very pale grey card */
+  .panel{background:#f6f7f8!important}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
