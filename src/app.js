@@ -248,9 +248,9 @@ function discsHTML(list,act){
     var p=pos[i],d=Math.round(p[2]*(.78+Math.min(h.r||.5,1.1)*.2));
     return "<button class='sun s"+i+(act===h.id?" on":"")+"' data-hood='"+h.id+"' aria-label='"+h.name+"' style='right:"+p[0]+"px;top:"+p[1]+"px;width:"+d+"px;height:"+d+"px;background:"+HOODCOL[washIdx(h.name)]+"'></button>"}).join("");
 }
-function hero(ja,en,sub,list,act){
+function hero(ja,en,sub,list,act,note){
   var n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;
-  return (function(){var k=(list||[]).map(function(x){return x.id}).join(),still=k===lastDiscs;lastDiscs=k;return "<div class='hero"+(act?" pick":"")+(still?" still":"")+"'>"+(list&&list.length?discsHTML(list,act):"")})()+"<div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='sub'>"+sub+"</div><div class='rom' style='font-size:"+rs+"rem'>"+en+"</div></div></div>";
+  return (function(){var k=(list||[]).map(function(x){return x.id}).join(),still=k===lastDiscs;lastDiscs=k;return "<div class='hero"+(act?" pick":"")+(still?" still":"")+"'>"+(list&&list.length?discsHTML(list,act):"")})()+"<div class='ttl'><div class='brush' style='font-size:"+fs+"px'>"+ja+"</div></div><div class='cap'><div class='sub'>"+sub+"</div><div class='rom' style='font-size:"+rs+"rem'>"+en+"</div>"+(note||"")+"</div></div>";
 }
 function dsc(n){return "<span class='dsc' style='--c:"+(CATCOL[n]||"#1e2527")+"'>"+ico(n)+"</span>"}
 function paras(a){return a.map(function(s){return "<p class='para'>"+s+"</p>"}).join("")}
@@ -315,9 +315,10 @@ function hoodHTML(){
 function placeHTML(){
   var c=C(),p=state.place,hd=p.hoodObj;
   var list=hd?(hd.ward&&hd.ward.hoods.length>1?hd.ward.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}):[hd].concat(nearHoods(hd,2))):[];
-  var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"").replace("class='hero","class='hero place");
-  var tag=p.src==="list"?"<span class='badge mine'>From your Maps list: "+p.list+"</span>":p.src==="research"?"<span class='badge mine'>From your research</span>":"<span class='badge guide'>Suggested landmark</span>";
-  h+="<p class='src'>"+tag+"</p><p class='lead'>"+p.note+"</p>";
+  var tx=p.src==="list"?"From your Maps list: "+p.list:p.src==="research"?"From your research":"Suggested landmark";
+  var note="<div class='srcnote"+(p.src==="guide"?" soft":"")+"'>"+ico("mine",true)+"<span>"+tx+"</span></div>";
+  var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"",note).replace("class='hero","class='hero place");
+  h+="<p class='lead'>"+p.note+"</p>";
   if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='lnk' data-hood='"+hd.id+"'>"+hd.name+"</button></dd></div></dl>";
   h+="<div class='actions'><a class='btn' target='_blank' rel='noopener' href='"+gq(p.q)+"'>Open in Google Maps</a>";
   h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&destination="+p.lat+","+p.lng+"'>Directions</a>";
