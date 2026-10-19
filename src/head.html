@@ -463,6 +463,9 @@
   .leaflet-control-zoom a+a{border-top:1px solid rgba(30,37,39,.14)!important}
   .leaflet-control-zoom a:hover{background:rgba(46,111,104,.08)!important;color:var(--shu)}
   .leaflet-control-zoom .zhome svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+  /* the trail: a fine pen line over a soft wash, like the hand-drawn route maps */
+  path.trail{filter:url(#rough);fill:none}
+  path.trail-wash{fill:none}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}

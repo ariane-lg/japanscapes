@@ -145,10 +145,12 @@ function buildLayers(){
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
   if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
-    L.polyline(NK_TRAIL,{color:"#fff",weight:6,opacity:.9,interactive:false,className:"trail-halo"}).addTo(G.hood);
-    var tr=L.polyline(NK_TRAIL,{color:"#2e6f68",weight:2,opacity:.95,dashArray:"1 6",lineCap:"round",className:"trail"}).addTo(G.hood);
+    L.polyline(NK_TRAIL,{color:"#7fc4b6",weight:11,opacity:.28,lineCap:"round",lineJoin:"round",interactive:false,className:"trail-wash"}).addTo(G.hood);
+    var tr=L.polyline(NK_TRAIL,{color:"#1e2527",weight:1.1,opacity:.9,lineCap:"round",lineJoin:"round",className:"trail"}).addTo(G.hood);
     tr.bindTooltip("Magome to Tsumago, the old Nakasendo trail",{sticky:true,className:"wtip",direction:"auto",offset:[14,0]});
     tr.on("click",function(){selectHood("trail")});
+    L.circleMarker(NK_TRAIL[0],{radius:4,color:"#1e2527",weight:1,fillColor:"#fff",fillOpacity:1,interactive:false,className:"trail-end"}).addTo(G.hood);
+    L.circleMarker(NK_TRAIL[NK_TRAIL.length-1],{radius:4,color:"#1e2527",weight:1,fillColor:"#1e2527",fillOpacity:1,interactive:false,className:"trail-end"}).addTo(G.hood);
   }
   c.places.forEach(function(p){
     var mine=p.src==="research"||p.src==="list";
