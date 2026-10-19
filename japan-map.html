@@ -1799,9 +1799,9 @@ function buildLines(){
   if(lineBuilt)return;lineBuilt=true;
   LINES.forEach(function(l){
     var arr=l.st.map(function(s){return [s[1],s[2]]});if(l.loop)arr.push(arr[0]);
-    L.polyline(arr,{color:l.c,weight:1.2,opacity:.9,className:"mline"}).bindTooltip(l.name+" line",{sticky:true,className:"wtip"}).addTo(G.line);
+    L.polyline(arr,{color:l.c,weight:.8,opacity:.9,className:"mline"}).bindTooltip(l.name+" line",{sticky:true,className:"wtip"}).addTo(G.line);
     l.st.forEach(function(s){
-      L.circleMarker([s[1],s[2]],{radius:2.8,color:l.c,weight:0,fillColor:l.c,fillOpacity:1,className:"mstop"}).bindTooltip(s[0],{direction:"top",offset:[0,-4],className:"wtip"}).addTo(G.line);
+      L.circleMarker([s[1],s[2]],{radius:2.2,color:l.c,weight:0,fillColor:l.c,fillOpacity:1,className:"mstop"}).bindTooltip(s[0],{direction:"top",offset:[0,-4],className:"wtip"}).addTo(G.line);
     });
   });
 }
