@@ -523,6 +523,12 @@
   .brand b{position:relative;padding-top:34px}
   .brand b::before{content:"";position:absolute;left:50%;top:6px;width:1px;height:22px;background:rgba(30,37,39,.35)}
   @media (max-width:900px){.brand{gap:8px}.brand b{padding-top:0}.brand b::before{display:none}}
+  /* map buttons: a slim square stack, hairline edges */
+  .leaflet-control-zoom.leaflet-bar{border:1px solid rgba(30,37,39,.22)!important;border-radius:0!important;background:rgba(255,255,255,.96)!important}
+  .leaflet-control-zoom a{width:30px!important;height:30px!important;line-height:28px!important;border-radius:0!important;font:200 17px/28px 'Shippori Mincho',serif!important;color:#1e2527}
+  .leaflet-control-zoom a+a{border-top:1px solid rgba(30,37,39,.12)!important}
+  .leaflet-control-zoom a:hover{background:#f1f2f3!important;color:#1e2527}
+  .leaflet-control-zoom .zhome svg{width:14px;height:14px;stroke-width:1.1}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
