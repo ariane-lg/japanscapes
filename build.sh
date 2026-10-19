@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 build() {  # out key use personal(0/1)
   { cat src/head.html src/wards.js; echo
     cat src/akasaka-data.js; echo
-    cat src/extra-data.js; echo
+    cat src/extra-data.js; echo; cat src/nk-trail.js; echo
     cat src/lore.js; echo
     cat src/lore2.js; echo
     cat src/lore3.js; echo

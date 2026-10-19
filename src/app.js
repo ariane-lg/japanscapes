@@ -15,7 +15,7 @@ var CITIES={
   tag:"Twenty-three wards, one map",bounds:[[35.52,139.57],[35.82,139.93]],wards:WARDS.tokyo,hoods:HOODS,places:PLACES,hotel:BASE,
   intro:"Ward boundaries follow Tokyo's official map. Tap a ward for its history and character. Zoom in and its neighbourhoods appear, then every saved place."},
  nakasendo:{label:"Nakasendō & Fuji-Hakone",ja:"中山道",short:"Nakasendō",dates:"",
-  tag:"The old road, then Fuji",bounds:[[35.15,137.4],[35.62,139.1]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
+  tag:"The old road, then Fuji",bounds:[[35.513,137.525],[35.562,137.598]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
   intro:"Two post towns on the old Edo-to-Kyoto road, an 8 km forest walk between them, then a night near Fuji. Hakone and Kawaguchiko are both shown as options for the Fuji stop."},
  kyoto:{label:"Kyoto",ja:"京都",short:"Kyoto",dates:"",
   tag:"Eleven wards, a thousand temples",bounds:[[34.94,135.66],[35.14,135.85]],wards:WARDS.kyoto,hoods:KY_HOODS,places:KY_PLACES,
@@ -97,7 +97,7 @@ tiles.clean.addTo(map);
 var G={ward:L.layerGroup().addTo(map),hood:L.layerGroup().addTo(map),line:L.layerGroup(),pin:L.layerGroup().addTo(map),hotel:L.layerGroup().addTo(map)};
 var lineBuilt=false;
 function band(){
-  var z=map.getZoom();map.getContainer().setAttribute("data-band",z<12.5?"overview":z<14?"area":z<15.5?"detail":"street");
+  var z=map.getZoom(),flat=C().wards===null;map.getContainer().setAttribute("data-band",z<(flat?9:12.5)?"overview":z<14?"area":z<15.5?"detail":"street");
   if(state.base==="auto")useTiles(z>=14.5?"streets":"clean");
 }
 map.on("zoomend",band);
@@ -144,6 +144,12 @@ function buildLayers(){
     h.circle.on("click",function(){selectHood(h.id)});
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
+  if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
+    L.polyline(NK_TRAIL,{color:"#fff",weight:6,opacity:.9,interactive:false,className:"trail-halo"}).addTo(G.hood);
+    var tr=L.polyline(NK_TRAIL,{color:"#2e6f68",weight:2,opacity:.95,dashArray:"1 6",lineCap:"round",className:"trail"}).addTo(G.hood);
+    tr.bindTooltip("Magome to Tsumago, the old Nakasendo trail",{sticky:true,className:"wtip",direction:"auto",offset:[14,0]});
+    tr.on("click",function(){selectHood("trail")});
+  }
   c.places.forEach(function(p){
     var mine=p.src==="research"||p.src==="list";
     p.mine=mine;

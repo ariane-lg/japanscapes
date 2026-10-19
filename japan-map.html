@@ -883,13 +883,13 @@ var OS_PLACES=[
 
 /* ---------- Nakasendo & Fuji-Hakone ---------- */
 var NK_HOODS=[
- {id:"magome",name:"Magome",short:"Magome",jp:"馬籠",lat:35.5217,lng:137.5636,r:.5,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
+ {id:"magome",name:"Magome",short:"Magome",jp:"馬籠",lat:35.5217,lng:137.5636,r:.32,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
   intro:"Magome burned down twice in the last century and was rebuilt each time to its Edo-period look on purpose. It was the 43rd of 69 post towns on the Nakasendo, the inland route between Edo and Kyoto.",
   see:["Magome-juku main street","Mt Ena viewpoint"],picks:"Walk it early, before the day-trippers."},
- {id:"trail",name:"Magome-Tsumago trail",short:"Trail",jp:"妻籠宿への道",lat:35.5380,lng:137.5540,r:.8,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
+ {id:"trail",name:"Magome-Tsumago trail",short:"Trail",jp:"妻籠宿への道",lat:35.5380,lng:137.5540,r:.45,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
   intro:"The path between the two post towns runs through forest and past a waterfall, with almost no power lines in sight. Same-day luggage forwarding between the towns (about ¥1,000 per bag) means you can walk it without your bags.",
   see:["Odaki and Medaki waterfalls","Free-tea rest stops"],picks:"Start early, from Magome, so the walk is mostly downhill."},
- {id:"tsumago",name:"Tsumago",short:"Tsumago",jp:"妻籠",lat:35.5539,lng:137.5444,r:.5,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
+ {id:"tsumago",name:"Tsumago",short:"Tsumago",jp:"妻籠",lat:35.5539,lng:137.5444,r:.32,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
   intro:"Tsumago began restoring its post-town streets in the late 1960s, and residents later pledged not to sell, rent or demolish historic buildings, a model for preservation towns across Japan. No visible vending machines, no daytime cars, no power lines.",
   see:["Preserved Edo-period main street","Waki-honjin Okuya (former inn, now museum)"],picks:"Stay until the day-trippers leave."},
  {id:"hakone",name:"Hakone (Owakudani)",short:"Hakone",jp:"箱根",lat:35.2430,lng:139.0195,r:1.2,p:1,tags:["nature"],tag:"Hakone and its black-egg valley",
@@ -910,6 +910,8 @@ var NK_PLACES=[
 [KY_PLACES,OS_PLACES,NK_PLACES].forEach(function(arr){
   arr.forEach(function(a,i){ arr[i]={i:i,name:a[0],cat:a[1],hood:a[2],lat:a[3],lng:a[4],note:a[5],q:a[0]+", Japan",src:"guide"}; });
 });
+
+﻿var NK_TRAIL=[[35.52170,137.56362],[35.52205,137.56348],[35.52236,137.56325],[35.52265,137.56318],[35.52291,137.56345],[35.52326,137.56348],[35.52348,137.56399],[35.52544,137.56279],[35.52641,137.56218],[35.52694,137.56187],[35.52723,137.56174],[35.52759,137.56204],[35.52813,137.56163],[35.52892,137.56132],[35.53045,137.55994],[35.53182,137.55894],[35.53279,137.55836],[35.53319,137.55827],[35.53506,137.55788],[35.53566,137.55730],[35.53607,137.55718],[35.53637,137.55695],[35.53652,137.55599],[35.53653,137.55543],[35.53646,137.5551],[35.53656,137.55498],[35.53674,137.55528],[35.53715,137.55528],[35.53735,137.55536],[35.53779,137.55591],[35.53808,137.55612],[35.53845,137.55620],[35.53895,137.55636],[35.53936,137.55614],[35.53980,137.55594],[35.54036,137.55544],[35.54071,137.55506],[35.54122,137.55491],[35.54183,137.55464],[35.54240,137.55425],[35.54261,137.55394],[35.54291,137.55364],[35.54356,137.55326],[35.54394,137.55294],[35.54420,137.55292],[35.54466,137.55305],[35.54576,137.55342],[35.54609,137.55354],[35.54624,137.55345],[35.54643,137.55316],[35.54675,137.55256],[35.54700,137.55240],[35.54817,137.55172],[35.54829,137.55124],[35.54866,137.54997],[35.54929,137.55000],[35.54975,137.54976],[35.55020,137.54950],[35.55034,137.54944],[35.55044,137.54938],[35.55053,137.54922],[35.55064,137.54906],[35.55080,137.54900],[35.55106,137.54908],[35.55117,137.54910],[35.55141,137.54901],[35.55156,137.54890],[35.55161,137.54874],[35.55175,137.54830],[35.55177,137.54809],[35.55180,137.54783],[35.55195,137.54769],[35.55217,137.54761],[35.55245,137.54757],[35.55269,137.54748],[35.55297,137.54710],[35.55308,137.54698],[35.55358,137.54677],[35.55380,137.54686],[35.55390,137.54684],[35.55420,137.54578],[35.55451,137.54483],[35.5543,137.54478],[35.55416,137.54461],[35.55393,137.54438],[35.55393,137.54438]];
 
 /* ---------- Lore: history, culture & craft, food, practical tips, sources ---------- */
 /* Written in my own words from the linked sources. h=history  c=culture & craft  f=food  t=good to know  s=sources */
@@ -1559,7 +1561,7 @@ var CITIES={
   tag:"Twenty-three wards, one map",bounds:[[35.52,139.57],[35.82,139.93]],wards:WARDS.tokyo,hoods:HOODS,places:PLACES,hotel:BASE,
   intro:"Ward boundaries follow Tokyo's official map. Tap a ward for its history and character. Zoom in and its neighbourhoods appear, then every saved place."},
  nakasendo:{label:"Nakasendō & Fuji-Hakone",ja:"中山道",short:"Nakasendō",dates:"",
-  tag:"The old road, then Fuji",bounds:[[35.15,137.4],[35.62,139.1]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
+  tag:"The old road, then Fuji",bounds:[[35.513,137.525],[35.562,137.598]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
   intro:"Two post towns on the old Edo-to-Kyoto road, an 8 km forest walk between them, then a night near Fuji. Hakone and Kawaguchiko are both shown as options for the Fuji stop."},
  kyoto:{label:"Kyoto",ja:"京都",short:"Kyoto",dates:"",
   tag:"Eleven wards, a thousand temples",bounds:[[34.94,135.66],[35.14,135.85]],wards:WARDS.kyoto,hoods:KY_HOODS,places:KY_PLACES,
@@ -1641,7 +1643,7 @@ tiles.clean.addTo(map);
 var G={ward:L.layerGroup().addTo(map),hood:L.layerGroup().addTo(map),line:L.layerGroup(),pin:L.layerGroup().addTo(map),hotel:L.layerGroup().addTo(map)};
 var lineBuilt=false;
 function band(){
-  var z=map.getZoom();map.getContainer().setAttribute("data-band",z<12.5?"overview":z<14?"area":z<15.5?"detail":"street");
+  var z=map.getZoom(),flat=C().wards===null;map.getContainer().setAttribute("data-band",z<(flat?9:12.5)?"overview":z<14?"area":z<15.5?"detail":"street");
   if(state.base==="auto")useTiles(z>=14.5?"streets":"clean");
 }
 map.on("zoomend",band);
@@ -1688,6 +1690,12 @@ function buildLayers(){
     h.circle.on("click",function(){selectHood(h.id)});
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
+  if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
+    L.polyline(NK_TRAIL,{color:"#fff",weight:6,opacity:.9,interactive:false,className:"trail-halo"}).addTo(G.hood);
+    var tr=L.polyline(NK_TRAIL,{color:"#2e6f68",weight:2,opacity:.95,dashArray:"1 6",lineCap:"round",className:"trail"}).addTo(G.hood);
+    tr.bindTooltip("Magome to Tsumago, the old Nakasendo trail",{sticky:true,className:"wtip",direction:"auto",offset:[14,0]});
+    tr.on("click",function(){selectHood("trail")});
+  }
   c.places.forEach(function(p){
     var mine=p.src==="research"||p.src==="list";
     p.mine=mine;
