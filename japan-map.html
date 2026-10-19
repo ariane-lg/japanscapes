@@ -294,7 +294,6 @@
   .plate{position:relative;flex:1;min-height:0;margin:0 0 0 0}
   .plate::before{content:"";position:absolute;inset:calc(var(--u)*1.25) calc(var(--u)*-1.25) calc(var(--u)*-1.25) calc(var(--u)*1.25);border:1px solid var(--shu);opacity:.32;pointer-events:none}
   #map{position:absolute;inset:0;background:#e9ece7;border:1px solid rgba(30,37,39,.55);z-index:1}
-  .ghost{position:absolute;z-index:2;top:calc(var(--u)*3);left:calc(var(--u)*3);writing-mode:vertical-rl;font:400 3.4rem/1.1 'Shippori Mincho',serif;letter-spacing:.18em;color:var(--shu);text-shadow:0 0 10px #fff,0 0 4px #fff;pointer-events:none;animation:inkin 1.2s var(--ease) both}
   .figline{display:flex;align-items:baseline;gap:calc(var(--u)*1.5);padding:calc(var(--u)*3) 0 calc(var(--u)*1.25);font:italic 400 .82rem 'Shippori Mincho',serif;color:var(--soft)}
   .figline b{font:400 .6rem 'Zen Kaku Gothic New',sans-serif;font-style:normal;letter-spacing:.24em;text-transform:uppercase;color:var(--shu)}
   .figline::after{content:"";flex:1;height:1px;background:var(--line);align-self:center;max-width:260px}
@@ -432,7 +431,7 @@
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   @keyframes pop{from{opacity:0;transform:scale(.5)}to{transform:none}}
   @keyframes inkin{from{opacity:0;filter:blur(6px);letter-spacing:.5em}to{opacity:1;filter:none}}
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sun{mix-blend-mode:screen;opacity:.35}:root:not([data-theme="light"]) .ghost{text-shadow:0 0 10px #0e1314}}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sun{mix-blend-mode:screen;opacity:.35}}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
   /* --- narrow screens: rail becomes a top strip, sheet slides under the plate --- */
@@ -451,7 +450,6 @@
     .stage{padding:0 calc(var(--u)*2.5)}
     .plate{height:56vh;flex:none}
     .plate::before{display:none}
-    .ghost{font-size:2.4rem}
     .maptools{padding-right:0}
     .leaflet-right .leaflet-control{margin-right:10px}
     .panel{margin:calc(var(--u)*-4) calc(var(--u)*1.5) calc(var(--u)*3);overflow:visible}
@@ -470,7 +468,6 @@
   <section class="stage">
     <div class="plate">
       <div id="map" aria-label="Map"></div>
-      <div class="ghost" id="ghost" aria-hidden="true"></div>
     </div>
     <div class="figline" id="figline"></div>
     <div class="maptools" id="maptools"></div>
@@ -1824,9 +1821,8 @@ function render(){
 }
 function plateTitle(){
   var c=C(),w=state.ward&&c.wardBy[state.ward],h=state.hood&&c.hoodBy[state.hood],p=state.place;
-  var ja=h?h.jp:w?w.ja:c.ja,en=p?p.name:h?h.name:w?w.en:c.label,n=ORDER.indexOf(state.city)+1;
-  var g=$("#ghost");if(g&&g.textContent!==ja){g.textContent=ja;g.style.animation="none";void g.offsetWidth;g.style.animation=""}
-  var f=$("#figline");if(f)f.innerHTML="<b>Fig. 0"+n+"</b>"+en+(h||w||p?"":" · "+c.tag);
+  var ja=h?h.jp:w?w.ja:c.ja,n=ORDER.indexOf(state.city)+1;
+  var f=$("#figline");if(f)f.innerHTML="<b>Fig. 0"+n+"</b>"+c.label+" · "+c.tag;
 }
 function hoodGlow(id,on){var h=C().hoodBy[id],e=h&&h.circle&&h.circle.getElement&&h.circle.getElement();if(e)e.classList.toggle("glow",on)}
 $("#panel").addEventListener("mouseover",function(e){var b=e.target.closest(".sun");if(b)hoodGlow(b.dataset.hood,true)});
