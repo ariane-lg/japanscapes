@@ -436,6 +436,7 @@
   [data-band="detail"] path.ward,[data-band="street"] path.ward{stroke-width:.6}
   [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{stroke-width:1.2}
   path.hood.sel,path.hood.glow{stroke-width:.8}
+  path.hood.sel{fill-opacity:.95}
   .wlabel span{font-weight:300;letter-spacing:.22em}
   .wlabel.main span,.hlabel span{font-weight:400}
   .pinb{border-width:1px;width:26px;height:26px}
@@ -1715,7 +1716,9 @@ function selectWard(code){
 function selectHood(id){
   var h=C().hoodBy[id];if(!h)return;
   state.hood=id;state.ward=h.ward?h.ward.code:null;state.place=null;
-  map.flyTo([h.lat,h.lng],(h.r||.5)>=.8?15:15.5,{duration:.8});
+  var pt=map.latLngToContainerPoint([h.lat,h.lng]),sz=map.getSize();
+  var inView=map.getZoom()>=12.5&&pt.x>40&&pt.x<sz.x-(innerWidth>900?130:40)&&pt.y>40&&pt.y<sz.y-40;
+  if(!inView)map.flyTo([h.lat,h.lng],(h.r||.5)>=.8?15:15.5,{duration:.8});
   applySel();render();
 }
 function selectPlace(p){

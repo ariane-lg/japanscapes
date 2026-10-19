@@ -183,7 +183,9 @@ function selectWard(code){
 function selectHood(id){
   var h=C().hoodBy[id];if(!h)return;
   state.hood=id;state.ward=h.ward?h.ward.code:null;state.place=null;
-  map.flyTo([h.lat,h.lng],(h.r||.5)>=.8?15:15.5,{duration:.8});
+  var pt=map.latLngToContainerPoint([h.lat,h.lng]),sz=map.getSize();
+  var inView=map.getZoom()>=12.5&&pt.x>40&&pt.x<sz.x-(innerWidth>900?130:40)&&pt.y>40&&pt.y<sz.y-40;
+  if(!inView)map.flyTo([h.lat,h.lng],(h.r||.5)>=.8?15:15.5,{duration:.8});
   applySel();render();
 }
 function selectPlace(p){
