@@ -145,7 +145,7 @@ function buildLayers(){
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
   if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
-    L.polyline(NK_TRAIL,{color:"#7fc4b6",weight:11,opacity:.28,lineCap:"round",lineJoin:"round",interactive:false,className:"trail-wash"}).addTo(G.hood);
+    L.polyline(NK_TRAIL,{color:"#8fb0ea",weight:11,opacity:.28,lineCap:"round",lineJoin:"round",interactive:false,className:"trail-wash"}).addTo(G.hood);
     var tr=L.polyline(NK_TRAIL,{color:"#1e2527",weight:1.1,opacity:.9,lineCap:"round",lineJoin:"round",className:"trail"}).addTo(G.hood);
     tr.bindTooltip("Magome to Tsumago, the old Nakasendo trail",{sticky:true,className:"wtip",direction:"auto",offset:[14,0]});
     tr.on("click",function(){selectHood("trail")});
