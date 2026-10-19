@@ -225,7 +225,7 @@ function discsHTML(list){
   var pos=[[40,-8,170],[6,58,124],[92,116,78]];
   return list.slice(0,3).map(function(h,i){
     var p=pos[i],d=Math.round(p[2]*(.78+Math.min(h.r||.5,1.1)*.2));
-    return "<button class='sun s"+i+"' data-hood='"+h.id+"' title='"+h.name+"' style='right:"+p[0]+"px;top:"+p[1]+"px;width:"+d+"px;height:"+d+"px;background:"+HOODCOL[washIdx(h.name)]+"'></button>"}).join("");
+    return "<button class='sun s"+i+"' data-hood='"+h.id+"' aria-label='"+h.name+"' style='right:"+p[0]+"px;top:"+p[1]+"px;width:"+d+"px;height:"+d+"px;background:"+HOODCOL[washIdx(h.name)]+"'></button>"}).join("");
 }
 function hero(ja,en,sub,list){
   var n=Math.max(ja.length,1),fs=Math.max(24,Math.min(58,Math.floor(224/n))),rs=en.length>16?1.7:en.length>11?2.1:2.7;
