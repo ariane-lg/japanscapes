@@ -127,6 +127,7 @@ function hoodTip(h){
   h2+="<div class='tf'>"+(h.tags||[]).map(function(t){return TAGS[t]||t}).join(" · ")+"</div>";
   return h2+"<div class='tc'>Click for history, food and craft</div>";
 }
+function chaikin(p,n){while(n--){var o=[p[0]];for(var i=0;i<p.length-1;i++){var a=p[i],b=p[i+1];o.push([.75*a[0]+.25*b[0],.75*a[1]+.25*b[1]],[.25*a[0]+.75*b[0],.25*a[1]+.75*b[1]])}o.push(p[p.length-1]);p=o}return p}
 function buildLayers(){
   var c=prep(state.city);
   Object.keys(G).forEach(function(k){if(k!=="line")G[k].clearLayers()});
@@ -145,8 +146,7 @@ function buildLayers(){
     L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
   if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
-    L.polyline(NK_TRAIL,{color:"#8fb0ea",weight:11,opacity:.28,lineCap:"round",lineJoin:"round",interactive:false,className:"trail-wash"}).addTo(G.hood);
-    var tr=L.polyline(NK_TRAIL,{color:"#1e2527",weight:1.1,opacity:.9,lineCap:"round",lineJoin:"round",className:"trail"}).addTo(G.hood);
+    var tr=L.polyline(chaikin(NK_TRAIL,3),{color:"#1e2527",weight:1.2,opacity:.9,lineCap:"round",lineJoin:"round",className:"trail"}).addTo(G.hood);
     tr.bindTooltip("Magome to Tsumago, the old Nakasendo trail",{sticky:true,className:"wtip",direction:"auto",offset:[14,0]});
     tr.on("click",function(){selectHood("trail")});
     L.circleMarker(NK_TRAIL[0],{radius:4,color:"#1e2527",weight:1,fillColor:"#fff",fillOpacity:1,interactive:false,className:"trail-end"}).addTo(G.hood);
