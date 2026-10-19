@@ -245,7 +245,7 @@
   :root{
     --paper:#fdfdfb; --surface:#ffffff; --raise:#ffffff;
     --ink:#1e2527; --soft:#667073; --line:rgba(30,37,39,.12);
-    --shu:#1e2527; --shu-soft:rgba(30,37,39,.08); --eat:#d2566e;
+    --shu:#9aa2aa; --shu-soft:rgba(154,162,170,.16); --eat:#d2566e;
     --ai:#3f7a99; --matcha:#5b9a78; --kin:#b8863f;
     --rose:#f4cdd5; --mint:#cfe6da; --aqua:#c4e1e8; --peach:#f7d9c4;
     --u:8px; --ax:40px; --ease:cubic-bezier(.22,.7,.2,1);
@@ -255,14 +255,14 @@
     :root:not([data-theme="light"]){
       --paper:#0e1314; --surface:#151b1c; --raise:#1a2224;
       --ink:#e8ebe6; --soft:#9aa6a6; --line:rgba(232,235,230,.14);
-      --shu:#e8ebe6; --shu-soft:rgba(232,235,230,.12); --eat:#ee8aa0;
+      --shu:#c9ced3; --shu-soft:rgba(201,206,211,.14); --eat:#ee8aa0;
       --ai:#86b9d3; --matcha:#98c8ae; --kin:#d6ad6c;
     }
   }
   :root[data-theme="dark"]{
     --paper:#0e1314; --surface:#151b1c; --raise:#1a2224;
     --ink:#e8ebe6; --soft:#9aa6a6; --line:rgba(232,235,230,.14);
-    --shu:#e8ebe6; --shu-soft:rgba(232,235,230,.12); --eat:#ee8aa0;
+    --shu:#c9ced3; --shu-soft:rgba(201,206,211,.14); --eat:#ee8aa0;
     --ai:#86b9d3; --matcha:#98c8ae; --kin:#d6ad6c;
   }
   body{display:block;height:100vh;overflow:hidden;background:var(--paper);font-size:14.5px;line-height:1.7}
@@ -493,6 +493,11 @@
   path.ward.sel{stroke-opacity:.75;stroke-width:1.1}
   [data-band="detail"] path.ward,[data-band="street"] path.ward{stroke-opacity:.25;stroke-width:.5}
   [data-band="detail"] path.ward.sel,[data-band="street"] path.ward.sel{stroke-opacity:.6;stroke-width:1}
+  /* silver accent: buttons carry ink text so they stay legible */
+  .btn{color:#1e2527!important}
+  .btn.ghost{color:var(--ink)!important}
+  .crumbs button,.cnt{color:var(--soft)}
+  .ptag,.eyebrow{color:#7d858d}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
