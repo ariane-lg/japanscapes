@@ -1682,6 +1682,7 @@ function prep(key){
 
 /* ---------- map ---------- */
 var map=L.map("map",{zoomControl:false,zoomSnap:.5,zoomDelta:.5,wheelPxPerZoomLevel:100});
+map.attributionControl.setPrefix(false);
 var zc=L.control.zoom({position:"bottomright"}).addTo(map);
 (function(){
   var b=L.DomUtil.create("a","zhome",zc.getContainer());
