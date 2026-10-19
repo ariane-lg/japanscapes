@@ -143,7 +143,7 @@ function buildLayers(){
     h.circle=L.circle([h.lat,h.lng],{radius:(h.r||.5)*1000,className:"hood c"+washIdx(h.name)}).addTo(G.hood);
     h.circle.bindTooltip(hoodTip(h),{sticky:true,className:"wtip hoodtip",direction:"auto",offset:[18,0]});
     h.circle.on("click",function(){selectHood(h.id)});
-    L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel",html:"<span>"+h.short+"</span>",iconSize:[0,0]})}).addTo(G.hood);
+    L.marker([h.llat||h.lat,h.llng||h.lng],{interactive:false,keyboard:false,icon:L.divIcon({className:"hlabel"+(h.lalign?" ha-"+h.lalign:""),html:"<span>"+h.short+(h.ltag?"<em>"+h.ltag+"</em>":"")+"</span>",iconSize:[0,0]})}).addTo(G.hood);
   });
   if(state.city==="nakasendo"&&typeof NK_TRAIL!=="undefined"){
     var tr=L.polyline(chaikin(NK_TRAIL,3),{color:"#1e2527",weight:1.2,opacity:.9,lineCap:"round",lineJoin:"round",className:"trail"}).addTo(G.hood);

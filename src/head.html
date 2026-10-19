@@ -465,6 +465,10 @@
   .leaflet-control-zoom .zhome svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
   /* the trail: a fine pen line over a soft wash, like the hand-drawn route maps */
   path.trail{fill:none}
+  /* labels that sit beside their circle instead of on top of it */
+  .hlabel.ha-r span{transform:translate(34px,-50%);text-align:left}
+  .hlabel.ha-l span{transform:translate(calc(-100% - 34px),-50%);text-align:right}
+  .hlabel span em{display:block;font:italic 400 .64rem 'Shippori Mincho',serif;letter-spacing:.06em;color:var(--soft);text-shadow:inherit;margin-top:1px}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
