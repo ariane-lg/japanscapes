@@ -24,6 +24,7 @@ var CITIES={
   tag:"The nation's kitchen",bounds:[[34.58,135.38],[34.78,135.62]],wards:WARDS.osaka,hoods:OS_HOODS,places:OS_PLACES,
   intro:"Osaka's wards, with the central Chuo, Kita and Naniwa wards carrying most of what you would come for."}
 };
+if(typeof PUBLIC_HOTELS!=="undefined")Object.keys(PUBLIC_HOTELS).forEach(function(k){CITIES[k].hotel=PUBLIC_HOTELS[k]});
 if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
 var ORDER=["tokyo","nakasendo","kyoto","osaka"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
