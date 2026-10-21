@@ -358,7 +358,6 @@ function buildTools(){
   var t=$("#maptools");
   var h="";
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
-  h+="<span class='brk' aria-hidden='true'></span>";
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
   if(CITYLINES[state.city])h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   t.innerHTML=h;

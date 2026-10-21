@@ -601,7 +601,7 @@
   /* map key: just the coloured symbol, no disc behind it */
   .dsc,.chip[aria-pressed="false"] .dsc,.chip[aria-pressed="true"] .dsc{background:transparent!important;box-shadow:none!important;mix-blend-mode:normal;width:20px;height:20px}
   .dsc .ico{width:17px;height:17px}
-  .maptools .brk{flex-basis:100%;height:0;margin:0;padding:0}
+  .maptools{column-gap:calc(var(--u)*5)}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -2131,7 +2131,6 @@ function buildTools(){
   var t=$("#maptools");
   var h="";
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
-  h+="<span class='brk' aria-hidden='true'></span>";
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
   if(CITYLINES[state.city])h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   t.innerHTML=h;
