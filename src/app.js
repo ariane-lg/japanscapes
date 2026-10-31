@@ -24,9 +24,10 @@ var CITIES={
   tag:"The nation's kitchen",bounds:[[34.58,135.38],[34.78,135.62]],wards:WARDS.osaka,hoods:OS_HOODS,places:OS_PLACES,
   intro:"Osaka's wards, with the central Chuo, Kita and Naniwa wards carrying most of what you would come for."}
 };
+CITIES.calendar={label:"Calendar",ja:"暦",short:"Calendar"};
 if(typeof PUBLIC_HOTELS!=="undefined")Object.keys(PUBLIC_HOTELS).forEach(function(k){CITIES[k].hotel=PUBLIC_HOTELS[k]});
 if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
-var ORDER=["tokyo","nakasendo","kyoto","osaka"];
+var ORDER=["tokyo","nakasendo","kyoto","osaka","calendar"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
 function C(){return CITIES[state.city]}
 var ICON={
@@ -331,6 +332,7 @@ function placeHTML(){
 }
 function render(){
   var el=$("#panel");
+  if(state.view==="calendar"){el.innerHTML="<div class='pwrap'>"+calPanelHTML()+"</div>";el.scrollTop=0;return}
   el.innerHTML="<div class='pwrap'>"+(state.place?placeHTML():state.hood?hoodHTML():state.ward?wardHTML():cityHTML())+"</div>";
   el.scrollTop=0;
   plateTitle();
@@ -346,6 +348,8 @@ $("#panel").addEventListener("mouseout",function(e){var b=e.target.closest(".sun
 $("#panel").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
   var c=C();
+  if(b.dataset.calback){state.calDay=null;renderCal();render();return}
+  if(b.dataset.cald){state.calDay=b.dataset.cald;renderCal();render();return}
   if(b.dataset.nav==="city")return goCity();
   if(b.dataset.nav==="ward")return goWard();
   if(b.dataset.nav==="hood")return goHood();
@@ -375,9 +379,9 @@ $("#maptools").addEventListener("click",function(e){
   buildTools();
 });
 function buildTabs(){
-  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(k===state.city)+"' aria-label='"+c.label+"'><i>"+c.ja+"</i><span>"+c.short+"</span></button>"}).join("");
+  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(state.view==="calendar"?k==="calendar":k===state.city)+"' aria-label='"+c.label+"'><i>"+c.ja+"</i><span>"+c.short+"</span></button>"}).join("");
 }
-$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setCity(b.dataset.city)});
+$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.city==="calendar")return openCalendar();if(state.view)closeCalendar();setCity(b.dataset.city)});
 
 var fitted=false,touched=false;
 function fitCity(){var s=map.getSize();if(s.x>80&&s.y>80){map.fitBounds(C().bounds,{animate:false,paddingBottomRight:[innerWidth>900?112:0,0]});band();fitted=true}}
@@ -405,6 +409,79 @@ function loadGoogle(){
   s.src="https://maps.googleapis.com/maps/api/js?key="+encodeURIComponent(GOOGLE_KEY)+"&language=en&region=JP&callback=__gmReady";
   s.async=true;document.head.appendChild(s);
 }
+/* ---------- calendar view ---------- */
+var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var STAYS=(typeof PERSONAL!=="undefined"&&PERSONAL.stays)||[];
+state.view=null;state.cal={y:2026,m:10};state.calDay=null;
+function ymd(y,m,d){return y+"-"+(m+1)+"-"+d}
+function stayOn(y,m,d){var t=new Date(y,m,d).getTime();for(var i=0;i<STAYS.length;i++){var a=STAYS[i].from.split("-"),b=STAYS[i].to.split("-");if(t>=new Date(+a[0],a[1]-1,+a[2]).getTime()&&t<=new Date(+b[0],b[1]-1,+b[2]).getTime())return STAYS[i]}return null}
+function calGrid(){
+  var y=state.cal.y,m=state.cal.m,first=new Date(y,m,1),lead=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate(),now=new Date();
+  var h="<div class='calhead'><button class='calnav' data-calnav='-1' aria-label='Previous month'>&#8249;</button><h2>"+MN[m]+" <i>"+y+"</i></h2><button class='calnav' data-calnav='1' aria-label='Next month'>&#8250;</button></div><div class='calweek'>";
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(function(d){h+="<span>"+d+"</span>"});
+  h+="</div><div class='calgrid'>";
+  for(var i=0;i<lead;i++)h+="<i></i>";
+  for(var d=1;d<=days;d++){
+    var ev=calEvents(y,m,d),st=stayOn(y,m,d),isToday=now.getFullYear()===y&&now.getMonth()===m&&now.getDate()===d,k=ymd(y,m,d);
+    var seen={},dots=ev.filter(function(e){if(seen[e.k])return false;seen[e.k]=1;return true}).map(function(e){return "<b style='background:"+CAL_KIND[e.k].c+"'></b>"}).join("");
+    h+="<button class='cald"+(state.calDay===k?" on":"")+(isToday?" today":"")+(st?" stay":"")+"' data-cald='"+k+"'"+(st?" title='"+st.label+"'":"")+"><span>"+d+"</span><em>"+dots+"</em>"+(st?"<u>"+st.label+"</u>":"")+"</button>";
+  }
+  h+="</div><div class='calkey'>"+Object.keys(CAL_KIND).map(function(k){return "<span><b style='background:"+CAL_KIND[k].c+"'></b>"+CAL_KIND[k].n+"</span>"}).join("")+"</div>";
+  return h;
+}
+function evRow(e){
+  return "<li class='ev'><b style='background:"+CAL_KIND[e.k].c+"'></b><div><span class='nm'>"+e.t+" <span class='cnt'>"+e.c+"</span></span>"+(e.note?"<span class='sub'>"+e.note+"</span>":"")+(e.url?"<a class='btn ghost' target='_blank' rel='noopener' href='"+e.url+"'>Website</a>":"")+"</div></li>";
+}
+function calPanelHTML(){
+  var y=state.cal.y,m=state.cal.m,h="";
+  if(state.calDay){
+    var p=state.calDay.split("-"),Y=+p[0],M=+p[1]-1,D=+p[2],ev=calEvents(Y,M,D),cl=calClosed(Y,M,D),st=stayOn(Y,M,D);
+    h+="<nav class='crumbs'><button data-calback='1'>Calendar</button> › <span>"+D+" "+MN[M]+"</span></nav>";
+    h+=hero("",DN[new Date(Y,M,D).getDay()]+" "+D,MN[M]+" "+Y,[],"");
+    h=h.replace("class='hero","class='hero place");
+    if(st)h+="<p class='srcnote'>"+ico("mine",true)+"<span>"+st.label+"</span></p>";
+    h+="<h4>On this day</h4>"+(ev.length?"<ul class='evs'>"+ev.map(evRow).join("")+"</ul>":"<p class='para'>Nothing marked.</p>");
+    h+="<h4>Closed this day</h4>"+(cl.length?"<ul class='dots'>"+cl.map(function(x){return "<li><b>"+x.n+"</b> <span class='cnt'>"+x.c+(x.conf==="usual"?" · usual closing day, check":"")+"</span></li>"}).join("")+"</ul>":"<p class='para'>None of the museums listed here close.</p>");
+    return h;
+  }
+  h+=hero("暦","Calendar","dates and bookings",[],"");
+  h=h.replace("class='hero","class='hero place");
+  h+="<p class='ptag'>When things happen, and what to book</p><p class='lead'>Markets, public holidays, ticket releases and the days museums close. Tap a day for the detail.</p>";
+  /* book ahead */
+  h+="<h4>Book ahead</h4><ul class='evs'>";
+  MUSEUMS.filter(function(x){return x.book!=="no"}).forEach(function(x){
+    h+="<li class='ev'><b style='background:"+(x.book==="required"?"#d2566e":"#b8863f")+"'></b><div><span class='nm'>"+x.n+" <span class='cnt'>"+x.c+" · "+(x.book==="required"?"booking required":"book ahead")+"</span></span><span class='sub'>"+x.how+"</span><a class='btn ghost' target='_blank' rel='noopener' href='"+x.url+"'>Website</a></div></li>"});
+  h+="</ul>";
+  /* weekly closures */
+  h+="<h4>Closing days</h4>";
+  [1,2,5].forEach(function(dw){
+    var l=MUSEUMS.filter(function(x){return x.closed.indexOf(dw)>-1});if(!l.length)return;
+    h+="<p class='para'><b>"+DN[dw]+"s:</b> "+l.map(function(x){return x.n+(x.conf==="usual"?"*":"")}).join(", ")+"</p>";
+  });
+  h+="<p class='srcs'>* A usual closing day reported by several sources but not read on the venue's own site; confirm before you go. When a Monday is a public holiday, museums that close on Mondays normally open that day and close the next day instead (23 Nov 2026 is one, so those museums close on Tuesday 24 Nov).</p>";
+  /* this month */
+  var seen={},list=[];
+  for(var d=1;d<=new Date(y,m+1,0).getDate();d++){calEvents(y,m,d).forEach(function(e){if(e.k==="season"&&e.t.indexOf("Autumn")===0){if(seen.a)return;seen.a=1}if(e.t.indexOf("Hanazono")===0)return;list.push({d:d,e:e})})}
+  h+="<h4>"+MN[m]+"</h4><ul class='list'>"+list.map(function(x){
+    return "<li><button class='row wide' data-cald='"+ymd(y,m,x.d)+"'><span class='nm'>"+x.d+" "+MN[m].slice(0,3)+" · "+x.e.t+" <span class='cnt'>"+x.e.c+"</span></span><span class='sub'>"+x.e.note.slice(0,110)+(x.e.note.length>110?"…":"")+"</span></button></li>"}).join("")+"</ul>";
+  h+="<p class='srcs'>Sources: <a target='_blank' rel='noopener' href='"+CFT[1]+"'>"+CFT[0]+"</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.oedo[1]+"'>Oedo Antique Market</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.kno[1]+"'>Kyoto National Museum</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.ghibli[1]+"'>Ghibli Museum</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.kuna[1]+"'>Imperial Household Agency</a>. Dates and closing days change; check each venue the day before.</p>";
+  return h;
+}
+function renderCal(){$("#calview").innerHTML=calGrid()}
+function openCalendar(){
+  state.view="calendar";document.querySelector(".stage").classList.add("iscal");
+  buildTabs();renderCal();render();
+}
+function closeCalendar(){
+  state.view=null;document.querySelector(".stage").classList.remove("iscal");
+  map.invalidateSize();
+}
+$("#calview").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  if(b.dataset.calnav){var n=state.cal.m+ +b.dataset.calnav,y=state.cal.y;if(n<0){n=11;y--}if(n>11){n=0;y++}state.cal={y:y,m:n};state.calDay=null;renderCal();render();return}
+  if(b.dataset.cald){state.calDay=b.dataset.cald;renderCal();render()}
+});
 loadGoogle();
 setCity("tokyo");
 })();

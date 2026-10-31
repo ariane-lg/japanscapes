@@ -22,4 +22,5 @@ This writes `japan-map.html`. The Google street map and hotel markers are on in 
 - Basemap tiles: Esri (Light Gray Canvas, World Street Map) and Google Maps. Map library: Leaflet.
 - Walking trail: simplified from OpenStreetMap walking routes (approximate).
 - Neighbourhood history and culture notes are written from the sources linked beside each entry (`src/lore*.js`). Some dates differ between sources and are flagged in the text.
+- `src/calendar.js` holds the calendar tab data: market dates, public holidays, ticket releases and museum closing days. Your own stay dates, if you want them shaded in, go in `local/personal.js` (git-ignored).
 - `src/akasaka-data.js` holds neighbourhood and place data carried over from the earlier "Tokyo from Akasaka" guide; `src/pins.js` and `src/lines.js` hold the extra pins and the metro and rail lines.

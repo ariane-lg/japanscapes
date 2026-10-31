@@ -602,6 +602,34 @@
   .dsc,.chip[aria-pressed="false"] .dsc,.chip[aria-pressed="true"] .dsc{background:transparent!important;box-shadow:none!important;mix-blend-mode:normal;width:20px;height:20px}
   .dsc .ico{width:17px;height:17px}
   .maptools{column-gap:calc(var(--u)*5)}
+  /* calendar tab: the grid takes the map's place */
+  .calview{display:none;position:absolute;inset:0;z-index:3;padding:calc(var(--u)*3) calc(var(--u)*14) calc(var(--u)*3) calc(var(--u)*3);overflow:auto}
+  .stage.iscal .calview{display:block}
+  .stage.iscal #map,.stage.iscal #maptools{display:none}
+  .calhead{display:flex;align-items:baseline;gap:calc(var(--u)*2);margin-bottom:calc(var(--u)*2.5)}
+  .calhead h2{font:500 2.2rem/1 'Shippori Mincho',serif;font-style:italic;margin:0}
+  .calhead h2 i{font-style:normal;font-weight:400;color:var(--soft);font-size:1.2rem;margin-left:.3rem}
+  .calnav{border:none;background:none;font:300 1.7rem/1 'Shippori Mincho',serif;color:var(--soft);padding:0 .4rem;transition:color .3s}
+  .calnav:hover{color:var(--ink)}
+  .calweek{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;font:400 .62rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cald{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-height:82px;padding:8px 9px;border:none;background:rgba(255,255,255,.55);border-radius:0;text-align:left;transition:background .3s var(--ease)}
+  .cald:hover{background:#fff}
+  .cald span{font:500 1rem 'Shippori Mincho',serif;color:var(--ink)}
+  .cald em{display:flex;gap:4px;font-style:normal;min-height:8px}
+  .cald em b,.calkey b,.ev>b{display:inline-block;width:7px;height:7px;border-radius:50%}
+  .cald.on{background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+  .cald.today span::after{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin-left:6px;vertical-align:middle}
+  .cald.stay{background:rgba(138,146,154,.16)}
+  .cald u{text-decoration:none;font:italic 400 .62rem 'Shippori Mincho',serif;color:var(--soft)}
+  .calkey{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:calc(var(--u)*3);font:italic 500 .84rem 'Shippori Mincho',serif;color:var(--soft)}
+  .calkey span{display:inline-flex;align-items:center;gap:.5rem}
+  ul.evs{list-style:none;margin:0 0 0 var(--ax);padding:0;display:grid;gap:calc(var(--u)*2)}
+  .ev{display:flex;gap:12px;align-items:flex-start}
+  .ev>b{flex:none;margin-top:.55em}
+  .ev .nm{display:block;font:600 1.02rem/1.3 'Shippori Mincho',serif}
+  .ev .sub{display:block;color:var(--soft);font-size:.8rem;line-height:1.6;margin-top:2px}
+  .ev .btn{margin-top:6px;display:inline-block}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -644,6 +672,7 @@
   <section class="stage">
     <div class="plate">
       <div id="map" aria-label="Map"></div>
+      <div id="calview" class="calview"></div>
     </div>
     <div class="maptools" id="maptools"></div>
   </section>

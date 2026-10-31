@@ -602,6 +602,34 @@
   .dsc,.chip[aria-pressed="false"] .dsc,.chip[aria-pressed="true"] .dsc{background:transparent!important;box-shadow:none!important;mix-blend-mode:normal;width:20px;height:20px}
   .dsc .ico{width:17px;height:17px}
   .maptools{column-gap:calc(var(--u)*5)}
+  /* calendar tab: the grid takes the map's place */
+  .calview{display:none;position:absolute;inset:0;z-index:3;padding:calc(var(--u)*3) calc(var(--u)*14) calc(var(--u)*3) calc(var(--u)*3);overflow:auto}
+  .stage.iscal .calview{display:block}
+  .stage.iscal #map,.stage.iscal #maptools{display:none}
+  .calhead{display:flex;align-items:baseline;gap:calc(var(--u)*2);margin-bottom:calc(var(--u)*2.5)}
+  .calhead h2{font:500 2.2rem/1 'Shippori Mincho',serif;font-style:italic;margin:0}
+  .calhead h2 i{font-style:normal;font-weight:400;color:var(--soft);font-size:1.2rem;margin-left:.3rem}
+  .calnav{border:none;background:none;font:300 1.7rem/1 'Shippori Mincho',serif;color:var(--soft);padding:0 .4rem;transition:color .3s}
+  .calnav:hover{color:var(--ink)}
+  .calweek{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;font:400 .62rem 'Zen Kaku Gothic New',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .cald{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-height:82px;padding:8px 9px;border:none;background:rgba(255,255,255,.55);border-radius:0;text-align:left;transition:background .3s var(--ease)}
+  .cald:hover{background:#fff}
+  .cald span{font:500 1rem 'Shippori Mincho',serif;color:var(--ink)}
+  .cald em{display:flex;gap:4px;font-style:normal;min-height:8px}
+  .cald em b,.calkey b,.ev>b{display:inline-block;width:7px;height:7px;border-radius:50%}
+  .cald.on{background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+  .cald.today span::after{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);margin-left:6px;vertical-align:middle}
+  .cald.stay{background:rgba(138,146,154,.16)}
+  .cald u{text-decoration:none;font:italic 400 .62rem 'Shippori Mincho',serif;color:var(--soft)}
+  .calkey{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:calc(var(--u)*3);font:italic 500 .84rem 'Shippori Mincho',serif;color:var(--soft)}
+  .calkey span{display:inline-flex;align-items:center;gap:.5rem}
+  ul.evs{list-style:none;margin:0 0 0 var(--ax);padding:0;display:grid;gap:calc(var(--u)*2)}
+  .ev{display:flex;gap:12px;align-items:flex-start}
+  .ev>b{flex:none;margin-top:.55em}
+  .ev .nm{display:block;font:600 1.02rem/1.3 'Shippori Mincho',serif}
+  .ev .sub{display:block;color:var(--soft);font-size:.8rem;line-height:1.6;margin-top:2px}
+  .ev .btn{margin-top:6px;display:inline-block}
   @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -644,6 +672,7 @@
   <section class="stage">
     <div class="plate">
       <div id="map" aria-label="Map"></div>
+      <div id="calview" class="calview"></div>
     </div>
     <div class="maptools" id="maptools"></div>
   </section>
@@ -1803,6 +1832,94 @@ var OS_LINES=[
 BASE={name:"OMO3 Tokyo Akasaka",lat:35.6750,lng:139.7360,hood:"akasaka"};
 var PUBLIC_HOTELS={kyoto:{name:"Kyoto Takasegawa Bettei",lat:34.99109,lng:135.76563}};
 
+/* ---------- Calendar data: what happens when, what closes, what to book ---------- */
+var CAL_KIND={
+ market:{n:"Markets",c:"#b8863f"},
+ season:{n:"Seasons and festivals",c:"#d2566e"},
+ holiday:{n:"Public holidays",c:"#8a929a"},
+ book:{n:"Ticket releases",c:"#3f7a99"},
+ exhibit:{n:"Exhibitions",c:"#5b9a78"}
+};
+var CAL_MONTHS=[[2026,9],[2026,10],[2026,11]];   /* October, November, December 2026 */
+var CAL_SRC={
+ oedo:["Oedo Antique Market","https://www.antique-market.jp/english/"],
+ cft:CFT,
+ kno:["Kyoto National Museum","https://www.kyohaku.go.jp/eng/"],
+ ghibli:["Ghibli Museum","https://www.ghibli-museum.jp/en/"],
+ kuna:["Imperial Household Agency, Kyoto properties","https://sankan.kunaicho.go.jp/english/index.html"]
+};
+
+/* Museums and sights with a weekly closing day or a booking requirement.
+   closed: weekdays (0 = Sunday). conf: "official" = read on the venue's own site; "usual" = widely reported, check before going. */
+var MUSEUMS=[
+ {n:"Ghibli Museum",c:"Tokyo",closed:[2],conf:"usual",book:"required",
+  how:"Every ticket is for a set date and time and must be bought ahead; there is no entry without one. Tickets for a month go on sale on the 10th of the month before, at 10:00 Japan time, through Lawson Ticket, and the popular dates go within hours.",
+  url:"https://www.ghibli-museum.jp/en/",src:"ghibli"},
+ {n:"Nezu Museum",c:"Tokyo",closed:[1],conf:"usual",book:"required",
+  how:"Entry is by date and time ticket booked online; a few walk-up places are kept at the desk only if there is room. Closed Mondays (and the day after a Monday holiday), and for about two weeks between exhibitions.",
+  url:"https://www.nezu-muse.or.jp/en/"},
+ {n:"teamLab Planets (Toyosu) and Borderless (Azabudai Hills)",c:"Tokyo",closed:[],conf:"usual",book:"advised",
+  how:"Both use dated, timed tickets that sell out days ahead, especially at weekends and on holidays. Book a slot before you travel. Closing days vary by venue, so check the calendar when you book.",
+  url:"https://www.teamlab.art/e/planets/"},
+ {n:"Tokyo National Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",
+  how:"No booking for the main galleries; some special exhibitions use timed tickets.",url:"https://www.tnm.jp/?lang=en"},
+ {n:"Sumida Hokusai Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",
+  how:"Small museum; usually closed Mondays.",url:"https://hokusai-museum.jp/?lang=en"},
+ {n:"21_21 Design Sight",c:"Tokyo",closed:[2],conf:"usual",book:"no",
+  how:"Closed Tuesdays, between exhibitions and over New Year.",url:"https://www.2121designsight.jp/en/"},
+ {n:"Imperial Palace East Gardens",c:"Tokyo",closed:[1,5],conf:"usual",book:"no",
+  how:"Free; normally closed Mondays and Fridays.",url:"https://www.kunaicho.go.jp/e-event/higashigyoen02.html"},
+ {n:"Kyoto National Museum",c:"Kyoto",closed:[1],conf:"official",book:"no",
+  how:"Open 9:00 to 17:30; if a Monday is a national holiday it opens that day and closes the next. Special exhibition The Tale of Genji runs to 29 Nov 2026, with the collection galleries off view until 22 Dec. No booking needed for it.",
+  url:"https://www.kyohaku.go.jp/eng/",src:"kno"},
+ {n:"Kyoto Imperial Palace",c:"Kyoto",closed:[],conf:"official",book:"no",
+  how:"Open to all visitors with no application needed.",url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"},
+ {n:"Sento Palace, Katsura and Shugakuin villas",c:"Kyoto",closed:[],conf:"official",book:"required",
+  how:"These three Imperial Household properties can be visited only by advance application made online through each property's page. Apply as early as you can; slots are limited.",
+  url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"}
+];
+
+/* Events by date. Returns [{k, t, c, note, url}] for the given year, month (0-11), day. */
+function calEvents(y,m,d){
+ var dow=new Date(y,m,d).getDay(),ev=[],key=y+"-"+(m+1)+"-"+d;
+ function add(k,t,c,note,url){ev.push({k:k,t:t,c:c,note:note||"",url:url||""})}
+ /* explicit dates */
+ var oedo={"2026-10-31":1,"2026-11-7":1,"2026-11-23":1,"2026-12-12":1,"2026-12-20":1};
+ if(oedo[key])add("market","Oedo Antique Market","Tokyo","Around 250 outdoor stalls at Tokyo International Forum, 9:00 to 16:00, free. Cancelled in rain, so check the website that morning. The best market for tea and traditional craft.","https://www.antique-market.jp/english/");
+ if(key==="2026-12-5"||key==="2026-12-6")add("market","Heiwajima Antique Fair","Tokyo","Indoor fair at the Tokyo Ryutsu Center, about 100 dealers, free. The oldest indoor antiques event in Japan, held four times a year.","https://kottouichi.com/en.html");
+ if(key==="2026-11-10"||key==="2026-12-10")add("book","Ghibli Museum tickets go on sale","Tokyo","Tickets for the following month are released at 10:00 Japan time on the 10th, through Lawson Ticket. Be ready a few minutes early; popular dates go fast.","https://www.ghibli-museum.jp/en/");
+ if(key==="2026-11-3")add("holiday","Culture Day","Japan","National holiday. Museums and gardens are busier.","");
+ if(key==="2026-11-23")add("holiday","Labour Thanksgiving Day","Japan","National holiday on a Monday. Museums that close on Mondays usually open today and close the next day instead.","");
+ if(key==="2026-11-15")add("season","Shichi-go-san","Japan","Traditional shrine visits for children aged three, five and seven, many in kimono. Big shrines such as Meiji Jingu and Hie are lively, especially at weekends around the 15th.","");
+ if(key==="2026-11-29")add("exhibit","The Tale of Genji ends","Kyoto","Last day of the special exhibition at the Kyoto National Museum. The collection galleries reopen on 22 Dec.","https://www.kyohaku.go.jp/eng/");
+ if(m===10&&d>=20||m===11&&d<=5)add("season","Autumn colour, typical peak","Kyoto and Tokyo","Roughly 20 Nov to 5 Dec in a normal year; it moves with the weather, so treat it as a guide, not a promise.","");
+ /* weekly and monthly markets */
+ if(dow===0)add("market","Hanazono Shrine antique market","Tokyo","A small Sunday market of 15 to 25 stalls in Shinjuku, usually not held during shrine festivals. The tea-ware guide suggests skipping it.","");
+ if(d===15)add("market","Chion-ji handmade market","Kyoto","Monthly craft market (handmade goods, not antiques). Hours reported as roughly 8:00 or 9:00 to 16:00; confirm with the temple.","");
+ if(d===15||d===28)add("market","Tomioka Hachimangu flea market","Tokyo","Flea market in Fukagawa; listed by Tokyo Cheapo for the 15th and 28th. Check before you go.","https://tokyocheapo.com/events/tomioka-hachimangu-markets/20260828/");
+ if(d===21)add("market","Kobo-san at To-ji","Kyoto","Over 1,000 stalls under the five-storey pagoda, 7:00 to 15:30. Free to the grounds.","http://www.touji-ennichi.com/ichi/kobichi.htm");
+ if(d===21||d===22)add("market","Shitenno-ji temple market","Osaka","300 to 400 stalls, 8:30 to 16:00, free to the grounds.","");
+ if(d===25)add("market","Tenjin-san at Kitano Tenmangu","Kyoto","800 to 1,000 stalls, 6:00 to 16:00. Craft-led, good for everyday tea tools.","https://kitanotenmangu.or.jp/en/");
+ if(dow===0&&d<=7){
+  add("market","To-ji antique market (first Sunday)","Kyoto","A smaller antique market that runs on the first Sunday of the month.","http://www.touji-ennichi.com/ichi/kobichi.htm");
+  add("market","Imamiya Shrine antique market","Kyoto","Under 20 stalls; the tea-ware guide calls it one to skip.","");
+ }
+ return ev;
+}
+
+/* Museums closed on a given date (by weekday, with the Monday-holiday rule). */
+function calClosed(y,m,d){
+ var dow=new Date(y,m,d).getDay(),key=y+"-"+(m+1)+"-"+d,out=[];
+ var prevMonHoliday=(key==="2026-11-24");   /* day after Labour Thanksgiving Day on Monday 23 Nov */
+ MUSEUMS.forEach(function(x){
+  var closed=x.closed.indexOf(dow)>-1;
+  if(x.closed.indexOf(1)>-1&&key==="2026-11-23")closed=false;      /* Monday holiday: open */
+  if(x.closed.indexOf(1)>-1&&prevMonHoliday)closed=true;            /* closed the next day instead */
+  if(closed)out.push(x);
+ });
+ return out;
+}
+
 /* ---------- App ---------- */
 /* Google Maps JavaScript API key (restricted to that API only). Leave "" to use the free Esri street map instead. */
 var GOOGLE_KEY="AIzaSyAiqkMcE68ZXWxuFiFNMCPfag1uQt-6p-4";
@@ -1829,9 +1946,10 @@ var CITIES={
   tag:"The nation's kitchen",bounds:[[34.58,135.38],[34.78,135.62]],wards:WARDS.osaka,hoods:OS_HOODS,places:OS_PLACES,
   intro:"Osaka's wards, with the central Chuo, Kita and Naniwa wards carrying most of what you would come for."}
 };
+CITIES.calendar={label:"Calendar",ja:"暦",short:"Calendar"};
 if(typeof PUBLIC_HOTELS!=="undefined")Object.keys(PUBLIC_HOTELS).forEach(function(k){CITIES[k].hotel=PUBLIC_HOTELS[k]});
 if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
-var ORDER=["tokyo","nakasendo","kyoto","osaka"];
+var ORDER=["tokyo","nakasendo","kyoto","osaka","calendar"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
 function C(){return CITIES[state.city]}
 var ICON={
@@ -2136,6 +2254,7 @@ function placeHTML(){
 }
 function render(){
   var el=$("#panel");
+  if(state.view==="calendar"){el.innerHTML="<div class='pwrap'>"+calPanelHTML()+"</div>";el.scrollTop=0;return}
   el.innerHTML="<div class='pwrap'>"+(state.place?placeHTML():state.hood?hoodHTML():state.ward?wardHTML():cityHTML())+"</div>";
   el.scrollTop=0;
   plateTitle();
@@ -2151,6 +2270,8 @@ $("#panel").addEventListener("mouseout",function(e){var b=e.target.closest(".sun
 $("#panel").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
   var c=C();
+  if(b.dataset.calback){state.calDay=null;renderCal();render();return}
+  if(b.dataset.cald){state.calDay=b.dataset.cald;renderCal();render();return}
   if(b.dataset.nav==="city")return goCity();
   if(b.dataset.nav==="ward")return goWard();
   if(b.dataset.nav==="hood")return goHood();
@@ -2180,9 +2301,9 @@ $("#maptools").addEventListener("click",function(e){
   buildTools();
 });
 function buildTabs(){
-  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(k===state.city)+"' aria-label='"+c.label+"'><i>"+c.ja+"</i><span>"+c.short+"</span></button>"}).join("");
+  $("#tabs").innerHTML=ORDER.map(function(k){var c=CITIES[k];return "<button class='tab' role='tab' data-city='"+k+"' aria-selected='"+(state.view==="calendar"?k==="calendar":k===state.city)+"' aria-label='"+c.label+"'><i>"+c.ja+"</i><span>"+c.short+"</span></button>"}).join("");
 }
-$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setCity(b.dataset.city)});
+$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.city==="calendar")return openCalendar();if(state.view)closeCalendar();setCity(b.dataset.city)});
 
 var fitted=false,touched=false;
 function fitCity(){var s=map.getSize();if(s.x>80&&s.y>80){map.fitBounds(C().bounds,{animate:false,paddingBottomRight:[innerWidth>900?112:0,0]});band();fitted=true}}
@@ -2210,6 +2331,79 @@ function loadGoogle(){
   s.src="https://maps.googleapis.com/maps/api/js?key="+encodeURIComponent(GOOGLE_KEY)+"&language=en&region=JP&callback=__gmReady";
   s.async=true;document.head.appendChild(s);
 }
+/* ---------- calendar view ---------- */
+var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var STAYS=(typeof PERSONAL!=="undefined"&&PERSONAL.stays)||[];
+state.view=null;state.cal={y:2026,m:10};state.calDay=null;
+function ymd(y,m,d){return y+"-"+(m+1)+"-"+d}
+function stayOn(y,m,d){var t=new Date(y,m,d).getTime();for(var i=0;i<STAYS.length;i++){var a=STAYS[i].from.split("-"),b=STAYS[i].to.split("-");if(t>=new Date(+a[0],a[1]-1,+a[2]).getTime()&&t<=new Date(+b[0],b[1]-1,+b[2]).getTime())return STAYS[i]}return null}
+function calGrid(){
+  var y=state.cal.y,m=state.cal.m,first=new Date(y,m,1),lead=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate(),now=new Date();
+  var h="<div class='calhead'><button class='calnav' data-calnav='-1' aria-label='Previous month'>&#8249;</button><h2>"+MN[m]+" <i>"+y+"</i></h2><button class='calnav' data-calnav='1' aria-label='Next month'>&#8250;</button></div><div class='calweek'>";
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(function(d){h+="<span>"+d+"</span>"});
+  h+="</div><div class='calgrid'>";
+  for(var i=0;i<lead;i++)h+="<i></i>";
+  for(var d=1;d<=days;d++){
+    var ev=calEvents(y,m,d),st=stayOn(y,m,d),isToday=now.getFullYear()===y&&now.getMonth()===m&&now.getDate()===d,k=ymd(y,m,d);
+    var seen={},dots=ev.filter(function(e){if(seen[e.k])return false;seen[e.k]=1;return true}).map(function(e){return "<b style='background:"+CAL_KIND[e.k].c+"'></b>"}).join("");
+    h+="<button class='cald"+(state.calDay===k?" on":"")+(isToday?" today":"")+(st?" stay":"")+"' data-cald='"+k+"'"+(st?" title='"+st.label+"'":"")+"><span>"+d+"</span><em>"+dots+"</em>"+(st?"<u>"+st.label+"</u>":"")+"</button>";
+  }
+  h+="</div><div class='calkey'>"+Object.keys(CAL_KIND).map(function(k){return "<span><b style='background:"+CAL_KIND[k].c+"'></b>"+CAL_KIND[k].n+"</span>"}).join("")+"</div>";
+  return h;
+}
+function evRow(e){
+  return "<li class='ev'><b style='background:"+CAL_KIND[e.k].c+"'></b><div><span class='nm'>"+e.t+" <span class='cnt'>"+e.c+"</span></span>"+(e.note?"<span class='sub'>"+e.note+"</span>":"")+(e.url?"<a class='btn ghost' target='_blank' rel='noopener' href='"+e.url+"'>Website</a>":"")+"</div></li>";
+}
+function calPanelHTML(){
+  var y=state.cal.y,m=state.cal.m,h="";
+  if(state.calDay){
+    var p=state.calDay.split("-"),Y=+p[0],M=+p[1]-1,D=+p[2],ev=calEvents(Y,M,D),cl=calClosed(Y,M,D),st=stayOn(Y,M,D);
+    h+="<nav class='crumbs'><button data-calback='1'>Calendar</button> › <span>"+D+" "+MN[M]+"</span></nav>";
+    h+=hero("",DN[new Date(Y,M,D).getDay()]+" "+D,MN[M]+" "+Y,[],"");
+    h=h.replace("class='hero","class='hero place");
+    if(st)h+="<p class='srcnote'>"+ico("mine",true)+"<span>"+st.label+"</span></p>";
+    h+="<h4>On this day</h4>"+(ev.length?"<ul class='evs'>"+ev.map(evRow).join("")+"</ul>":"<p class='para'>Nothing marked.</p>");
+    h+="<h4>Closed this day</h4>"+(cl.length?"<ul class='dots'>"+cl.map(function(x){return "<li><b>"+x.n+"</b> <span class='cnt'>"+x.c+(x.conf==="usual"?" · usual closing day, check":"")+"</span></li>"}).join("")+"</ul>":"<p class='para'>None of the museums listed here close.</p>");
+    return h;
+  }
+  h+=hero("暦","Calendar","dates and bookings",[],"");
+  h=h.replace("class='hero","class='hero place");
+  h+="<p class='ptag'>When things happen, and what to book</p><p class='lead'>Markets, public holidays, ticket releases and the days museums close. Tap a day for the detail.</p>";
+  /* book ahead */
+  h+="<h4>Book ahead</h4><ul class='evs'>";
+  MUSEUMS.filter(function(x){return x.book!=="no"}).forEach(function(x){
+    h+="<li class='ev'><b style='background:"+(x.book==="required"?"#d2566e":"#b8863f")+"'></b><div><span class='nm'>"+x.n+" <span class='cnt'>"+x.c+" · "+(x.book==="required"?"booking required":"book ahead")+"</span></span><span class='sub'>"+x.how+"</span><a class='btn ghost' target='_blank' rel='noopener' href='"+x.url+"'>Website</a></div></li>"});
+  h+="</ul>";
+  /* weekly closures */
+  h+="<h4>Closing days</h4>";
+  [1,2,5].forEach(function(dw){
+    var l=MUSEUMS.filter(function(x){return x.closed.indexOf(dw)>-1});if(!l.length)return;
+    h+="<p class='para'><b>"+DN[dw]+"s:</b> "+l.map(function(x){return x.n+(x.conf==="usual"?"*":"")}).join(", ")+"</p>";
+  });
+  h+="<p class='srcs'>* A usual closing day reported by several sources but not read on the venue's own site; confirm before you go. When a Monday is a public holiday, museums that close on Mondays normally open that day and close the next day instead (23 Nov 2026 is one, so those museums close on Tuesday 24 Nov).</p>";
+  /* this month */
+  var seen={},list=[];
+  for(var d=1;d<=new Date(y,m+1,0).getDate();d++){calEvents(y,m,d).forEach(function(e){if(e.k==="season"&&e.t.indexOf("Autumn")===0){if(seen.a)return;seen.a=1}if(e.t.indexOf("Hanazono")===0)return;list.push({d:d,e:e})})}
+  h+="<h4>"+MN[m]+"</h4><ul class='list'>"+list.map(function(x){
+    return "<li><button class='row wide' data-cald='"+ymd(y,m,x.d)+"'><span class='nm'>"+x.d+" "+MN[m].slice(0,3)+" · "+x.e.t+" <span class='cnt'>"+x.e.c+"</span></span><span class='sub'>"+x.e.note.slice(0,110)+(x.e.note.length>110?"…":"")+"</span></button></li>"}).join("")+"</ul>";
+  h+="<p class='srcs'>Sources: <a target='_blank' rel='noopener' href='"+CFT[1]+"'>"+CFT[0]+"</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.oedo[1]+"'>Oedo Antique Market</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.kno[1]+"'>Kyoto National Museum</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.ghibli[1]+"'>Ghibli Museum</a> · <a target='_blank' rel='noopener' href='"+CAL_SRC.kuna[1]+"'>Imperial Household Agency</a>. Dates and closing days change; check each venue the day before.</p>";
+  return h;
+}
+function renderCal(){$("#calview").innerHTML=calGrid()}
+function openCalendar(){
+  state.view="calendar";document.querySelector(".stage").classList.add("iscal");
+  buildTabs();renderCal();render();
+}
+function closeCalendar(){
+  state.view=null;document.querySelector(".stage").classList.remove("iscal");
+  map.invalidateSize();
+}
+$("#calview").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  if(b.dataset.calnav){var n=state.cal.m+ +b.dataset.calnav,y=state.cal.y;if(n<0){n=11;y--}if(n>11){n=0;y++}state.cal={y:y,m:n};state.calDay=null;renderCal();render();return}
+  if(b.dataset.cald){state.calDay=b.dataset.cald;renderCal();render()}
+});
 loadGoogle();
 setCity("tokyo");
 })();
