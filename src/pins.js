@@ -139,3 +139,5 @@ OS_HOODS.push({id:"sumiyoshi",name:"Sumiyoshi",short:"Sumiyoshi",jp:"住吉",lat
    ["Osaka Museum of History","sight","osakacastle",34.6826,135.5208,"A museum opposite Osaka Castle, with floors on the city's history and a view across to the keep. I could not confirm its closing day; check before you go.","Osaka Museum of History, Japan"]
   ],"Osaka");
 })();
+
+KY_PLACES.push({i:KY_PLACES.length,name:"Saiho-ji (the moss temple)",cat:"sight",hood:"arashiyama",lat:34.9939,lng:135.6847,note:"A garden of more than a hundred kinds of moss, in the Matsuo district south of Arashiyama. Entry is by advance reservation only, through the temple's own booking site or a return postcard; guides give the fee as ¥4,000 and the minimum age as 13, and visits start around 9:30. Pair it with Arashiyama on the same morning.",q:"Saiho-ji Kokedera, Kyoto, Japan",src:"guide",url:"https://saihoji-kokedera.com/en/reservation.html",cite:["Kyoto Tourism: Saiho-ji (Kokedera)","https://kyoto.travel/en/destinations/saihoji-temple-kokedera-temple/"]});
