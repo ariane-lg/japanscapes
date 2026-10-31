@@ -15,7 +15,7 @@ var CITIES={
   tag:"Twenty-three wards, one map",bounds:[[35.52,139.57],[35.82,139.93]],wards:WARDS.tokyo,hoods:HOODS,places:PLACES,hotel:BASE,
   intro:"Ward boundaries follow Tokyo's official map. Tap a ward for its history and character. Zoom in and its neighbourhoods appear, then every saved place."},
  nakasendo:{label:"Nakasendō & Fuji-Hakone",ja:"中山道",short:"Nakasendō",dates:"",
-  tag:"The old road, then Fuji",bounds:[[35.513,137.525],[35.562,137.598]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
+  tag:"The old road, then Fuji",bounds:[[35.513,137.525],[35.612,137.622]],wards:null,hoods:NK_HOODS,places:NK_PLACES,
   intro:"Two post towns on the old Edo-to-Kyoto road, an 8 km forest walk between them, then a night near Fuji. Hakone and Kawaguchiko are both shown as options for the Fuji stop."},
  kyoto:{label:"Kyoto",ja:"京都",short:"Kyoto",dates:"",
   tag:"Eleven wards, a thousand temples",bounds:[[34.94,135.66],[35.14,135.85]],wards:WARDS.kyoto,hoods:KY_HOODS,places:KY_PLACES,
@@ -25,7 +25,9 @@ var CITIES={
   intro:"Osaka's wards, with the central Chuo, Kita and Naniwa wards carrying most of what you would come for."}
 };
 CITIES.calendar={label:"Calendar",ja:"暦",short:"Calendar"};
-if(typeof PUBLIC_HOTELS!=="undefined")Object.keys(PUBLIC_HOTELS).forEach(function(k){CITIES[k].hotel=PUBLIC_HOTELS[k]});
+if(typeof PUBLIC_HOTELS!=="undefined")Object.keys(PUBLIC_HOTELS).forEach(function(k){var v=PUBLIC_HOTELS[k];if(Array.isArray(v)){CITIES[k].hotels=v;CITIES[k].hotel=v[0]}else CITIES[k].hotel=v});
+function hotelsOf(c){return c.hotels||(c.hotel?[c.hotel]:[])}
+function nearHotel(c,p){var hs=hotelsOf(c),b=null,bd=1e9;hs.forEach(function(h){var d=Math.pow(h.lat-p.lat,2)+Math.pow(h.lng-p.lng,2);if(d<bd){bd=d;b=h}});return b}
 if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
 var ORDER=["tokyo","nakasendo","kyoto","osaka","calendar"];
 var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
@@ -166,11 +168,11 @@ function buildLayers(){
     p.m.on("click",function(){selectPlace(p)});
   });
   refreshPins();
-  if(c.hotel){
-    var m=L.marker([c.hotel.lat,c.hotel.lng],{icon:L.divIcon({className:"pinb hotelb",html:"<span class='hb'>"+ico("hotel",true)+"</span>",iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
-    m.bindTooltip(c.hotel.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
-    m.on("click",function(){if(c.hotel.hood)selectHood(c.hotel.hood)});
-  }
+  hotelsOf(c).forEach(function(ho){
+    var m=L.marker([ho.lat,ho.lng],{icon:L.divIcon({className:"pinb hotelb",html:"<span class='hb'>"+ico("hotel",true)+"</span>",iconSize:[32,32],iconAnchor:[16,16]}),keyboard:false}).addTo(G.hotel);
+    m.bindTooltip(ho.name,{permanent:true,direction:"right",offset:[18,0],className:"hoteltip"});
+    m.on("click",function(){if(ho.hood)selectHood(ho.hood)});
+  });
   if(CITYLINES[state.city]){buildLines();if(state.lines)G.line.addTo(map)}
 }
 
@@ -325,7 +327,7 @@ function placeHTML(){
   h+="<div class='actions'><a class='btn' target='_blank' rel='noopener' href='"+gq(p.q)+"'>Open in Google Maps</a>";
   if(p.url)h+="<a class='btn ghost' target='_blank' rel='noopener' href='"+p.url+"'>Website</a>";
   h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&destination="+p.lat+","+p.lng+"'>Directions</a>";
-  if(c.hotel)h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(c.hotel.name)+"&destination="+p.lat+","+p.lng+"&travelmode=transit'>From the hotel</a>";
+  if(c.hotel)h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(nearHotel(c,p).name)+"&destination="+p.lat+","+p.lng+"&travelmode=transit'>From the hotel</a>";
   h+="</div>";
   if(p.cite)h+=srcs([p.cite]);
   return h;
