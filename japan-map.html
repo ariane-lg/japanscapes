@@ -2430,7 +2430,7 @@ function loadGoogle(){
 var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
 var DN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var STAYS=(typeof PERSONAL!=="undefined"&&PERSONAL.stays)||[];
-state.view=null;state.cal={y:2026,m:10};state.calDay=null;
+var _n=new Date();state.view=null;state.cal=(_n.getFullYear()===2026&&_n.getMonth()>=9)?{y:2026,m:_n.getMonth()}:{y:2026,m:10};state.calDay=null;
 function ymd(y,m,d){return y+"-"+(m+1)+"-"+d}
 function stayOn(y,m,d){var t=new Date(y,m,d).getTime();for(var i=0;i<STAYS.length;i++){var a=STAYS[i].from.split("-"),b=STAYS[i].to.split("-");if(t>=new Date(+a[0],a[1]-1,+a[2]).getTime()&&t<=new Date(+b[0],b[1]-1,+b[2]).getTime())return STAYS[i]}return null}
 function calGrid(){
@@ -2468,6 +2468,12 @@ function calPanelHTML(){
   h+=hero("暦","Calendar","dates and bookings",[],"");
   h=h.replace("class='hero","class='hero place");
   h+="<p class='ptag'>When things happen, and what to book</p><p class='lead'>Markets, public holidays, ticket releases and the days museums close. Tap a day for the detail.</p>";
+  /* to do now (private items only) */
+  if(typeof PERSONAL!=="undefined"&&PERSONAL.events){
+    var t0=new Date();t0.setHours(0,0,0,0);var lo=t0.getTime()-2*864e5,hi=t0.getTime()+16*864e5;
+    var tds=PERSONAL.events.filter(function(e){var p=e.d.split("-"),t=new Date(+p[0],p[1]-1,+p[2]).getTime();return (e.k||"todo")==="todo"&&t>=lo&&t<=hi}).sort(function(a,b){return a.d<b.d?-1:1});
+    if(tds.length)h+="<h4>To do soon</h4><ul class='list'>"+tds.map(function(e){var p=e.d.split("-"),k=ymd(+p[0],p[1]-1,+p[2]);return "<li><button class='row wide' data-cald='"+k+"'><span class='nm'>"+(+p[2])+" "+MN[p[1]-1].slice(0,3)+" · "+e.t+" <span class='cnt'>"+(e.c||"")+"</span></span><span class='sub'>"+(e.note||"Open for the steps.").slice(0,110)+"</span></button></li>"}).join("")+"</ul>";
+  }
   /* book ahead */
   h+="<h4>Book ahead</h4><ul class='evs'>";
   MUSEUMS.filter(function(x){return x.book!=="no"}).forEach(function(x){
