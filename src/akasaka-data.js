@@ -117,7 +117,11 @@ var HOODS=[
   tag:"Coffee roasters and contemporary art",
   intro:"A quiet warehouse district turned coffee neighbourhood, Kiyosumi-Shirakawa took off after Blue Bottle opened its first Japanese café here in 2015, and other roasters followed. It also has the Museum of Contemporary Art Tokyo and Kiyosumi Garden, a Meiji-era stroll garden around a pond.",
   see:["The stepping stones across Kiyosumi Garden’s pond","The Museum of Contemporary Art Tokyo (MOT)","A coffee crawl between the roasteries"],
-  l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"}
+  l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"},
+ {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["heritage"],
+  tag:"The temple of the 47 ronin",
+  intro:"Sengaku-ji, near Sengakuji station in the south of Minato, is the temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta retold in the Chushingura story. A small museum and the memorial graves sit beside it.",
+  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."}
 ];
 var HOOD={};HOODS.forEach(function(h){HOOD[h.id]=h});
 var CATS=[{id:"sight",name:"Sights & culture"},{id:"eat",name:"Eat & drink"},{id:"make",name:"Shops, craft & fabric"},{id:"green",name:"Parks & leaves"}];

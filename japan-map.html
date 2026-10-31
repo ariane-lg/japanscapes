@@ -811,7 +811,11 @@ var HOODS=[
   tag:"Coffee roasters and contemporary art",
   intro:"A quiet warehouse district turned coffee neighbourhood, Kiyosumi-Shirakawa took off after Blue Bottle opened its first Japanese café here in 2015, and other roasters followed. It also has the Museum of Contemporary Art Tokyo and Kiyosumi Garden, a Meiji-era stroll garden around a pond.",
   see:["The stepping stones across Kiyosumi Garden’s pond","The Museum of Contemporary Art Tokyo (MOT)","A coffee crawl between the roasteries"],
-  l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"}
+  l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"},
+ {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["heritage"],
+  tag:"The temple of the 47 ronin",
+  intro:"Sengaku-ji, near Sengakuji station in the south of Minato, is the temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta retold in the Chushingura story. A small museum and the memorial graves sit beside it.",
+  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."}
 ];
 var HOOD={};HOODS.forEach(function(h){HOOD[h.id]=h});
 var CATS=[{id:"sight",name:"Sights & culture"},{id:"eat",name:"Eat & drink"},{id:"make",name:"Shops, craft & fabric"},{id:"green",name:"Parks & leaves"}];
@@ -1744,6 +1748,8 @@ addPins(PLACES,[
  ["Ohya Shobo","make","jimbocho",35.6959,139.7605,"Antiquarian bookshop, known for old maps and woodblock prints"],
  ["Bondy Jimbocho","eat","jimbocho",35.6959,139.7578,"European-style curry on Jimbocho's well-known curry circuit","Bondy, Jimbocho, Tokyo, Japan"],
  ["Tomato Nippori","make","nippori",35.7276,139.7697,"Huge fabric store, the flagship of Nippori Textile Town","Tomato, Nippori, Tokyo, Japan"],
+ ["Japanese Sword Museum (Ryogoku)","sight","skytree",35.6988,139.7937,"Japan's national museum of the sword, run by the society that preserves it, with blades, fittings and armour-related pieces on rotating display. Listed as open 9:30 to 17:00, last entry 16:30, closed Mondays and during exhibition changes; about ¥1,000. A short walk from the Sumida Hokusai Museum, so the two make one outing.","Japanese Sword Museum, Sumida, Tokyo"],
+ ["Sengaku-ji (the 47 ronin)","sight","takanawa",35.6384,139.7390,"The temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta known as the Chushingura story. There is a small museum and the memorial graves; allow one to two hours. I found no confirmed opening hours or closing days, so check the temple's site before you go.","Sengaku-ji, Minato, Tokyo"],
  ["Ota Memorial Museum of Art (ukiyo-e)","sight","harajuku",35.6693,139.7040,"A small museum of ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs to 6 Dec, with a second display from 7 Nov (closed 4 to 6 Nov and Mondays). No reservation needed; cash only. Weekdays are quieter.","Ota Memorial Museum of Art, Tokyo"],
  ["Sumida Hokusai Museum","sight","skytree",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo. The 10th-anniversary show of its best works runs to 23 Nov. About 1,800 works in the collection, but the permanent room is mostly replicas. Closed Mondays, 9:30 to 17:30. Its shows have timed online tickets, so check the museum site for this one."]
 ],"Tokyo");
@@ -1946,6 +1952,9 @@ var MUSEUMS=[
  {n:"Sumida Hokusai Museum",c:"Tokyo",closed:[1],conf:"official",book:"advised",
   how:"Closed Mondays, and the next weekday after a Monday holiday. 9:30 to 17:30, last entry 17:00. The 10th-anniversary show runs to 23 Nov (second display from 21 Oct); adult ticket about ¥1,500. The museum's pages for other shows sell timed online tickets that skip the reception line, with limited sales and no changes or refunds. I could not find the ticket page for this show, so look on the museum's site. The permanent room is mostly replicas; originals are in the special show.",
   url:"https://hokusai-museum.jp/?lang=en"},
+ {n:"Japanese Sword Museum (Ryogoku)",c:"Tokyo",closed:[1],conf:"usual",book:"no",
+  how:"Open 9:30 to 17:00, last entry 16:30; closed Mondays (holidays are open) and during exhibition changes, which are irregular, so check the museum's site. About ¥1,000, no booking. Close to the Sumida Hokusai Museum.",
+  url:"https://touken.or.jp/english/"},
  {n:"Ota Memorial Museum of Art (ukiyo-e, Harajuku)",c:"Tokyo",closed:[1],conf:"official",book:"no",
   how:"Ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs 6 Oct to 6 Dec; the second display starts 7 Nov and the museum is closed 4 to 6 Nov for the change. Closed Mondays (9, 16 and 24 Nov). No reservation needed; cash only. Weekends, holidays and the last days of a show are busy, so go on a weekday. Admission and hours were not on the page I read, so check.",
   url:"https://ukiyoe-ota-muse.jp/eng"},
