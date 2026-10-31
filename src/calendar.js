@@ -70,7 +70,7 @@ function calEvents(y,m,d){
   add("market","To-ji antique market (first Sunday)","Kyoto","A smaller antique market that runs on the first Sunday of the month.","http://www.touji-ennichi.com/ichi/kobichi.htm");
   add("market","Imamiya Shrine antique market","Kyoto","Under 20 stalls; the tea-ware guide calls it one to skip.","");
  }
- if(typeof PERSONAL!=="undefined"&&PERSONAL.events){var iso=y+"-"+("0"+(m+1)).slice(-2)+"-"+("0"+d).slice(-2);PERSONAL.events.forEach(function(e){if(e.d===iso)ev.push({k:e.k||"todo",t:e.t,c:e.c||"",note:e.note||"",url:e.url||""})})}
+ if(typeof PERSONAL!=="undefined"&&PERSONAL.events){var iso=y+"-"+("0"+(m+1)).slice(-2)+"-"+("0"+d).slice(-2);PERSONAL.events.forEach(function(e){if(e.d===iso)ev.push({k:e.k||"todo",t:e.t,c:e.c||"",note:e.note||"",url:e.url||"",steps:e.steps||null,tips:e.tips||null})})}
  return ev;
 }
 

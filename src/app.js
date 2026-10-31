@@ -433,7 +433,9 @@ function calGrid(){
   return h;
 }
 function evRow(e){
-  return "<li class='ev'><b style='background:"+CAL_KIND[e.k].c+"'></b><div><span class='nm'>"+e.t+" <span class='cnt'>"+e.c+"</span></span>"+(e.note?"<span class='sub'>"+e.note+"</span>":"")+(e.url?"<a class='btn ghost' target='_blank' rel='noopener' href='"+e.url+"'>Website</a>":"")+"</div></li>";
+  var st=e.steps?"<ol class='steps'>"+e.steps.map(function(s){return "<li><span class='tm'>"+(s[0]||"")+"</span><span class='tx'>"+s[1]+"</span></li>"}).join("")+"</ol>":"";
+  var tp=e.tips?"<div class='tips'><span class='tl'>Good to know</span><ul>"+e.tips.map(function(t){return "<li>"+t+"</li>"}).join("")+"</ul></div>":"";
+  return "<li class='ev'><b style='background:"+CAL_KIND[e.k].c+"'></b><div><span class='nm'>"+e.t+" <span class='cnt'>"+e.c+"</span></span>"+(e.note?"<span class='sub'>"+e.note+"</span>":"")+st+tp+(e.url?"<a class='btn ghost' target='_blank' rel='noopener' href='"+e.url+"'>Website</a>":"")+"</div></li>";
 }
 function calPanelHTML(){
   var y=state.cal.y,m=state.cal.m,h="";
@@ -443,6 +445,7 @@ function calPanelHTML(){
     h+=hero("",DN[new Date(Y,M,D).getDay()]+" "+D,MN[M]+" "+Y,[],"");
     h=h.replace("class='hero","class='hero place");
     if(st)h+="<p class='srcnote'>"+ico("mine",true)+"<span>"+st.label+"</span></p>";
+    ev.sort(function(a,b){return (b.k==="todo")-(a.k==="todo")});
     h+="<h4>On this day</h4>"+(ev.length?"<ul class='evs'>"+ev.map(evRow).join("")+"</ul>":"<p class='para'>Nothing marked.</p>");
     h+="<h4>Closed this day</h4>"+(cl.length?"<ul class='dots'>"+cl.map(function(x){return "<li><b>"+x.n+"</b> <span class='cnt'>"+x.c+(x.conf==="usual"?" · usual closing day, check":"")+"</span></li>"}).join("")+"</ul>":"<p class='para'>None of the museums listed here close.</p>");
     return h;
