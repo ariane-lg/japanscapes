@@ -322,9 +322,11 @@ function placeHTML(){
   h+="<p class='lead'>"+p.note+"</p>";
   if(hd)h+="<dl class='facts'><div><dt>Neighbourhood</dt><dd><button class='lnk' data-hood='"+hd.id+"'>"+hd.name+"</button></dd></div></dl>";
   h+="<div class='actions'><a class='btn' target='_blank' rel='noopener' href='"+gq(p.q)+"'>Open in Google Maps</a>";
+  if(p.url)h+="<a class='btn ghost' target='_blank' rel='noopener' href='"+p.url+"'>Website</a>";
   h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&destination="+p.lat+","+p.lng+"'>Directions</a>";
   if(c.hotel)h+="<a class='btn ghost' target='_blank' rel='noopener' href='https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(c.hotel.name)+"&destination="+p.lat+","+p.lng+"&travelmode=transit'>From the hotel</a>";
   h+="</div>";
+  if(p.cite)h+=srcs([p.cite]);
   return h;
 }
 function render(){
