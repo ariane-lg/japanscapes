@@ -88,5 +88,5 @@ function calClosed(y,m,d){
 }
 
 MUSEUMS.push({n:"Shinkansen (Tokyo to Nagoya) and the Shinano limited express",c:"Nakasendō",closed:[],conf:"usual",book:"advised",
-  how:"Every seat on the Shinano is reserved, so you cannot board without a seat ticket; the Shinkansen fills up on an autumn weekend, so reserve that too. The Kitaena and Ontake buses in the Kiso valley can't be reserved, and the JR Pass doesn't cover them.",
+  how:"The Shinano has two non-reserved cars except in peak holiday periods, so a reservation is not required in mid-November, but it is the safe choice, above all for Nagiso where only four Shinano a day stop. The Shinkansen fills up on an autumn weekend, so reserve that too. The Kitaena and Ontake buses in the Kiso valley can't be reserved, and the JR Pass doesn't cover them.",
   url:"https://www.japan-guide.com/e/e6078.html"});
