@@ -460,10 +460,11 @@ function calPanelHTML(){
   h+="</ul>";
   /* weekly closures */
   h+="<h4>Closing days</h4>";
-  [1,2,5].forEach(function(dw){
+  [0,1,2,5].forEach(function(dw){
     var l=MUSEUMS.filter(function(x){return x.closed.indexOf(dw)>-1});if(!l.length)return;
     h+="<p class='para'><b>"+DN[dw]+"s:</b> "+l.map(function(x){return x.n+(x.conf==="usual"?"*":"")}).join(", ")+"</p>";
   });
+  if(typeof OPENDAILY!=="undefined")h+="<p class='para'><b>No weekly closing day, as far as I know:</b> "+OPENDAILY.join(", ")+". This is general knowledge, apart from Ryoan-ji, where guides agree; many have year-end closures, so confirm the hours the day before.</p>";
   h+="<p class='srcs'>* A usual closing day reported by several sources but not read on the venue's own site; confirm before you go. When a Monday is a public holiday, museums that close on Mondays normally open that day and close the next day instead (23 Nov 2026 is one, so those museums close on Tuesday 24 Nov).</p>";
   /* this month */
   var seen={},list=[];

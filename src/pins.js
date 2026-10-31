@@ -100,3 +100,42 @@ NK_HOODS.push({id:"nagiso",name:"Nagiso Station",short:"Nagiso",jp:"南木曽",l
   intro:"Nagiso Station, on the JR Chuo line, is the rail stop for Tsumago, about 3.5 km away. Buses between the station and Tsumago take about 7 minutes. From here, limited express trains run on to Nagoya, where you change to the Shinkansen for Kyoto or Tokyo.",
   see:["Bus to Tsumago from the station"],picks:"Check the bus times the day before; there is no seat reservation.",
   go:"From Tsumago, a bus takes about 7 minutes (¥300, timetable as of 1 April 2026), or you can walk the 3.5 km in about an hour. Four Shinano limited expresses a day stop here for Nagoya (8:09, 15:55, 16:55 and 17:55, about 1 hour 10 minutes); the others skip Nagiso, and local trains run to Nakatsugawa (about 2 hours to Nagoya in all, no reservations). Nagiso has no ticket machine and its ticket office keeps limited hours, so get your ticket beforehand."});
+
+/* ---------- Main temples, palaces and historic sites that were missing ---------- */
+KY_HOODS.push(
+ {id:"nijo",name:"Nijo Castle & the Imperial Palace",short:"Nijo",jp:"二条城",lat:35.0195,lng:135.7550,r:.9,p:1,tags:["heritage","history"],tag:"Shogun's castle and the emperors' old home",
+  intro:"Central Kyoto holds two seats of power a short walk apart: Nijo Castle, the shogun's Kyoto residence, and the Kyoto Imperial Palace in its park, where the emperors lived until 1868.",
+  see:["Nijo Castle and its nightingale floors","Kyoto Imperial Palace (free)"],picks:"Do both on one day; the palace is closed on Mondays."},
+ {id:"okazaki",name:"Okazaki, Heian Jingu & Nanzen-ji",short:"Okazaki",jp:"岡崎",lat:35.0130,lng:135.7870,r:1,p:1,tags:["temples","heritage"],tag:"A great shrine, a Zen temple and an autumn garden",
+  intro:"Along the foot of the eastern hills, Okazaki strings together Heian Jingu with its giant torii, Nanzen-ji with its brick aqueduct, and Eikan-do, famous for autumn leaves.",
+  see:["Heian Jingu","Nanzen-ji and its aqueduct","Eikan-do (autumn leaves)"],picks:"Walk it south to north, finishing at Eikan-do in autumn."}
+);
+OS_HOODS.push({id:"sumiyoshi",name:"Sumiyoshi",short:"Sumiyoshi",jp:"住吉",lat:34.6125,lng:135.4933,r:.6,p:2,tags:["temples","heritage"],tag:"One of Japan's oldest shrines",
+  intro:"Sumiyoshi Taisha, in the south of Osaka, is one of Japan's oldest shrines, with an arched wooden bridge and a style of architecture that predates Buddhist influence. It is off the central routes and reached by tram or train from Namba.",
+  see:["Sumiyoshi Taisha and its arched bridge"],picks:"A calm half-day away from the crowds."});
+
+(function(){
+  function add(arr,list,city){list.forEach(function(a){arr.push({i:arr.length,name:a[0],cat:a[1],hood:a[2],lat:a[3],lng:a[4],note:a[5],q:a[6]||(a[0]+", "+city+", Japan"),src:"guide",url:a[7]||"",cite:a[8]||null})})}
+  add(PLACES,[
+   ["Zojo-ji","sight","roppongi",35.6573,139.7483,"The Tokugawa family temple, standing right beside Tokyo Tower. Its main gate dates from the Edo period and is among the oldest wooden structures in Tokyo.","Zojo-ji, Tokyo, Japan","https://www.zojoji.or.jp/en/"],
+   ["Tokyo Tower","sight","roppongi",35.6584,139.7455,"The red lattice tower of 1958, with observation decks over the city. Tickets can be bought online ahead of time.","Tokyo Tower, Japan","https://www.tokyotower.co.jp/en/"],
+   ["Hama-rikyu Gardens","green","tsukiji",35.6602,139.7638,"An Edo-period garden of the shogun's family, with tidal ponds and a teahouse set on the water, against the skyscrapers of Shiodome.","Hama-rikyu Gardens, Tokyo, Japan"],
+   ["Koishikawa Korakuen","green","kagurazaka",35.7054,139.7492,"One of Tokyo's oldest daimyo gardens, laid out from 1629 by the Mito branch of the Tokugawa, with Chinese-inspired scenery.","Koishikawa Korakuen, Tokyo, Japan"],
+   ["Ueno Toshogu","sight","ueno",35.7154,139.7706,"A gilded shrine to Tokugawa Ieyasu, founded in 1627 and little changed since, set quietly inside Ueno Park.","Ueno Toshogu, Tokyo, Japan"],
+   ["Yushima Seido","sight","akihabara",35.7004,139.7666,"A Confucian temple dating from 1690, once the Edo shogunate's school for training officials. Quiet, near Ochanomizu.","Yushima Seido, Tokyo, Japan"],
+   ["Edo-Tokyo Museum","sight","kuramae",35.6964,139.7961,"Tokyo's history museum, reopened on 31 March 2026 after about four years of renovation. Closed on Mondays; check the calendar.","Edo-Tokyo Museum, Tokyo, Japan","https://www.edo-tokyo-museum.or.jp/en/"]
+  ],"Tokyo");
+  add(KY_PLACES,[
+   ["Nijo Castle","sight","nijo",35.0140,135.7485,"The shogun's Kyoto residence, built in 1603 by Tokugawa Ieyasu, famous for the Ninomaru Palace's 'nightingale' floors that sing underfoot. Admission is 8:45 to 16:00; the Ninomaru Palace is reported closed on Tuesdays in December, January, July and August.","Nijo Castle, Kyoto, Japan","https://nijo-jocastle.city.kyoto.lg.jp/?lang=en"],
+   ["Kyoto Imperial Palace","sight","nijo",35.0253,135.7623,"Where the emperors lived until 1868, set in a large park. Free, and the standard walking route needs no reservation. Closed on Mondays (the next day if Monday is a holiday).","Kyoto Imperial Palace, Japan","https://sankan.kunaicho.go.jp/english/index.html"],
+   ["Heian Jingu","sight","okazaki",35.0161,135.7829,"A grand shrine founded in 1895 to mark Kyoto's 1,100th anniversary, with a huge vermilion torii and a garden behind it.","Heian Jingu, Kyoto, Japan"],
+   ["Nanzen-ji","sight","okazaki",35.0115,135.7927,"A major Zen temple whose grounds hold a surprising 19th-century brick aqueduct, the Suirokaku, among the maples.","Nanzen-ji, Kyoto, Japan"],
+   ["Eikan-do","sight","okazaki",35.0144,135.7949,"Known as Kyoto's temple for autumn leaves, with an evening illumination in the season (reported 20 Nov to 6 Dec 2026; check the temple's notice for ticket rules).","Eikan-do Zenrin-ji, Kyoto, Japan"],
+   ["Sanjusangen-do","sight","higashiyama",34.9882,135.7718,"A 120-metre wooden hall lined with 1,001 gilded statues of the thousand-armed Kannon.","Sanjusangen-do, Kyoto, Japan"],
+   ["Tofuku-ji","sight","fushimi",34.9772,135.7746,"A Zen temple famous for autumn leaves seen from the Tsutenkyo bridge. It is a daytime stop and gets crowded, so go early.","Tofuku-ji, Kyoto, Japan"]
+  ],"Kyoto");
+  add(OS_PLACES,[
+   ["Sumiyoshi Taisha","sight","sumiyoshi",34.6130,135.4931,"One of Japan's oldest shrines, traditionally dated to the 3rd century, with a steeply arched red bridge over a pond. Reached by tram or train from Namba.","Sumiyoshi Taisha, Osaka, Japan"],
+   ["Osaka Museum of History","sight","osakacastle",34.6826,135.5208,"A museum opposite Osaka Castle, with floors on the city's history and a view across to the keep. I could not confirm its closing day; check before you go.","Osaka Museum of History, Japan"]
+  ],"Osaka");
+})();

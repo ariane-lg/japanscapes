@@ -38,8 +38,8 @@ var MUSEUMS=[
  {n:"Kyoto National Museum",c:"Kyoto",closed:[1],conf:"official",book:"no",
   how:"Open 9:00 to 17:30; if a Monday is a national holiday it opens that day and closes the next. Special exhibition The Tale of Genji runs to 29 Nov 2026, with the collection galleries off view until 22 Dec. No booking needed for it.",
   url:"https://www.kyohaku.go.jp/eng/",src:"kno"},
- {n:"Kyoto Imperial Palace",c:"Kyoto",closed:[],conf:"official",book:"no",
-  how:"Open to all visitors with no application needed.",url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"},
+ {n:"Kyoto Imperial Palace",c:"Kyoto",closed:[1],conf:"usual",book:"no",
+  how:"Free, and the Imperial Household Agency says no application is needed. Normally closed on Mondays (the next day if Monday is a holiday) and over the year-end; in winter it admits visitors until about 15:20 and closes at 16:00.",url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"},
  {n:"Sento Palace, Katsura and Shugakuin villas",c:"Kyoto",closed:[],conf:"official",book:"required",
   how:"These three Imperial Household properties can be visited only by advance application made online through each property's page. Apply as early as you can; slots are limited.",
   url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"}
@@ -59,6 +59,10 @@ function calEvents(y,m,d){
  if(key==="2026-11-15")add("season","Shichi-go-san","Japan","Traditional shrine visits for children aged three, five and seven, many in kimono. Big shrines such as Meiji Jingu and Hie are lively, especially at weekends around the 15th.","");
  if(key==="2026-11-29")add("exhibit","The Tale of Genji ends","Kyoto","Last day of the special exhibition at the Kyoto National Museum. The collection galleries reopen on 22 Dec.","https://www.kyohaku.go.jp/eng/");
  if(m===10&&d>=20||m===11&&d<=5)add("season","Autumn colour, typical peak","Kyoto and Tokyo","Roughly 20 Nov to 5 Dec in a normal year; it moves with the weather, so treat it as a guide, not a promise.","");
+ if(m===10&&d>=20||m===11&&d<=6)add("season","Eikan-do evening illumination","Kyoto","Reported 20 Nov to 6 Dec 2026, about 17:30 to 21:00. One guide says advance tickets are not available and another says some dates are online-only, so check the temple's notice.","");
+ if(m===10&&d>=21&&d<=30)add("season","Kiyomizu-dera evening opening","Kyoto","One guide gives 21 to 30 Nov 2026 for the autumn night opening; others say late Nov to early Dec. Confirm the dates and ticket rules.","");
+ if(key==="2026-11-24")add("exhibit","Osaka Castle: 3rd floor closed","Osaka","The tower's 3rd floor closes for a display change today; the rest of the tower stays open.","");
+ if(key==="2026-11-25")add("exhibit","Osaka Castle: 4th floor closed","Osaka","The tower's 4th floor closes for a display change today; the rest of the tower stays open.","");
  /* weekly and monthly markets */
  if(dow===0)add("market","Hanazono Shrine antique market","Tokyo","A small Sunday market of 15 to 25 stalls in Shinjuku, usually not held during shrine festivals. The tea-ware guide suggests skipping it.","");
  if(d===15)add("market","Chion-ji handmade market","Kyoto","Monthly craft market (handmade goods, not antiques). Hours reported as roughly 8:00 or 9:00 to 16:00; confirm with the temple.","");
@@ -90,3 +94,14 @@ function calClosed(y,m,d){
 MUSEUMS.push({n:"Shinkansen (Tokyo to Nagoya) and the Shinano limited express",c:"Nakasendō",closed:[],conf:"usual",book:"advised",
   how:"The Shinano has two non-reserved cars except in peak holiday periods, so a reservation is not required in mid-November, but it is the safe choice, above all for Nagiso where only four Shinano a day stop. The Shinkansen fills up on an autumn weekend, so reserve that too. The Kitaena and Ontake buses in the Kiso valley can't be reserved, and the JR Pass doesn't cover them.",
   url:"https://www.japan-guide.com/e/e6078.html"});
+
+/* ---------- Main temples, palaces and historic sites: closing days and booking ---------- */
+MUSEUMS.push(
+ {n:"Nijo Castle",c:"Kyoto",closed:[],conf:"usual",book:"no",how:"Open daily in November, admission 8:45 to 16:00. Guides report the Ninomaru Palace closed on Tuesdays in December, January, July and August, and the official site notes shortened admission on Sunday 6 December 2026. Confirm before you go.",url:"https://nijo-jocastle.city.kyoto.lg.jp/?lang=en"},
+ {n:"Edo-Tokyo Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",how:"Reopened on 31 March 2026 after about four years of renovation. Closed on Mondays, but open on a Monday holiday and closed the next weekday instead. Special exhibitions cost extra.",url:"https://www.edo-tokyo-museum.or.jp/en/"},
+ {n:"Imperial Palace inner grounds tour",c:"Tokyo",closed:[0,1],conf:"usual",book:"required",how:"A free guided walk through the inner grounds, booked through the Imperial Household Agency; one guide says at least four days ahead. Tours are not held on Sundays or Mondays. The East Gardens next to it need no booking.",url:"https://sankan.kunaicho.go.jp/english/index.html"},
+ {n:"Tokyo Skytree",c:"Tokyo",closed:[],conf:"usual",book:"advised",how:"Open all year. A date-and-time ticket bought online saves the queue at the ticket desk.",url:"https://www.tokyo-skytree.jp/en/"},
+ {n:"Saiho-ji (the moss temple)",c:"Kyoto",closed:[],conf:"usual",book:"required",how:"Entry is by advance application only, and guides disagree on whether to apply by post or online; check the temple's own site. It needs weeks to months of notice, so it is probably too late for a mid-November visit.",url:"https://kyoto.travel/destinations/saihoji-temple-kokedera-temple/"},
+ {n:"Osaka Castle tower",c:"Osaka",closed:[],conf:"usual",book:"no",how:"Open daily 9:00 to 18:00 (last entry 17:30), closed 28 December to 1 January. Two exhibit floors close for display changes: the 3rd on 24 Nov and the 4th on 25 Nov 2026.",url:"https://www.osakacastle.net/english/"}
+);
+var OPENDAILY=["Senso-ji","Meiji Jingu","Zojo-ji","Hama-rikyu Gardens","Koishikawa Korakuen","Fushimi Inari-taisha","Kiyomizu-dera","Kinkaku-ji","Ryoan-ji","Sumiyoshi Taisha"];
