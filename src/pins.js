@@ -21,7 +21,8 @@ addPins(PLACES,[
  ["Ohya Shobo","make","jimbocho",35.6959,139.7605,"Antiquarian bookshop, known for old maps and woodblock prints"],
  ["Bondy Jimbocho","eat","jimbocho",35.6959,139.7578,"European-style curry on Jimbocho's well-known curry circuit","Bondy, Jimbocho, Tokyo, Japan"],
  ["Tomato Nippori","make","nippori",35.7276,139.7697,"Huge fabric store, the flagship of Nippori Textile Town","Tomato, Nippori, Tokyo, Japan"],
- ["Sumida Hokusai Museum","sight","skytree",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo"]
+ ["Ota Memorial Museum of Art (ukiyo-e)","sight","harajuku",35.6693,139.7040,"A small museum of ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs to 6 Dec, with a second display from 7 Nov (closed 4 to 6 Nov and Mondays). No reservation needed; cash only. Weekdays are quieter.","Ota Memorial Museum of Art, Tokyo"],
+ ["Sumida Hokusai Museum","sight","skytree",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo. The 10th-anniversary show of its best works runs to 23 Nov. About 1,800 works in the collection, but the permanent room is mostly replicas. Closed Mondays, 9:30 to 17:30. Its shows have timed online tickets, so check the museum site for this one."]
 ],"Tokyo");
 
 addPins(KY_PLACES,[

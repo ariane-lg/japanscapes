@@ -29,8 +29,12 @@ var MUSEUMS=[
   url:"https://www.teamlab.art/e/planets/"},
  {n:"Tokyo National Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",
   how:"No booking for the main galleries; some special exhibitions use timed tickets.",url:"https://www.tnm.jp/?lang=en"},
- {n:"Sumida Hokusai Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",
-  how:"Small museum; usually closed Mondays.",url:"https://hokusai-museum.jp/?lang=en"},
+ {n:"Sumida Hokusai Museum",c:"Tokyo",closed:[1],conf:"official",book:"advised",
+  how:"Closed Mondays, and the next weekday after a Monday holiday. 9:30 to 17:30, last entry 17:00. The 10th-anniversary show runs to 23 Nov (second display from 21 Oct); adult ticket about ¥1,500. The museum's pages for other shows sell timed online tickets that skip the reception line, with limited sales and no changes or refunds. I could not find the ticket page for this show, so look on the museum's site. The permanent room is mostly replicas; originals are in the special show.",
+  url:"https://hokusai-museum.jp/?lang=en"},
+ {n:"Ota Memorial Museum of Art (ukiyo-e, Harajuku)",c:"Tokyo",closed:[1],conf:"official",book:"no",
+  how:"Ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs 6 Oct to 6 Dec; the second display starts 7 Nov and the museum is closed 4 to 6 Nov for the change. Closed Mondays (9, 16 and 24 Nov). No reservation needed; cash only. Weekends, holidays and the last days of a show are busy, so go on a weekday. Admission and hours were not on the page I read, so check.",
+  url:"https://ukiyoe-ota-muse.jp/eng"},
  {n:"21_21 Design Sight",c:"Tokyo",closed:[2],conf:"usual",book:"no",
   how:"Closed Tuesdays, between exhibitions and over New Year.",url:"https://www.2121designsight.jp/en/"},
  {n:"Imperial Palace East Gardens",c:"Tokyo",closed:[1,5],conf:"usual",book:"no",
@@ -54,6 +58,9 @@ function calEvents(y,m,d){
  if(oedo[key])add("market","Oedo Antique Market","Tokyo","Around 250 outdoor stalls at Tokyo International Forum, 9:00 to 16:00, free. Cancelled in rain, so check the website that morning. The best market for tea and traditional craft.","https://www.antique-market.jp/english/");
  if(key==="2026-12-5"||key==="2026-12-6")add("market","Heiwajima Antique Fair","Tokyo","Indoor fair at the Tokyo Ryutsu Center, about 100 dealers, free. The oldest indoor antiques event in Japan, held four times a year.","https://kottouichi.com/en.html");
  if(key==="2026-11-10"||key==="2026-12-10")add("book","Ghibli Museum tickets go on sale","Tokyo","Tickets for the following month are released at 10:00 Japan time on the 10th, through Lawson Ticket. Be ready a few minutes early; popular dates go fast.","https://www.ghibli-museum.jp/en/");
+ if(key==="2026-11-4"||key==="2026-11-5"||key==="2026-11-6")add("exhibit","Ota Museum closed for display change","Tokyo","The ukiyo-e museum in Harajuku is closed 4 to 6 Nov. The second display of the Oi show opens on 7 Nov.","https://ukiyoe-ota-muse.jp/eng");
+ if(key==="2026-11-7")add("exhibit","Ota Museum: second display opens","Tokyo","Second half of Katsushika Oi: Night Scene in the Yoshiwara, to 6 Dec. No booking, cash only; weekdays are quieter.","https://ukiyoe-ota-muse.jp/eng");
+ if(key==="2026-11-23")add("exhibit","Hokusai Museum 10th-anniversary show ends","Tokyo","Last day of the special show of the museum's best works. Look for its timed online tickets.","https://hokusai-museum.jp/?lang=en");
  if(key==="2026-11-3")add("holiday","Culture Day","Japan","National holiday. Museums and gardens are busier.","");
  if(key==="2026-11-23")add("holiday","Labour Thanksgiving Day","Japan","National holiday on a Monday. Museums that close on Mondays usually open today and close the next day instead.","");
  if(key==="2026-11-15")add("season","Shichi-go-san","Japan","Traditional shrine visits for children aged three, five and seven, many in kimono. Big shrines such as Meiji Jingu and Hie are lively, especially at weekends around the 15th.","");
