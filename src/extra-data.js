@@ -185,13 +185,13 @@ var OS_PLACES=[
 
 /* ---------- Nakasendo & Fuji-Hakone ---------- */
 var NK_HOODS=[
- {id:"magome",name:"Magome",short:"Magome",lalign:"r",ltag:"start",jp:"馬籠",lat:35.5217,lng:137.5636,r:.32,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
+ {id:"magome",name:"Magome",short:"Magome",lalign:"r",ltag:"start",jp:"馬籠",lat:35.5268,lng:137.5677,r:.32,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
   intro:"Magome burned down twice in the last century and was rebuilt each time to its Edo-period look on purpose. It was the 43rd of 69 post towns on the Nakasendo, the inland route between Edo and Kyoto.",
   see:["Magome-juku main street","Mt Ena viewpoint"],picks:"Walk it early, before the day-trippers."},
- {id:"trail",name:"Magome-Tsumago trail",short:"The walk",lalign:"r",ltag:"forest path",jp:"妻籠宿への道",lat:35.5380,lng:137.5540,r:.45,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
+ {id:"trail",name:"Magome-Tsumago trail",short:"The walk",lalign:"r",ltag:"forest path",jp:"妻籠宿への道",lat:35.5500,lng:137.5820,r:.45,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
   intro:"The path between the two post towns runs through forest and past a waterfall, with almost no power lines in sight. Same-day luggage forwarding between the towns (about ¥1,000 per bag) means you can walk it without your bags.",
   see:["Odaki and Medaki waterfalls","Free-tea rest stops"],picks:"Start early, from Magome, so the walk is mostly downhill."},
- {id:"tsumago",name:"Tsumago",short:"Tsumago",lalign:"l",ltag:"finish",jp:"妻籠",lat:35.5539,lng:137.5444,r:.32,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
+ {id:"tsumago",name:"Tsumago",short:"Tsumago",lalign:"l",ltag:"finish",jp:"妻籠",lat:35.5770,lng:137.5954,r:.32,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
   intro:"Tsumago began restoring its post-town streets in the late 1960s, and residents later pledged not to sell, rent or demolish historic buildings, a model for preservation towns across Japan. No visible vending machines, no daytime cars, no power lines.",
   see:["Preserved Edo-period main street","Waki-honjin Okuya (former inn, now museum)"],picks:"Stay until the day-trippers leave."},
  {id:"hakone",name:"Hakone (Owakudani)",short:"Hakone",jp:"箱根",lat:35.2430,lng:139.0195,r:1.2,p:1,tags:["nature"],tag:"Hakone and its black-egg valley",
@@ -202,10 +202,10 @@ var NK_HOODS=[
   see:["Lake Kawaguchiko lakeside viewpoints"],picks:"Another popular Fuji base."}
 ];
 var NK_PLACES=[
- ["Magome-juku main street","sight","magome",35.5217,137.5636,"Stone-paved, car-free post town"],
- ["Tsumago-juku main street","sight","tsumago",35.5539,137.5444,"The most complete Edo streetscape left"],
- ["Waki-honjin Okuya","sight","tsumago",35.5540,137.5440,"Former inn, now a museum"],
- ["Odaki and Medaki waterfalls","green","trail",35.5360,137.5560,"On the trail, near the midpoint"],
+ ["Magome-juku main street","sight","magome",35.5268,137.5677,"Stone-paved, car-free post town"],
+ ["Tsumago-juku main street","sight","tsumago",35.5770,137.5954,"The most complete Edo streetscape left"],
+ ["Waki-honjin Okuya","sight","tsumago",35.5775,137.5948,"Former inn, now a museum"],
+ ["Odaki and Medaki waterfalls","green","trail",35.5491,137.5874,"On the trail, near the midpoint"],
  ["Owakudani","sight","hakone",35.2433,139.0194,"Sulphur valley and black eggs"],
  ["Oishi Park, Kawaguchiko","green","kawaguchiko",35.5260,138.7650,"A popular Fuji viewpoint on the lake"]
 ];

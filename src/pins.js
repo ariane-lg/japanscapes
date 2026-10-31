@@ -45,8 +45,8 @@ addPins(OS_PLACES,[
 ],"Osaka");
 
 addPins(NK_PLACES,[
- ["Shimazaki Toson Memorial Museum","sight","magome",35.5223,137.5628,"Museum for the writer Shimazaki Toson, who was born in Magome"],
- ["Otsumago hamlet","sight","trail",35.5441,137.5529,"Small hamlet near the Tsumago end of the walk, a good place to rest"],
+ ["Shimazaki Toson Memorial Museum","sight","magome",35.5271,137.5675,"Museum for the writer Shimazaki Toson, who was born in Magome"],
+ ["Otsumago hamlet","sight","trail",35.5641,137.5911,"Small hamlet near the Tsumago end of the walk, a good place to rest"],
  ["Tōge no Chaya (tea house on the trail)","eat","trail",35.5392,137.5848,"A small tea house on the old road between Magome and Tsumago, serving a gohei-mochi set, soba sets, goma dango with hot tea and shaved ice. Listed as open 10:30 to 15:00 every day; one listing gives +81 573-69-3550. Bring your own water and check it is open before you count on it.","Tōge no Chaya, Nagiso, Nagano"],
  ["Hakone Open-Air Museum","sight","hakone",35.2443,139.0521,"Sculpture park in the hills, with a Picasso pavilion"],
  ["Hakone Shrine","sight","hakone",35.2040,139.0256,"Lakeside shrine with a red torii standing in Lake Ashi"],

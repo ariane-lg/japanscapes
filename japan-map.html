@@ -1060,13 +1060,13 @@ var OS_PLACES=[
 
 /* ---------- Nakasendo & Fuji-Hakone ---------- */
 var NK_HOODS=[
- {id:"magome",name:"Magome",short:"Magome",lalign:"r",ltag:"start",jp:"馬籠",lat:35.5217,lng:137.5636,r:.32,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
+ {id:"magome",name:"Magome",short:"Magome",lalign:"r",ltag:"start",jp:"馬籠",lat:35.5268,lng:137.5677,r:.32,p:1,tags:["heritage"],tag:"A post town rebuilt to look like it never changed",
   intro:"Magome burned down twice in the last century and was rebuilt each time to its Edo-period look on purpose. It was the 43rd of 69 post towns on the Nakasendo, the inland route between Edo and Kyoto.",
   see:["Magome-juku main street","Mt Ena viewpoint"],picks:"Walk it early, before the day-trippers."},
- {id:"trail",name:"Magome-Tsumago trail",short:"The walk",lalign:"r",ltag:"forest path",jp:"妻籠宿への道",lat:35.5380,lng:137.5540,r:.45,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
+ {id:"trail",name:"Magome-Tsumago trail",short:"The walk",lalign:"r",ltag:"forest path",jp:"妻籠宿への道",lat:35.5500,lng:137.5820,r:.45,p:1,tags:["nature","heritage"],tag:"An 8km walk the Kiso valley protects on purpose",
   intro:"The path between the two post towns runs through forest and past a waterfall, with almost no power lines in sight. Same-day luggage forwarding between the towns (about ¥1,000 per bag) means you can walk it without your bags.",
   see:["Odaki and Medaki waterfalls","Free-tea rest stops"],picks:"Start early, from Magome, so the walk is mostly downhill."},
- {id:"tsumago",name:"Tsumago",short:"Tsumago",lalign:"l",ltag:"finish",jp:"妻籠",lat:35.5539,lng:137.5444,r:.32,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
+ {id:"tsumago",name:"Tsumago",short:"Tsumago",lalign:"l",ltag:"finish",jp:"妻籠",lat:35.5770,lng:137.5954,r:.32,p:1,tags:["heritage"],tag:"Where Japan's preservation movement began",
   intro:"Tsumago began restoring its post-town streets in the late 1960s, and residents later pledged not to sell, rent or demolish historic buildings, a model for preservation towns across Japan. No visible vending machines, no daytime cars, no power lines.",
   see:["Preserved Edo-period main street","Waki-honjin Okuya (former inn, now museum)"],picks:"Stay until the day-trippers leave."},
  {id:"hakone",name:"Hakone (Owakudani)",short:"Hakone",jp:"箱根",lat:35.2430,lng:139.0195,r:1.2,p:1,tags:["nature"],tag:"Hakone and its black-egg valley",
@@ -1077,10 +1077,10 @@ var NK_HOODS=[
   see:["Lake Kawaguchiko lakeside viewpoints"],picks:"Another popular Fuji base."}
 ];
 var NK_PLACES=[
- ["Magome-juku main street","sight","magome",35.5217,137.5636,"Stone-paved, car-free post town"],
- ["Tsumago-juku main street","sight","tsumago",35.5539,137.5444,"The most complete Edo streetscape left"],
- ["Waki-honjin Okuya","sight","tsumago",35.5540,137.5440,"Former inn, now a museum"],
- ["Odaki and Medaki waterfalls","green","trail",35.5360,137.5560,"On the trail, near the midpoint"],
+ ["Magome-juku main street","sight","magome",35.5268,137.5677,"Stone-paved, car-free post town"],
+ ["Tsumago-juku main street","sight","tsumago",35.5770,137.5954,"The most complete Edo streetscape left"],
+ ["Waki-honjin Okuya","sight","tsumago",35.5775,137.5948,"Former inn, now a museum"],
+ ["Odaki and Medaki waterfalls","green","trail",35.5491,137.5874,"On the trail, near the midpoint"],
  ["Owakudani","sight","hakone",35.2433,139.0194,"Sulphur valley and black eggs"],
  ["Oishi Park, Kawaguchiko","green","kawaguchiko",35.5260,138.7650,"A popular Fuji viewpoint on the lake"]
 ];
@@ -1088,7 +1088,7 @@ var NK_PLACES=[
   arr.forEach(function(a,i){ arr[i]={i:i,name:a[0],cat:a[1],hood:a[2],lat:a[3],lng:a[4],note:a[5],q:a[0]+", Japan",src:"guide"}; });
 });
 
-﻿var NK_TRAIL=[[35.52170,137.56362],[35.52205,137.56348],[35.52236,137.56325],[35.52265,137.56318],[35.52291,137.56345],[35.52326,137.56348],[35.52348,137.56399],[35.52544,137.56279],[35.52641,137.56218],[35.52694,137.56187],[35.52723,137.56174],[35.52759,137.56204],[35.52813,137.56163],[35.52892,137.56132],[35.53045,137.55994],[35.53182,137.55894],[35.53279,137.55836],[35.53319,137.55827],[35.53506,137.55788],[35.53566,137.55730],[35.53607,137.55718],[35.53637,137.55695],[35.53652,137.55599],[35.53653,137.55543],[35.53646,137.5551],[35.53656,137.55498],[35.53674,137.55528],[35.53715,137.55528],[35.53735,137.55536],[35.53779,137.55591],[35.53808,137.55612],[35.53845,137.55620],[35.53895,137.55636],[35.53936,137.55614],[35.53980,137.55594],[35.54036,137.55544],[35.54071,137.55506],[35.54122,137.55491],[35.54183,137.55464],[35.54240,137.55425],[35.54261,137.55394],[35.54291,137.55364],[35.54356,137.55326],[35.54394,137.55294],[35.54420,137.55292],[35.54466,137.55305],[35.54576,137.55342],[35.54609,137.55354],[35.54624,137.55345],[35.54643,137.55316],[35.54675,137.55256],[35.54700,137.55240],[35.54817,137.55172],[35.54829,137.55124],[35.54866,137.54997],[35.54929,137.55000],[35.54975,137.54976],[35.55020,137.54950],[35.55034,137.54944],[35.55044,137.54938],[35.55053,137.54922],[35.55064,137.54906],[35.55080,137.54900],[35.55106,137.54908],[35.55117,137.54910],[35.55141,137.54901],[35.55156,137.54890],[35.55161,137.54874],[35.55175,137.54830],[35.55177,137.54809],[35.55180,137.54783],[35.55195,137.54769],[35.55217,137.54761],[35.55245,137.54757],[35.55269,137.54748],[35.55297,137.54710],[35.55308,137.54698],[35.55358,137.54677],[35.55380,137.54686],[35.55390,137.54684],[35.55420,137.54578],[35.55451,137.54483],[35.5543,137.54478],[35.55416,137.54461],[35.55393,137.54438],[35.55393,137.54438]];
+﻿var NK_TRAIL=[[35.52680,137.56770],[35.52734,137.56817],[35.52786,137.56887],[35.52831,137.56943],[35.52877,137.57002],[35.52894,137.57025],[35.52896,137.57049],[35.52916,137.57095],[35.52897,137.57142],[35.52920,137.57179],[35.52956,137.57178],[35.52993,137.57174],[35.53035,137.57187],[35.53061,137.57207],[35.53081,137.57217],[35.53086,137.57246],[35.53064,137.57289],[35.53050,137.57317],[35.53043,137.57396],[35.53093,137.57454],[35.53126,137.57485],[35.53161,137.57542],[35.53179,137.57567],[35.53203,137.57577],[35.53231,137.57603],[35.53271,137.57695],[35.53300,137.57788],[35.53344,137.57788],[35.53374,137.57786],[35.53396,137.57829],[35.53402,137.57875],[35.53406,137.57911],[35.53409,137.57942],[35.53426,137.58013],[35.53437,137.58050],[35.53435,137.58096],[35.53423,137.58125],[35.53434,137.58166],[35.53438,137.58198],[35.53475,137.58246],[35.53531,137.58290],[35.53620,137.58363],[35.53668,137.58404],[35.53767,137.58439],[35.53789,137.58452],[35.53823,137.58451],[35.53871,137.58462],[35.53907,137.58472],[35.53921,137.58485],[35.53960,137.58494],[35.53996,137.58518],[35.54020,137.58528],[35.54006,137.58501],[35.54028,137.58496],[35.54064,137.58504],[35.54164,137.58526],[35.54205,137.58569],[35.54292,137.58591],[35.54376,137.58584],[35.54435,137.58573],[35.54483,137.58579],[35.54522,137.58598],[35.54539,137.58621],[35.54551,137.58651],[35.54571,137.58677],[35.54599,137.58710],[35.54646,137.58721],[35.54694,137.58738],[35.54741,137.58758],[35.54806,137.58761],[35.54864,137.58737],[35.54911,137.58743],[35.54966,137.58773],[35.55016,137.58771],[35.55072,137.58771],[35.55125,137.58826],[35.55156,137.58849],[35.55214,137.58849],[35.55268,137.58873],[35.55287,137.58892],[35.55338,137.58894],[35.55377,137.58897],[35.55354,137.58943],[35.55392,137.58943],[35.55463,137.58956],[35.55518,137.58944],[35.55574,137.58943],[35.55621,137.58959],[35.55656,137.58940],[35.55671,137.58956],[35.55693,137.58952],[35.55782,137.59000],[35.55838,137.59035],[35.55853,137.59040],[35.55889,137.59021],[35.55924,137.59061],[35.55919,137.59073],[35.55915,137.59093],[35.55957,137.59135],[35.55994,137.59164],[35.56029,137.59219],[35.56065,137.59225],[35.56063,137.59243],[35.56039,137.59255],[35.56052,137.59255],[35.56084,137.59261],[35.56104,137.59259],[35.56129,137.59254],[35.56183,137.59271],[35.56215,137.59240],[35.56260,137.59215],[35.56304,137.59216],[35.56342,137.59193],[35.56379,137.59171],[35.56371,137.59142],[35.56376,137.59201],[35.56329,137.59199],[35.56393,137.59241],[35.56464,137.59259],[35.56476,137.59293],[35.56537,137.59274],[35.56565,137.59300],[35.56587,137.59349],[35.56617,137.59399],[35.56661,137.59393],[35.56687,137.59441],[35.56738,137.59434],[35.56777,137.59366],[35.56827,137.59380],[35.56878,137.59400],[35.56915,137.59414],[35.56948,137.59428],[35.56990,137.59445],[35.57017,137.59438],[35.57056,137.59419],[35.57095,137.59412],[35.57116,137.59412],[35.57148,137.59445],[35.57216,137.59521],[35.57266,137.59557],[35.57325,137.59582],[35.57356,137.59581],[35.57397,137.59560],[35.57444,137.59546],[35.57483,137.59533],[35.57547,137.59496],[35.57603,137.59485],[35.57627,137.59509],[35.57655,137.59519],[35.57701,137.59534]];
 
 /* ---------- Lore: history, culture & craft, food, practical tips, sources ---------- */
 /* Written in my own words from the linked sources. h=history  c=culture & craft  f=food  t=good to know  s=sources */
@@ -1768,8 +1768,8 @@ addPins(OS_PLACES,[
 ],"Osaka");
 
 addPins(NK_PLACES,[
- ["Shimazaki Toson Memorial Museum","sight","magome",35.5223,137.5628,"Museum for the writer Shimazaki Toson, who was born in Magome"],
- ["Otsumago hamlet","sight","trail",35.5441,137.5529,"Small hamlet near the Tsumago end of the walk, a good place to rest"],
+ ["Shimazaki Toson Memorial Museum","sight","magome",35.5271,137.5675,"Museum for the writer Shimazaki Toson, who was born in Magome"],
+ ["Otsumago hamlet","sight","trail",35.5641,137.5911,"Small hamlet near the Tsumago end of the walk, a good place to rest"],
  ["Tōge no Chaya (tea house on the trail)","eat","trail",35.5392,137.5848,"A small tea house on the old road between Magome and Tsumago, serving a gohei-mochi set, soba sets, goma dango with hot tea and shaved ice. Listed as open 10:30 to 15:00 every day; one listing gives +81 573-69-3550. Bring your own water and check it is open before you count on it.","Tōge no Chaya, Nagiso, Nagano"],
  ["Hakone Open-Air Museum","sight","hakone",35.2443,139.0521,"Sculpture park in the hills, with a Picasso pavilion"],
  ["Hakone Shrine","sight","hakone",35.2040,139.0256,"Lakeside shrine with a red torii standing in Lake Ashi"],
