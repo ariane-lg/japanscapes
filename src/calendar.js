@@ -42,8 +42,8 @@ var MUSEUMS=[
  {n:"Kyoto National Museum",c:"Kyoto",closed:[1],conf:"official",book:"no",
   how:"Open 9:00 to 17:30; if a Monday is a national holiday it opens that day and closes the next. Special exhibition The Tale of Genji runs to 29 Nov 2026, with the collection galleries off view until 22 Dec. No booking needed for it.",
   url:"https://www.kyohaku.go.jp/eng/",src:"kno"},
- {n:"Kyoto Imperial Palace",c:"Kyoto",closed:[1],conf:"usual",book:"no",
-  how:"Free, and the Imperial Household Agency says no application is needed. Normally closed on Mondays (the next day if Monday is a holiday) and over the year-end; in winter it admits visitors until about 15:20 and closes at 16:00.",url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"},
+ {n:"Kyoto Imperial Palace",c:"Kyoto",closed:[1],conf:"official",book:"no",
+  how:"Walk-in and free; the Imperial Household Agency says no registration or prior arrangement is needed. Closed Mondays (open on a Monday holiday and closed the next day instead) and 28 Dec to 4 Jan; it can close without notice for court functions or weather. Enter by Seishomon Gate; bags are checked and large baggage is not allowed. Free guided tours of about 50 minutes, no registration (may need it if crowded): English at 10:00 and 14:00. A free audio-guide app is also offered. Opening and last-entry times are on the official calendar, not the page I read; one earlier source gives winter entry to about 15:20 and closing at 16:00.",url:"https://kyoto-gosho.kunaicho.go.jp/en/visit",src:"kuna"},
  {n:"Sento Palace, Katsura and Shugakuin villas",c:"Kyoto",closed:[],conf:"official",book:"required",
   how:"These three Imperial Household properties can be visited only by advance application made online through each property's page. Apply as early as you can; slots are limited.",
   url:"https://sankan.kunaicho.go.jp/english/index.html",src:"kuna"}
