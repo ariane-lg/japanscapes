@@ -826,10 +826,18 @@ var HOODS=[
   intro:"A quiet warehouse district turned coffee neighbourhood, Kiyosumi-Shirakawa took off after Blue Bottle opened its first Japanese café here in 2015, and other roasters followed. It also has the Museum of Contemporary Art Tokyo and Kiyosumi Garden, a Meiji-era stroll garden around a pond.",
   see:["The stepping stones across Kiyosumi Garden’s pond","The Museum of Contemporary Art Tokyo (MOT)","A coffee crawl between the roasteries"],
   l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"},
- {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["heritage"],
+ {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["history","temples"],
   tag:"The temple of the 47 ronin",
   intro:"Sengaku-ji, near Sengakuji station in the south of Minato, is the temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta retold in the Chushingura story. A small museum and the memorial graves sit beside it.",
-  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."}
+  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."},
+ {id:"ryogoku",name:"Ryogoku",short:"Ryogoku",jp:"両国",g:"low",lat:35.6970,lng:139.7960,r:.7,p:1,tags:["art","history"],
+  tag:"Sumo, swords and Hokusai",
+  intro:"Ryogoku, on the east bank of the Sumida river, is Tokyo's sumo district, built around the Kokugikan arena. It also holds a cluster of museums: the Japanese Sword Museum, the Edo-Tokyo Museum, which reopened in 2026, and, a short walk east, the Sumida Hokusai Museum.",
+  see:["The Japanese Sword Museum","The Edo-Tokyo Museum","The Sumida Hokusai Museum"],picks:"Pair the Sword Museum with the Hokusai Museum; check the closing days first, as most close on Mondays."},
+ {id:"shiba",name:"Shiba & Tokyo Tower",short:"Shiba",jp:"芝",g:"low",lat:35.6579,lng:139.7469,r:.65,p:1,tags:["temples","history"],
+  tag:"The Tokugawa temple and the red tower",
+  intro:"Shiba, in the south of Minato, is where Tokyo Tower rises right behind Zojo-ji, the temple of the Tokugawa family. The tower seen through the temple's great gate is one of the city's classic old-and-new views.",
+  see:["Zojo-ji and its great gate","Tokyo Tower","The view of the tower through the temple gate"],picks:"Walk through the temple first, then go up the tower."}
 ];
 var HOOD={};HOODS.forEach(function(h){HOOD[h.id]=h});
 var CATS=[{id:"sight",name:"Sights & culture"},{id:"eat",name:"Eat & drink"},{id:"make",name:"Shops, craft & fabric"},{id:"green",name:"Parks & leaves"}];
@@ -1762,11 +1770,11 @@ addPins(PLACES,[
  ["Ohya Shobo","make","jimbocho",35.6959,139.7605,"Antiquarian bookshop, known for old maps and woodblock prints"],
  ["Bondy Jimbocho","eat","jimbocho",35.6959,139.7578,"European-style curry on Jimbocho's well-known curry circuit","Bondy, Jimbocho, Tokyo, Japan"],
  ["Tomato Nippori","make","nippori",35.7276,139.7697,"Huge fabric store, the flagship of Nippori Textile Town","Tomato, Nippori, Tokyo, Japan"],
- ["Japanese Sword Museum (Ryogoku)","sight","skytree",35.6988,139.7937,"Japan's national museum of the sword, run by the society that preserves it, with blades, fittings and armour-related pieces on rotating display. Listed as open 9:30 to 17:00, last entry 16:30, closed Mondays and during exhibition changes; about ¥1,000. A short walk from the Sumida Hokusai Museum, so the two make one outing.","Japanese Sword Museum, Sumida, Tokyo"],
+ ["Japanese Sword Museum (Ryogoku)","sight","ryogoku",35.6988,139.7937,"Japan's national museum of the sword, run by the society that preserves it, with blades, fittings and armour-related pieces on rotating display. Listed as open 9:30 to 17:00, last entry 16:30, closed Mondays and during exhibition changes; about ¥1,000. A short walk from the Sumida Hokusai Museum, so the two make one outing.","Japanese Sword Museum, Sumida, Tokyo"],
  ["Sengaku-ji (the 47 ronin)","sight","takanawa",35.6384,139.7390,"The temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta known as the Chushingura story. There is a small museum and the memorial graves; allow one to two hours. I found no confirmed opening hours or closing days, so check the temple's site before you go.","Sengaku-ji, Minato, Tokyo"],
  ["Hara Shobo (print dealer)","make","jimbocho",35.6958,139.7572,"A long-established dealer of Edo and Meiji woodblock prints in Jimbocho. Open Tuesday to Saturday, 11:00 to 18:00; closed Sundays, Mondays and public holidays. The site doesn't say whether you can walk in without an appointment, so phone 03-5212-7801 or use its contact page if unsure.","Hara Shobo, Jimbocho, Tokyo","https://harashobo.com/english/"],
  ["Ota Memorial Museum of Art (ukiyo-e)","sight","harajuku",35.6693,139.7040,"A small museum of ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs to 6 Dec, with a second display from 7 Nov (closed 4 to 6 Nov and Mondays). No reservation needed; cash only. Weekdays are quieter.","Ota Memorial Museum of Art, Tokyo"],
- ["Sumida Hokusai Museum","sight","skytree",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo. The 10th-anniversary show of its best works runs to 23 Nov. About 1,800 works in the collection, but the permanent room is mostly replicas. Closed Mondays, 9:30 to 17:30. Its shows have timed online tickets, so check the museum site for this one."]
+ ["Sumida Hokusai Museum","sight","ryogoku",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo. The 10th-anniversary show of its best works runs to 23 Nov. About 1,800 works in the collection, but the permanent room is mostly replicas. Closed Mondays, 9:30 to 17:30. Its shows have timed online tickets, so check the museum site for this one."]
 ],"Tokyo");
 
 addPins(KY_PLACES,[
@@ -1863,13 +1871,13 @@ OS_HOODS.push({id:"sumiyoshi",name:"Sumiyoshi",short:"Sumiyoshi",jp:"住吉",lat
 (function(){
   function add(arr,list,city){list.forEach(function(a){arr.push({i:arr.length,name:a[0],cat:a[1],hood:a[2],lat:a[3],lng:a[4],note:a[5],q:a[6]||(a[0]+", "+city+", Japan"),src:"guide",url:a[7]||"",cite:a[8]||null})})}
   add(PLACES,[
-   ["Zojo-ji","sight","roppongi",35.6573,139.7483,"The Tokugawa family temple, standing right beside Tokyo Tower. Its main gate dates from the Edo period and is among the oldest wooden structures in Tokyo.","Zojo-ji, Tokyo, Japan","https://www.zojoji.or.jp/en/"],
-   ["Tokyo Tower","sight","roppongi",35.6584,139.7455,"The red lattice tower of 1958, with observation decks over the city. Tickets can be bought online ahead of time.","Tokyo Tower, Japan","https://www.tokyotower.co.jp/en/"],
+   ["Zojo-ji","sight","shiba",35.6573,139.7483,"The Tokugawa family temple, standing right beside Tokyo Tower. Its main gate dates from the Edo period and is among the oldest wooden structures in Tokyo.","Zojo-ji, Tokyo, Japan","https://www.zojoji.or.jp/en/"],
+   ["Tokyo Tower","sight","shiba",35.6584,139.7455,"The red lattice tower of 1958, with observation decks over the city. Tickets can be bought online ahead of time.","Tokyo Tower, Japan","https://www.tokyotower.co.jp/en/"],
    ["Hama-rikyu Gardens","green","tsukiji",35.6602,139.7638,"An Edo-period garden of the shogun's family, with tidal ponds and a teahouse set on the water, against the skyscrapers of Shiodome.","Hama-rikyu Gardens, Tokyo, Japan"],
    ["Koishikawa Korakuen","green","kagurazaka",35.7054,139.7492,"One of Tokyo's oldest daimyo gardens, laid out from 1629 by the Mito branch of the Tokugawa, with Chinese-inspired scenery.","Koishikawa Korakuen, Tokyo, Japan"],
    ["Ueno Toshogu","sight","ueno",35.7154,139.7706,"A gilded shrine to Tokugawa Ieyasu, founded in 1627 and little changed since, set quietly inside Ueno Park.","Ueno Toshogu, Tokyo, Japan"],
    ["Yushima Seido","sight","akihabara",35.7004,139.7666,"A Confucian temple dating from 1690, once the Edo shogunate's school for training officials. Quiet, near Ochanomizu.","Yushima Seido, Tokyo, Japan"],
-   ["Edo-Tokyo Museum","sight","kuramae",35.6964,139.7961,"Tokyo's history museum, reopened on 31 March 2026 after about four years of renovation. Closed on Mondays; check the calendar.","Edo-Tokyo Museum, Tokyo, Japan","https://www.edo-tokyo-museum.or.jp/en/"]
+   ["Edo-Tokyo Museum","sight","ryogoku",35.6964,139.7961,"Tokyo's history museum, reopened on 31 March 2026 after about four years of renovation. Closed on Mondays; check the calendar.","Edo-Tokyo Museum, Tokyo, Japan","https://www.edo-tokyo-museum.or.jp/en/"]
   ],"Tokyo");
   add(KY_PLACES,[
    ["Nijo Castle","sight","nijo",35.0140,135.7485,"The shogun's Kyoto residence, built in 1603 by Tokugawa Ieyasu, famous for the Ninomaru Palace's 'nightingale' floors that sing underfoot. Admission is 8:45 to 16:00; Ninomaru Palace and general admission need no booking. The separate Honmaru Palace ticket must be bought online in advance (sales open 30 days ahead, no refunds); Honmaru is closed Mon 16 and Tue 17 Nov. Ninomaru is closed on Tuesdays only in December, January, July and August.","Nijo Castle, Kyoto, Japan","https://nijo-jocastle.city.kyoto.lg.jp/admission/ticket/"],
@@ -1889,7 +1897,11 @@ OS_HOODS.push({id:"sumiyoshi",name:"Sumiyoshi",short:"Sumiyoshi",jp:"住吉",lat
 addPins(KY_PLACES,[
  ["Takezasado (woodblock prints)","make","pontocho",35.0010,135.7565,"A print workshop and shop in a Meiji townhouse in Shimogyo ward, about 8 minutes on foot from Karasuma or Shijo. Sources disagree on hours (one says 11:00 to 18:00, closed Wednesdays; an older one 13:00 to 18:00, closed Sundays and holidays), so check first. Phone 075-353-8585. It also runs printmaking classes; I found no booking details. The pin position is my estimate.","Takezasado, Shimogyo, Kyoto","https://www.takezasado.com/"]
 ],"Kyoto");
-KY_PLACES.push({i:KY_PLACES.length,name:"Saiho-ji (the moss temple)",cat:"sight",hood:"arashiyama",lat:34.9939,lng:135.6847,note:"A garden of more than a hundred kinds of moss, in the Matsuo district south of Arashiyama. Entry is by advance reservation only, through the temple's own booking site or a return postcard; guides give the fee as ¥4,000 and the minimum age as 13, and visits start around 9:30. Pair it with Arashiyama on the same morning.",q:"Saiho-ji Kokedera, Kyoto, Japan",src:"guide",url:"https://saihoji-kokedera.com/en/reservation.html",cite:["Kyoto Tourism: Saiho-ji (Kokedera)","https://kyoto.travel/en/destinations/saihoji-temple-kokedera-temple/"]});
+KY_HOODS.push({id:"matsuo",name:"Matsuo & Saiho-ji",short:"Matsuo",jp:"松尾",lat:34.9945,lng:135.6860,r:.7,p:1,tags:["temples"],tag:"The moss temple and an old shrine",
+  intro:"Matsuo, in the south-west of Kyoto, is the quiet district around Matsuo-taisha shrine and Saiho-ji, the moss temple. It is a short taxi or bus ride south of Arashiyama, so it pairs with it for a morning.",
+  see:["Saiho-ji, the moss temple (by reservation only)","Matsuo-taisha shrine"],picks:"Go by taxi or bus from Arashiyama, and keep the reservation confirmation with you."});
+
+KY_PLACES.push({i:KY_PLACES.length,name:"Saiho-ji (the moss temple)",cat:"sight",hood:"matsuo",lat:34.9939,lng:135.6847,note:"A garden of more than a hundred kinds of moss, in the Matsuo district south of Arashiyama. Entry is by advance reservation only, through the temple's own booking site or a return postcard; guides give the fee as ¥4,000 and the minimum age as 13, and visits start around 9:30. Pair it with Arashiyama on the same morning.",q:"Saiho-ji Kokedera, Kyoto, Japan",src:"guide",url:"https://saihoji-kokedera.com/en/reservation.html",cite:["Kyoto Tourism: Saiho-ji (Kokedera)","https://kyoto.travel/en/destinations/saihoji-temple-kokedera-temple/"]});
 addPins(KY_PLACES,[
   ["Shigetsu (Zen vegetarian lunch)","eat","arashiyama",35.0160,135.6727,"The temple's own restaurant inside the Tenryu-ji grounds, serving a multi-course Zen vegetarian meal. The official page gives lunch 11:00 to 14:00, closed Thursdays, with the Moon set at ¥6,500; reservations are recommended and it often sells out. The meal is separate from the garden fee.","Shigetsu Tenryu-ji, Kyoto"],
   ["Yudofu Sagano","eat","arashiyama",35.0166,135.6702,"A tofu restaurant in the Sagano area, near the bamboo grove, serving yudofu (tofu simmered in a pot) with tempura and pickles. Guides give about ¥4,400 for the set and take reservations on 075-871-6946; hours vary by source, so check before you go.","Yudofu Sagano, Kyoto"],

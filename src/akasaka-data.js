@@ -118,10 +118,18 @@ var HOODS=[
   intro:"A quiet warehouse district turned coffee neighbourhood, Kiyosumi-Shirakawa took off after Blue Bottle opened its first Japanese café here in 2015, and other roasters followed. It also has the Museum of Contemporary Art Tokyo and Kiyosumi Garden, a Meiji-era stroll garden around a pond.",
   see:["The stepping stones across Kiyosumi Garden’s pond","The Museum of Contemporary Art Tokyo (MOT)","A coffee crawl between the roasteries"],
   l:["Z"],t:"20 min",go:"Hanzomon line from Nagatacho to Kiyosumi-shirakawa, direct",when:"A weekday morning"},
- {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["heritage"],
+ {id:"takanawa",name:"Takanawa & Sengaku-ji",short:"Takanawa",jp:"高輪",g:"low",lat:35.6384,lng:139.7390,r:.45,p:1,tags:["history","temples"],
   tag:"The temple of the 47 ronin",
   intro:"Sengaku-ji, near Sengakuji station in the south of Minato, is the temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta retold in the Chushingura story. A small museum and the memorial graves sit beside it.",
-  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."}
+  see:["The graves of the 47 ronin","The small museum beside the temple"],picks:"Allow one to two hours; I found no confirmed opening hours, so check the temple site first."},
+ {id:"ryogoku",name:"Ryogoku",short:"Ryogoku",jp:"両国",g:"low",lat:35.6970,lng:139.7960,r:.7,p:1,tags:["art","history"],
+  tag:"Sumo, swords and Hokusai",
+  intro:"Ryogoku, on the east bank of the Sumida river, is Tokyo's sumo district, built around the Kokugikan arena. It also holds a cluster of museums: the Japanese Sword Museum, the Edo-Tokyo Museum, which reopened in 2026, and, a short walk east, the Sumida Hokusai Museum.",
+  see:["The Japanese Sword Museum","The Edo-Tokyo Museum","The Sumida Hokusai Museum"],picks:"Pair the Sword Museum with the Hokusai Museum; check the closing days first, as most close on Mondays."},
+ {id:"shiba",name:"Shiba & Tokyo Tower",short:"Shiba",jp:"芝",g:"low",lat:35.6579,lng:139.7469,r:.65,p:1,tags:["temples","history"],
+  tag:"The Tokugawa temple and the red tower",
+  intro:"Shiba, in the south of Minato, is where Tokyo Tower rises right behind Zojo-ji, the temple of the Tokugawa family. The tower seen through the temple's great gate is one of the city's classic old-and-new views.",
+  see:["Zojo-ji and its great gate","Tokyo Tower","The view of the tower through the temple gate"],picks:"Walk through the temple first, then go up the tower."}
 ];
 var HOOD={};HOODS.forEach(function(h){HOOD[h.id]=h});
 var CATS=[{id:"sight",name:"Sights & culture"},{id:"eat",name:"Eat & drink"},{id:"make",name:"Shops, craft & fabric"},{id:"green",name:"Parks & leaves"}];
