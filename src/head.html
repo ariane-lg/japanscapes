@@ -103,6 +103,8 @@
   [data-band="overview"] .hlabel,[data-band="overview"] path.hood{display:none}
   [data-band="overview"] .pin,[data-band="area"] .pin{display:none}
   [data-band="overview"] .pintip,[data-band="area"] .pintip,[data-band="detail"] .pintip:not(.on){display:none}
+  /* "Show pins": keep every pin on the map at any zoom */
+  [data-pins="all"] .pin.pinb{display:grid!important}
 
   path.pin{stroke:#fff;stroke-width:1.6;fill-opacity:1;cursor:pointer}
   path.pin-sight{fill:#27405e} path.pin-eat{fill:#c23a2b} path.pin-make{fill:#a8842c} path.pin-green{fill:#5f7a3f}

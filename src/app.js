@@ -30,7 +30,7 @@ function hotelsOf(c){return c.hotels||(c.hotel?[c.hotel]:[])}
 function nearHotel(c,p){var hs=hotelsOf(c),b=null,bd=1e9;hs.forEach(function(h){var d=Math.pow(h.lat-p.lat,2)+Math.pow(h.lng-p.lng,2);if(d<bd){bd=d;b=h}});return b}
 if(typeof PERSONAL!=="undefined"){Object.keys(PERSONAL.hotels||{}).forEach(function(k){CITIES[k].hotel=PERSONAL.hotels[k]});Object.keys(PERSONAL.dates).forEach(function(k){CITIES[k].dates=PERSONAL.dates[k]});var _b=$(".brand small");if(_b)_b.textContent=PERSONAL.brand}
 var ORDER=["tokyo","nakasendo","kyoto","osaka","calendar"];
-var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,lines:false,base:"auto"};
+var state={city:"tokyo",ward:null,hood:null,place:null,cats:{sight:1,eat:1,make:1,green:1},mine:false,pins:false,lines:false,base:"auto"};
 function C(){return CITIES[state.city]}
 var ICON={
  sight:'<path d="M2.5 6.2c3-1.3 6-1.9 9.5-1.9s6.5.6 9.5 1.9"/><path d="M5 9.6h14"/><path d="M7.2 6v14.5M16.8 6v14.5"/>',
@@ -362,14 +362,15 @@ $("#panel").addEventListener("click",function(e){
 });
 
 /* ---------- toolbar & tabs ---------- */
+function applyPins(){map.getContainer().setAttribute("data-pins",state.pins?"all":"")}
 function buildTools(){
   var t=$("#maptools");
   var h="";
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
-  h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
+  h+="<button class='chip' data-pins='1' aria-pressed='"+state.pins+"'>"+ico('mine')+"Show pins</button>";
   if(CITYLINES[state.city])h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
   h+="<span class='srch'><input id='q' type='search' placeholder='Search places &amp; areas' aria-label='Search places and areas' autocomplete='off' spellcheck='false'><div class='qres' id='qres' hidden></div></span>";
-  t.innerHTML=h;
+  t.innerHTML=h;applyPins();
 }
 /* ---------- search: areas and pins across all cities ---------- */
 var SIDX=null,SR=[];
@@ -429,7 +430,7 @@ $("#maptools").addEventListener("click",function(e){
     state.base=b.dataset.base;
     if(state.base==="auto")band();else useTiles(state.base);
   }else if(b.dataset.cat){state.cats[b.dataset.cat]=state.cats[b.dataset.cat]?0:1;refreshPins();render()}
-  else if(b.dataset.mine){state.mine=!state.mine;refreshPins();render()}
+  else if(b.dataset.pins){state.pins=!state.pins;b.setAttribute('aria-pressed',state.pins);applyPins()}
   else if(b.dataset.lines){state.lines=!state.lines;if(state.lines)G.line.addTo(map);else map.removeLayer(G.line)}
   buildTools();
 });
