@@ -162,7 +162,7 @@ var P=[
  ["Nihonbashi bridge","sight","nihonbashi",35.6840,139.7745,"Kilometre zero for Japan’s roads"],
  ["Tsukiji Outer Market","eat","tsukiji",35.6654,139.7707,"Go before 10am"],
  ["Tsukiji Hongwanji","sight","tsukiji",35.6665,139.7724,"Temple built in an Indian-inspired style"],
- ["Tokyo National Museum","sight","ueno",35.7188,139.7765,"Japan’s oldest museum, founded 1872"],
+ ["Tokyo National Museum","sight","ueno",35.7188,139.7765,"Japan’s oldest museum, founded 1872. A Hiroshige woodblock-print exhibition runs in the Honkan to 20 Dec (extra charge). Closed Mondays; usually 9:30 to 17:00 and later on some Fridays and Saturdays. Check the museum site."],
  ["Shinobazu Pond","green","ueno",35.7120,139.7710,"Lotus pond with a temple island"],
  ["Ameyoko","eat","ueno",35.7100,139.7745,"Market street with postwar roots"],
  ["Nezu Shrine","sight","yanesen",35.7203,139.7604,"Tunnel of red torii"],

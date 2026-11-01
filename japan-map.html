@@ -856,7 +856,7 @@ var P=[
  ["Nihonbashi bridge","sight","nihonbashi",35.6840,139.7745,"Kilometre zero for Japan’s roads"],
  ["Tsukiji Outer Market","eat","tsukiji",35.6654,139.7707,"Go before 10am"],
  ["Tsukiji Hongwanji","sight","tsukiji",35.6665,139.7724,"Temple built in an Indian-inspired style"],
- ["Tokyo National Museum","sight","ueno",35.7188,139.7765,"Japan’s oldest museum, founded 1872"],
+ ["Tokyo National Museum","sight","ueno",35.7188,139.7765,"Japan’s oldest museum, founded 1872. A Hiroshige woodblock-print exhibition runs in the Honkan to 20 Dec (extra charge). Closed Mondays; usually 9:30 to 17:00 and later on some Fridays and Saturdays. Check the museum site."],
  ["Shinobazu Pond","green","ueno",35.7120,139.7710,"Lotus pond with a temple island"],
  ["Ameyoko","eat","ueno",35.7100,139.7745,"Market street with postwar roots"],
  ["Nezu Shrine","sight","yanesen",35.7203,139.7604,"Tunnel of red torii"],
@@ -1750,6 +1750,7 @@ addPins(PLACES,[
  ["Tomato Nippori","make","nippori",35.7276,139.7697,"Huge fabric store, the flagship of Nippori Textile Town","Tomato, Nippori, Tokyo, Japan"],
  ["Japanese Sword Museum (Ryogoku)","sight","skytree",35.6988,139.7937,"Japan's national museum of the sword, run by the society that preserves it, with blades, fittings and armour-related pieces on rotating display. Listed as open 9:30 to 17:00, last entry 16:30, closed Mondays and during exhibition changes; about ¥1,000. A short walk from the Sumida Hokusai Museum, so the two make one outing.","Japanese Sword Museum, Sumida, Tokyo"],
  ["Sengaku-ji (the 47 ronin)","sight","takanawa",35.6384,139.7390,"The temple where Lord Asano and his 47 loyal retainers are buried, the Edo-period vendetta known as the Chushingura story. There is a small museum and the memorial graves; allow one to two hours. I found no confirmed opening hours or closing days, so check the temple's site before you go.","Sengaku-ji, Minato, Tokyo"],
+ ["Hara Shobo (print dealer)","make","jimbocho",35.6958,139.7572,"A long-established dealer of Edo and Meiji woodblock prints in Jimbocho. Open Tuesday to Saturday, 11:00 to 18:00; closed Sundays, Mondays and public holidays. The site doesn't say whether you can walk in without an appointment, so phone 03-5212-7801 or use its contact page if unsure.","Hara Shobo, Jimbocho, Tokyo","https://harashobo.com/english/"],
  ["Ota Memorial Museum of Art (ukiyo-e)","sight","harajuku",35.6693,139.7040,"A small museum of ukiyo-e prints only. Katsushika Oi: Night Scene in the Yoshiwara runs to 6 Dec, with a second display from 7 Nov (closed 4 to 6 Nov and Mondays). No reservation needed; cash only. Weekdays are quieter.","Ota Memorial Museum of Art, Tokyo"],
  ["Sumida Hokusai Museum","sight","skytree",35.6964,139.8005,"Museum devoted to Hokusai, who was born in this part of Edo. The 10th-anniversary show of its best works runs to 23 Nov. About 1,800 works in the collection, but the permanent room is mostly replicas. Closed Mondays, 9:30 to 17:30. Its shows have timed online tickets, so check the museum site for this one."]
 ],"Tokyo");
@@ -1871,6 +1872,9 @@ OS_HOODS.push({id:"sumiyoshi",name:"Sumiyoshi",short:"Sumiyoshi",jp:"住吉",lat
   ],"Osaka");
 })();
 
+addPins(KY_PLACES,[
+ ["Takezasado (woodblock prints)","make","pontocho",35.0010,135.7565,"A print workshop and shop in a Meiji townhouse in Shimogyo ward, about 8 minutes on foot from Karasuma or Shijo. Sources disagree on hours (one says 11:00 to 18:00, closed Wednesdays; an older one 13:00 to 18:00, closed Sundays and holidays), so check first. Phone 075-353-8585. It also runs printmaking classes; I found no booking details. The pin position is my estimate.","Takezasado, Shimogyo, Kyoto","https://www.takezasado.com/"]
+],"Kyoto");
 KY_PLACES.push({i:KY_PLACES.length,name:"Saiho-ji (the moss temple)",cat:"sight",hood:"arashiyama",lat:34.9939,lng:135.6847,note:"A garden of more than a hundred kinds of moss, in the Matsuo district south of Arashiyama. Entry is by advance reservation only, through the temple's own booking site or a return postcard; guides give the fee as ¥4,000 and the minimum age as 13, and visits start around 9:30. Pair it with Arashiyama on the same morning.",q:"Saiho-ji Kokedera, Kyoto, Japan",src:"guide",url:"https://saihoji-kokedera.com/en/reservation.html",cite:["Kyoto Tourism: Saiho-ji (Kokedera)","https://kyoto.travel/en/destinations/saihoji-temple-kokedera-temple/"]});
 addPins(KY_PLACES,[
   ["Shigetsu (Zen vegetarian lunch)","eat","arashiyama",35.0160,135.6727,"The temple's own restaurant inside the Tenryu-ji grounds, serving a multi-course Zen vegetarian meal. The official page gives lunch 11:00 to 14:00, closed Thursdays, with the Moon set at ¥6,500; reservations are recommended and it often sells out. The meal is separate from the garden fee.","Shigetsu Tenryu-ji, Kyoto"],
@@ -1948,7 +1952,11 @@ var MUSEUMS=[
   how:"Both use dated, timed tickets that sell out days ahead, especially at weekends and on holidays. Book a slot before you travel. Closing days vary by venue, so check the calendar when you book.",
   url:"https://www.teamlab.art/e/planets/"},
  {n:"Tokyo National Museum",c:"Tokyo",closed:[1],conf:"usual",book:"no",
-  how:"No booking for the main galleries; some special exhibitions use timed tickets.",url:"https://www.tnm.jp/?lang=en"},
+  how:"Closed Mondays (the next day after a Monday holiday). Usually 9:30 to 17:00, and later on some Fridays and Saturdays: the museum's own page showed 9:30 to 20:00 on the day I looked, other guides say until 21:00, so check. General admission is about ¥1,000 (older pages say ¥620). A Hiroshige woodblock-print special exhibition, \"Hiroshige: New Perspectives on Edo Japan\", is on in the Honkan to 20 Dec, and costs extra. No booking for the main galleries; some special exhibitions use timed tickets, so check the site for this one.",url:"https://www.tnm.jp/?lang=en"},
+ {n:"Hara Shobo (print dealer, Jimbocho)",c:"Tokyo",closed:[0,1],conf:"official",book:"no",
+  how:"Open Tuesday to Saturday, 11:00 to 18:00; closed Sundays, Mondays and public holidays (from its own site). A long-established dealer of Edo and Meiji woodblock prints, in Kanda Jimbocho. The site does not say whether you can walk in without an appointment, so ask by phone (03-5212-7801) or its contact page if unsure.",url:"https://harashobo.com/english/"},
+ {n:"Takezasado (woodblock print shop, Kyoto)",c:"Kyoto",closed:[],conf:"usual",book:"no",
+  how:"A print workshop and shop in a Meiji townhouse in Shimogyo ward, about 8 minutes on foot from Karasuma or Shijo. Sources disagree on hours and closing days: one gives 11:00 to 18:00 and closed Wednesdays, an older one 13:00 to 18:00 and closed Sundays and holidays. Phone 075-353-8585. It also runs printmaking classes; I found no booking details, so contact the shop first.",url:"https://www.takezasado.com/"},
  {n:"Sumida Hokusai Museum",c:"Tokyo",closed:[1],conf:"official",book:"advised",
   how:"Closed Mondays, and the next weekday after a Monday holiday. 9:30 to 17:30, last entry 17:00. The 10th-anniversary show runs to 23 Nov (second display from 21 Oct); adult ticket about ¥1,500. The museum's pages for other shows sell timed online tickets that skip the reception line, with limited sales and no changes or refunds. I could not find the ticket page for this show, so look on the museum's site. The permanent room is mostly replicas; originals are in the special show.",
   url:"https://hokusai-museum.jp/?lang=en"},
