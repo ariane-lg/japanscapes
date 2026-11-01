@@ -368,10 +368,58 @@ function buildTools(){
   CATS.forEach(function(k){h+="<button class='chip' data-cat='"+k.id+"' aria-pressed='"+!!state.cats[k.id]+"'>"+dsc(k.id)+k.name+"</button>"});
   h+="<button class='chip' data-mine='1' aria-pressed='"+state.mine+"'>"+ico('mine')+"Only mine</button>";
   if(CITYLINES[state.city])h+="<button class='chip line-chip' data-lines='1' aria-pressed='"+state.lines+"'>"+ico('line')+"Metro lines</button>";
+  h+="<span class='srch'><input id='q' type='search' placeholder='Search places &amp; areas' aria-label='Search places and areas' autocomplete='off' spellcheck='false'><div class='qres' id='qres' hidden></div></span>";
   t.innerHTML=h;
 }
+/* ---------- search: areas and pins across all cities ---------- */
+var SIDX=null,SR=[];
+function norm(s){return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+function srchIndex(){
+  if(SIDX)return SIDX;
+  SIDX=[];
+  ORDER.forEach(function(k){
+    var c=CITIES[k];if(!c||!c.hoods)return;
+    var by={};c.hoods.forEach(function(h){by[h.id]=h;SIDX.push({k:k,t:"area",o:h,n:h.name,s:norm(h.name+" "+(h.short||"")+" "+(h.jp||"")),lab:"Area"})});
+    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),lab:catName(p.cat)})});
+  });
+  return SIDX;
+}
+function srchRun(q){
+  q=norm(q.trim());if(q.length<2)return [];
+  var out=[];
+  srchIndex().forEach(function(it){
+    var n=norm(it.n),r=n.indexOf(q)===0?0:n.indexOf(" "+q)>-1?1:n.indexOf(q)>-1?2:it.s.indexOf(q)>-1?3:-1;
+    if(r>-1)out.push({it:it,r:r});
+  });
+  out.sort(function(a,b){return a.r-b.r||(a.it.t===b.it.t?0:a.it.t==="area"?-1:1)});
+  return out.slice(0,8).map(function(x){return x.it});
+}
+function srchShow(q){
+  var box=$("#qres");if(!box)return;
+  SR=srchRun(q);
+  if(!q.trim()||q.trim().length<2){box.hidden=true;box.innerHTML="";return}
+  box.innerHTML=SR.length?SR.map(function(it,i){return "<button type='button' data-sr='"+i+"'><span>"+it.n+"</span><small>"+it.lab+" · "+CITIES[it.k].short+"</small></button>"}).join(""):"<div class='none'>Nothing found</div>";
+  box.hidden=false;
+}
+function srchPick(i){
+  var it=SR[i];if(!it)return;
+  var box=$("#qres"),inp=$("#q");
+  if(state.city!==it.k)setCity(it.k);
+  if(it.t==="area"){selectHood(it.o.id);map.flyTo([it.o.lat,it.o.lng],(it.o.r||.5)>=.8?15:15.5,{duration:.8})}
+  else{if(!state.cats[it.o.cat]){state.cats[it.o.cat]=1;buildTools();refreshPins()}selectPlace(it.o)}
+  var q=$("#q");if(q)q.value="";var b=$("#qres");if(b){b.hidden=true;b.innerHTML=""}
+}
+$("#maptools").addEventListener("input",function(e){if(e.target.id==="q")srchShow(e.target.value)});
+$("#maptools").addEventListener("keydown",function(e){
+  if(e.target.id!=="q")return;
+  if(e.key==="Enter"){e.preventDefault();srchPick(0)}
+  else if(e.key==="Escape"){var b=$("#qres");if(b){b.hidden=true}e.target.blur()}
+});
+document.addEventListener("click",function(e){if(!e.target.closest(".srch")){var b=$("#qres");if(b)b.hidden=true}});
+
 $("#maptools").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
+  if(b.dataset.sr)return srchPick(+b.dataset.sr);
   if(b.dataset.base){
     state.base=b.dataset.base;
     if(state.base==="auto")band();else useTiles(state.base);

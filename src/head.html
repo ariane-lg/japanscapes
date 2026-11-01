@@ -670,6 +670,18 @@
     .pwrap{padding:calc(var(--u)*3) calc(var(--u)*2.5) calc(var(--u)*6)}
     :root{--ax:28px}
   }
+  /* search: a hairline field at the end of the key, results open above it */
+  .srch{position:relative;display:inline-flex;align-items:center}
+  .srch input{font:italic 500 .86rem/1 'Shippori Mincho',serif;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:.3rem .1rem;width:11.5rem;outline:none;transition:border-color .3s var(--ease);-webkit-appearance:none;appearance:none}
+  .srch input::placeholder{color:var(--soft);opacity:.85}
+  .srch input:focus{border-bottom-color:var(--ink)}
+  .srch input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .qres{position:absolute;left:0;bottom:calc(100% + 8px);width:min(22rem,82vw);max-height:17rem;overflow:auto;background:var(--raise);border:1px solid var(--line);box-shadow:0 10px 30px -14px rgba(22,26,33,.3);z-index:900}
+  .qres[hidden]{display:none}
+  .qres button{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;width:100%;text-align:left;background:none;border:none;border-radius:0;padding:.55rem .75rem;font:italic 500 .86rem/1.25 'Shippori Mincho',serif;color:var(--ink);cursor:pointer}
+  .qres button:hover,.qres button.on{background:color-mix(in srgb,var(--ink) 5%,transparent)}
+  .qres small{font:400 .62rem 'Zen Kaku Gothic New',sans-serif;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+  .qres .none{padding:.65rem .75rem;color:var(--soft);font:italic 500 .84rem 'Shippori Mincho',serif}
 </style>
 </head>
 <body>
