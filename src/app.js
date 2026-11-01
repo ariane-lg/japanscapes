@@ -161,7 +161,7 @@ function buildLayers(){
     L.circleMarker(NK_TRAIL[NK_TRAIL.length-1],{radius:4,color:"#1e2527",weight:1,fillColor:"#1e2527",fillOpacity:1,interactive:false,className:"trail-end"}).addTo(G.hood);
   }
   c.places.forEach(function(p){
-    var mine=p.src==="research"||p.src==="list";
+    var mine=p.src==="research"||p.src==="list"||p.src==="irene";
     p.mine=mine;
     p.m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:"pin pinb pin-"+p.cat+(mine?" mine":""),html:ico(p.cat,true),iconSize:[28,28],iconAnchor:[14,14]}),riseOnHover:true,keyboard:false});
     p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[16,0],className:"pintip"});
@@ -319,7 +319,7 @@ function hoodHTML(){
 function placeHTML(){
   var c=C(),p=state.place,hd=p.hoodObj;
   var list=hd?(hd.ward&&hd.ward.hoods.length>1?hd.ward.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}):[hd].concat(nearHoods(hd,2))):[];
-  var tx=p.src==="list"?"From your Maps list: "+p.list:p.src==="research"?"From your research":"Suggested landmark";
+  var tx=p.src==="list"?"From your Maps list: "+p.list:p.src==="research"?"From your research":p.src==="irene"?"Irene’s recommendation":"Suggested landmark";
   var note="<div class='srcnote"+(p.src==="guide"?" soft":"")+"'>"+ico("mine",true)+"<span>"+tx+"</span></div>";
   var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"",note).replace("class='hero","class='hero place");
   h+="<p class='lead'>"+p.note+"</p>";
@@ -380,7 +380,7 @@ function srchIndex(){
   ORDER.forEach(function(k){
     var c=CITIES[k];if(!c||!c.hoods)return;
     var by={};c.hoods.forEach(function(h){by[h.id]=h;SIDX.push({k:k,t:"area",o:h,n:h.name,s:norm(h.name+" "+(h.short||"")+" "+(h.jp||"")),d:norm([h.tag,h.intro,(h.see||[]).join(" "),h.picks,(h.tags||[]).map(function(t){return TAGS[t]||t}).join(" ")].join(" ")),lab:"Area"})});
-    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),d:norm([p.note,catName(p.cat)].join(" ")),lab:catName(p.cat)})});
+    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),d:norm([p.note,catName(p.cat),p.src==="irene"?"irene recommendation":""].join(" ")),lab:catName(p.cat)})});
   });
   return SIDX;
 }

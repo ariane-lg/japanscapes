@@ -154,3 +154,45 @@ addPins(KY_PLACES,[
   ["Yudofu Sagano","eat","arashiyama",35.0166,135.6702,"A tofu restaurant in the Sagano area, near the bamboo grove, serving yudofu (tofu simmered in a pot) with tempura and pickles. Guides give about ¥4,400 for the set and take reservations on 075-871-6946; hours vary by source, so check before you go.","Yudofu Sagano, Kyoto"],
   ["Arashiyama Yoshimura (soba)","eat","arashiyama",35.0108,135.6774,"Soba beside the Togetsukyo bridge. It takes no reservations, so there is a walk-in queue, short at off-peak weekday lunch and long in autumn-leaf season. Hours vary by source (around 11:00 to 17:00); phone 075-863-5700.","Arashiyama Yoshimura soba, Kyoto"]
 ],"Kyoto");
+
+/* ---------- Irene's Tokyo list (a shared Google Maps list; 25 places) ---------- */
+(function(){
+  var IRENE=[
+    ["WaraTako","Takoyaki restaurant",35.6666794,139.70618],
+    ["The Matcha Tokyo Omotesandō","Cafe",35.666928,139.7063615],
+    ["Sushi Tokyo Ten","Sushi restaurant",35.6884554,139.7005282],
+    ["YAKINIKU WASHINO SHINJUKU","Yakiniku restaurant",35.6917743,139.706754],
+    ["Kakashi","Ramen restaurant",35.7084793,139.7757348],
+    ["Uruchi “ULT” Ramen","Ramen restaurant",35.7094737,139.7903368],
+    ["Suzukien Asakusa matcha gelato","Traditional teahouse, matcha gelato",35.7163436,139.7969391],
+    ["Hatoya Asakusa","Cafe",35.7145375,139.8014641],
+    ["Mallory Pork Steak Naka-meguro","Steak house",35.6423201,139.6966631],
+    ["Hatoya Shibuya","Cafe",35.6656199,139.6925832],
+    ["Kiwamiya Shibuya PARCO Store","Steak house",35.6621425,139.6984964],
+    ["Ikedaya TeaStore Matcha","Tea shop",35.6904103,139.6987575],
+    ["Kenyan Shibuya","Tea room",35.6638151,139.6999153],
+    ["Himawari Sushi Shintoshin","Conveyor belt sushi",35.6889788,139.6975038],
+    ["Sushi Choshimaru Shinjuku Subnade","Conveyor belt sushi",35.6936175,139.7012413],
+    ["Koseto","Coffee shop",35.6961456,139.7613172],
+    ["Tonkatsu Aoki Nihombashi","Tonkatsu restaurant",35.6897493,139.7722289],
+    ["Manten Sushi Marunouchi","Sushi restaurant",35.6787845,139.7627699],
+    ["Tsubakiya Coffee","Cafe",35.6689814,139.7618337],
+    ["Sumiyaki Unafuji Yurakucho Store","Unagi restaurant",35.6703288,139.7590179],
+    ["Tonkatsu Aoki Daimon","Tonkatsu restaurant",35.6587985,139.7557589],
+    ["Miura Misaki Port Ueno","Sushi restaurant",35.71091,139.7749875],
+    ["Tonkatsu Hasegawa","Tonkatsu restaurant",35.6950281,139.793942],
+    ["Kosoan","Japanese sweets restaurant",35.6106826,139.6685775],
+    ["Chiyaba","Cafe",35.6417503,139.6958261]
+  ];
+  function nearest(lat,lng){
+    var best=null,bd=1e9;
+    HOODS.forEach(function(h){if(h.lat==null)return;var d=Math.pow(h.lat-lat,2)+Math.pow((h.lng-lng)*.82,2);if(d<bd){bd=d;best=h}});
+    return best?best.id:"";
+  }
+  function nm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,"")}
+  IRENE.forEach(function(a){
+    var dup=PLACES.filter(function(o){return nm(o.name)===nm(a[0])})[0];
+    if(dup){dup.note=(dup.note?dup.note+" ":"")+"Irene recommends it too.";return}
+    PLACES.push({i:PLACES.length,name:a[0],cat:"eat",hood:nearest(a[2],a[3]),lat:a[2],lng:a[3],note:a[1]+".",q:a[0]+", Tokyo, Japan",src:"irene"});
+  });
+})();

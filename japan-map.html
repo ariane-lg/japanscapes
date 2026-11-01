@@ -1894,6 +1894,48 @@ addPins(KY_PLACES,[
   ["Arashiyama Yoshimura (soba)","eat","arashiyama",35.0108,135.6774,"Soba beside the Togetsukyo bridge. It takes no reservations, so there is a walk-in queue, short at off-peak weekday lunch and long in autumn-leaf season. Hours vary by source (around 11:00 to 17:00); phone 075-863-5700.","Arashiyama Yoshimura soba, Kyoto"]
 ],"Kyoto");
 
+/* ---------- Irene's Tokyo list (a shared Google Maps list; 25 places) ---------- */
+(function(){
+  var IRENE=[
+    ["WaraTako","Takoyaki restaurant",35.6666794,139.70618],
+    ["The Matcha Tokyo Omotesandō","Cafe",35.666928,139.7063615],
+    ["Sushi Tokyo Ten","Sushi restaurant",35.6884554,139.7005282],
+    ["YAKINIKU WASHINO SHINJUKU","Yakiniku restaurant",35.6917743,139.706754],
+    ["Kakashi","Ramen restaurant",35.7084793,139.7757348],
+    ["Uruchi “ULT” Ramen","Ramen restaurant",35.7094737,139.7903368],
+    ["Suzukien Asakusa matcha gelato","Traditional teahouse, matcha gelato",35.7163436,139.7969391],
+    ["Hatoya Asakusa","Cafe",35.7145375,139.8014641],
+    ["Mallory Pork Steak Naka-meguro","Steak house",35.6423201,139.6966631],
+    ["Hatoya Shibuya","Cafe",35.6656199,139.6925832],
+    ["Kiwamiya Shibuya PARCO Store","Steak house",35.6621425,139.6984964],
+    ["Ikedaya TeaStore Matcha","Tea shop",35.6904103,139.6987575],
+    ["Kenyan Shibuya","Tea room",35.6638151,139.6999153],
+    ["Himawari Sushi Shintoshin","Conveyor belt sushi",35.6889788,139.6975038],
+    ["Sushi Choshimaru Shinjuku Subnade","Conveyor belt sushi",35.6936175,139.7012413],
+    ["Koseto","Coffee shop",35.6961456,139.7613172],
+    ["Tonkatsu Aoki Nihombashi","Tonkatsu restaurant",35.6897493,139.7722289],
+    ["Manten Sushi Marunouchi","Sushi restaurant",35.6787845,139.7627699],
+    ["Tsubakiya Coffee","Cafe",35.6689814,139.7618337],
+    ["Sumiyaki Unafuji Yurakucho Store","Unagi restaurant",35.6703288,139.7590179],
+    ["Tonkatsu Aoki Daimon","Tonkatsu restaurant",35.6587985,139.7557589],
+    ["Miura Misaki Port Ueno","Sushi restaurant",35.71091,139.7749875],
+    ["Tonkatsu Hasegawa","Tonkatsu restaurant",35.6950281,139.793942],
+    ["Kosoan","Japanese sweets restaurant",35.6106826,139.6685775],
+    ["Chiyaba","Cafe",35.6417503,139.6958261]
+  ];
+  function nearest(lat,lng){
+    var best=null,bd=1e9;
+    HOODS.forEach(function(h){if(h.lat==null)return;var d=Math.pow(h.lat-lat,2)+Math.pow((h.lng-lng)*.82,2);if(d<bd){bd=d;best=h}});
+    return best?best.id:"";
+  }
+  function nm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,"")}
+  IRENE.forEach(function(a){
+    var dup=PLACES.filter(function(o){return nm(o.name)===nm(a[0])})[0];
+    if(dup){dup.note=(dup.note?dup.note+" ":"")+"Irene recommends it too.";return}
+    PLACES.push({i:PLACES.length,name:a[0],cat:"eat",hood:nearest(a[2],a[3]),lat:a[2],lng:a[3],note:a[1]+".",q:a[0]+", Tokyo, Japan",src:"irene"});
+  });
+})();
+
 /* ---------- Lines: finish the Tokyo lines, and add Kyoto and Osaka ---------- */
 var NEWST={
  "Ogikubo":[35.7045,139.6202],"Minami-Asagaya":[35.6994,139.6357],"Shin-Koenji":[35.6979,139.6487],"Higashi-Koenji":[35.6982,139.6582],
@@ -2219,7 +2261,7 @@ function buildLayers(){
     L.circleMarker(NK_TRAIL[NK_TRAIL.length-1],{radius:4,color:"#1e2527",weight:1,fillColor:"#1e2527",fillOpacity:1,interactive:false,className:"trail-end"}).addTo(G.hood);
   }
   c.places.forEach(function(p){
-    var mine=p.src==="research"||p.src==="list";
+    var mine=p.src==="research"||p.src==="list"||p.src==="irene";
     p.mine=mine;
     p.m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:"pin pinb pin-"+p.cat+(mine?" mine":""),html:ico(p.cat,true),iconSize:[28,28],iconAnchor:[14,14]}),riseOnHover:true,keyboard:false});
     p.m.bindTooltip(p.name,{permanent:true,direction:"right",offset:[16,0],className:"pintip"});
@@ -2377,7 +2419,7 @@ function hoodHTML(){
 function placeHTML(){
   var c=C(),p=state.place,hd=p.hoodObj;
   var list=hd?(hd.ward&&hd.ward.hoods.length>1?hd.ward.hoods.slice().sort(function(a,b){return (b.r||.5)-(a.r||.5)}):[hd].concat(nearHoods(hd,2))):[];
-  var tx=p.src==="list"?"From your Maps list: "+p.list:p.src==="research"?"From your research":"Suggested landmark";
+  var tx=p.src==="list"?"From your Maps list: "+p.list:p.src==="research"?"From your research":p.src==="irene"?"Irene’s recommendation":"Suggested landmark";
   var note="<div class='srcnote"+(p.src==="guide"?" soft":"")+"'>"+ico("mine",true)+"<span>"+tx+"</span></div>";
   var h=crumbs(3)+hero("",p.name,catName(p.cat),list,hd?hd.id:"",note).replace("class='hero","class='hero place");
   h+="<p class='lead'>"+p.note+"</p>";
@@ -2438,7 +2480,7 @@ function srchIndex(){
   ORDER.forEach(function(k){
     var c=CITIES[k];if(!c||!c.hoods)return;
     var by={};c.hoods.forEach(function(h){by[h.id]=h;SIDX.push({k:k,t:"area",o:h,n:h.name,s:norm(h.name+" "+(h.short||"")+" "+(h.jp||"")),d:norm([h.tag,h.intro,(h.see||[]).join(" "),h.picks,(h.tags||[]).map(function(t){return TAGS[t]||t}).join(" ")].join(" ")),lab:"Area"})});
-    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),d:norm([p.note,catName(p.cat)].join(" ")),lab:catName(p.cat)})});
+    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),d:norm([p.note,catName(p.cat),p.src==="irene"?"irene recommendation":""].join(" ")),lab:catName(p.cat)})});
   });
   return SIDX;
 }
