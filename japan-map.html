@@ -2437,20 +2437,25 @@ function srchIndex(){
   SIDX=[];
   ORDER.forEach(function(k){
     var c=CITIES[k];if(!c||!c.hoods)return;
-    var by={};c.hoods.forEach(function(h){by[h.id]=h;SIDX.push({k:k,t:"area",o:h,n:h.name,s:norm(h.name+" "+(h.short||"")+" "+(h.jp||"")),lab:"Area"})});
-    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),lab:catName(p.cat)})});
+    var by={};c.hoods.forEach(function(h){by[h.id]=h;SIDX.push({k:k,t:"area",o:h,n:h.name,s:norm(h.name+" "+(h.short||"")+" "+(h.jp||"")),d:norm([h.tag,h.intro,(h.see||[]).join(" "),h.picks,(h.tags||[]).map(function(t){return TAGS[t]||t}).join(" ")].join(" ")),lab:"Area"})});
+    (c.places||[]).forEach(function(p){var h=by[p.hood];SIDX.push({k:k,t:"place",o:p,n:p.name,s:norm(p.name+" "+(h?h.name:"")),d:norm([p.note,catName(p.cat)].join(" ")),lab:catName(p.cat)})});
   });
   return SIDX;
 }
 function srchRun(q){
   q=norm(q.trim());if(q.length<2)return [];
+  var terms=q.split(/\s+/).filter(function(t){return t.length>1});
   var out=[];
   srchIndex().forEach(function(it){
     var n=norm(it.n),r=n.indexOf(q)===0?0:n.indexOf(" "+q)>-1?1:n.indexOf(q)>-1?2:it.s.indexOf(q)>-1?3:-1;
+    if(r<0&&terms.length){
+      var all=terms.every(function(t){return it.s.indexOf(t)>-1||it.d.indexOf(t)>-1});
+      if(all)r=4;
+    }
     if(r>-1)out.push({it:it,r:r});
   });
   out.sort(function(a,b){return a.r-b.r||(a.it.t===b.it.t?0:a.it.t==="area"?-1:1)});
-  return out.slice(0,8).map(function(x){return x.it});
+  return out.slice(0,10).map(function(x){return x.it});
 }
 function srchShow(q){
   var box=$("#qres");if(!box)return;
