@@ -177,7 +177,7 @@ var P=[
  ["Kayaba Coffee","eat","yanesen",35.7213,139.7695,"Kissaten dating from 1938","Kayaba Coffee Yanaka"],
  ["Yanaka Ginza","make","yanesen",35.7277,139.7657,"Old shopping street · go before lunch"],
  ["Nippori Fabric Town · Tomato","make","nippori",35.7297,139.7743,"80-plus fabric shops · Tomato flagship 10am–6pm","Tomato Nippori fabric"],
- ["Senso-ji","sight","asakusa",35.7148,139.7967,"Tokyo’s oldest temple"],
+ ["Senso-ji","sight","asakusa",35.7148,139.7967,"Tokyo’s oldest temple, traditionally dated to the 7th century, and the heart of Asakusa. Come in through the Kaminarimon gate with its giant red lantern, then along Nakamise street to the main hall. The grounds are open at all hours and free, with no booking; the main hall keeps shorter hours (from memory, about 6:30 to 17:00 in winter). Quietest early in the morning."],
  ["Hoppy Street","eat","asakusa",35.7138,139.7942,"Outdoor izakaya · expect a table charge"],
  ["Kappabashi","make","asakusa",35.7106,139.7880,"Kitchenware street · weekdays, bring cash","Kappabashi Kitchen Town"],
  ["Maito Kuramae","make","kuramae",35.7036,139.7899,"Natural-dye workshop and shop"],

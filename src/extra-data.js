@@ -131,7 +131,7 @@ var KY_HOODS=[
   see:["Kurama-dera temple and mountain trail","Kibune riverside restaurants"],picks:"Hike the mountain path between the two villages."}
 ];
 var KY_PLACES=[
- ["Kiyomizu-dera","sight","higashiyama",34.9949,135.7850,"Wooden stage over the hillside"],
+ ["Kiyomizu-dera","sight","higashiyama",34.9949,135.7850,"A large hillside temple and UNESCO site, known for its wooden stage that juts out over the trees with a view across Kyoto. Walk in, with a ticket at the gate (about ¥500, from memory). Mid to late November is the autumn-colour season, but the approach streets, Sannenzaka and Ninenzaka, are crowded by mid-morning. Its autumn evening opening is listed for 21 to 30 Nov, after your stay."],
  ["Sannenzaka and Ninenzaka","sight","higashiyama",34.9985,135.7807,"Stone lanes lined with old shops"],
  ["Kodai-ji","sight","higashiyama",35.0003,135.7813,"Temple with garden and evening illuminations"],
  ["Hanamikoji-dori","sight","gion",35.0030,135.7755,"Gion's main geisha street"],
@@ -139,12 +139,12 @@ var KY_PLACES=[
  ["Shirakawa canal","green","gion",35.0065,135.7740,"Willow-lined canal and teahouses"],
  ["Nishiki Market","eat","pontocho",35.0050,135.7646,"Four centuries of food stalls"],
  ["Pontocho alley","eat","pontocho",35.0065,135.7707,"Narrow alley of restaurants"],
- ["Fushimi Inari-taisha","sight","fushimi",34.9671,135.7727,"Thousands of torii gates"],
+ ["Fushimi Inari-taisha","sight","fushimi",34.9671,135.7727,"Thousands of vermilion torii gates form tunnels up the wooded hill of Inari, and you walk through them. Open at all hours and free, with no booking. The full climb to the summit is roughly two to three hours (from memory); the first stretch of gates is the busiest, so go early or turn back at a viewpoint part-way up."],
  ["Gekkeikan Okura Sake Museum","eat","fushimi",34.9300,135.7619,"Sake tasting in the brewery district"],
  ["Arashiyama Bamboo Grove","green","arashiyama",35.0170,135.6713,"Go at opening"],
  ["Tenryu-ji","sight","arashiyama",35.0158,135.6738,"Garden temple, UNESCO World Heritage"],
  ["Togetsukyo Bridge","sight","arashiyama",35.0100,135.6775,"The wooden-style bridge over the Katsura River"],
- ["Kinkaku-ji","sight","kinkakuji",35.0394,135.7292,"The Golden Pavilion"],
+ ["Kinkaku-ji","sight","kinkakuji",35.0394,135.7292,"The Golden Pavilion: a gilded Zen temple building reflected in its pond, and a UNESCO site. It is one of Kyoto's most photographed sights. A one-way path takes in the pavilion and garden in about 45 minutes. Walk in, with a ticket at the gate (about ¥500, open around 9:00 to 17:00; both from memory, so check). Calmer early in the morning or late in the afternoon."],
  ["Ryoan-ji","sight","kinkakuji",35.0345,135.7183,"Rock garden"],
  ["Kamo-Takano stepping stones","green","demachiyanagi",35.0305,135.7720,"Where two rivers meet"],
  ["Kurama-dera","sight","kurama",35.1190,135.7676,"Mountain temple"],
