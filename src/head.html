@@ -672,6 +672,42 @@
     .pwrap{padding:calc(var(--u)*3) calc(var(--u)*2.5) calc(var(--u)*6)}
     :root{--ax:28px}
   }
+  /* phones: easier to read and tap */
+  @media (max-width:900px){
+    .tabs{flex-wrap:wrap;overflow:visible;align-items:center;gap:0 calc(var(--u)*2.2)}
+    .tab{min-height:42px;align-items:center;opacity:.62}
+    .tab:hover{opacity:.85}
+    .tab[aria-selected="true"]{opacity:1}
+    .tab span{letter-spacing:.06em}
+    .panel{margin-top:calc(var(--u)*2)}
+    .maptools{gap:0 calc(var(--u)*3)}
+    .chip{min-height:40px;padding:.6rem 0}
+    .srch{flex:1 1 11rem}
+    .maptools .srch input{width:100%;min-height:40px;font-size:16px}
+    .maptools .qres{width:min(22rem,calc(100vw - 2*var(--u)*2.5));max-height:45vh}
+    .maptools .qres button{padding:.8rem .75rem}
+    .panel .crumbs button{padding:.8rem .25rem;margin:-.6rem 0}
+    .panel .actions .btn,.panel a.btn{min-height:42px;display:inline-flex;align-items:center}
+    .panel .lnk{padding:.6rem 0}
+    .panel .srcs a{display:inline-block;padding:.5rem 0}
+    .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px}
+  }
+  /* phones: keep the map pinned while the card scrolls beneath it */
+  @media (max-width:900px){
+    .stage{display:contents}
+    .plate{position:sticky;top:0;z-index:30;height:42vh;margin:0 calc(var(--u)*2.5)}
+    .maptools{margin:0 calc(var(--u)*2.5)}
+    .stage.iscal .plate{position:relative;height:auto;z-index:auto}
+    .stage.iscal .calview{position:relative;inset:auto;padding:calc(var(--u)*2) 0;overflow:visible}
+    .calgrid{grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+    .cald{min-width:0;min-height:66px;padding:6px 5px}
+    .cald u{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.56rem}
+    .cald span{font-size:.95rem}
+    .cald em{flex-wrap:wrap;gap:3px}
+    .calhead h2{font-size:1.9rem}
+  }
+  .maphint{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;text-align:center;background:rgba(20,22,26,.5);color:#fff;font:italic 500 .95rem 'Shippori Mincho',serif;pointer-events:none;opacity:0;transition:opacity .25s;z-index:800}
+  .maphint.on{opacity:1}
   /* search: a hairline field at the end of the key, results open above it */
   .srch{position:relative;display:inline-flex;align-items:center}
   .srch input{font:italic 500 .86rem/1 'Shippori Mincho',serif;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:.3rem .1rem;width:11.5rem;outline:none;transition:border-color .3s var(--ease);-webkit-appearance:none;appearance:none}
