@@ -690,6 +690,8 @@
     .panel .actions .btn,.panel a.btn{min-height:42px;display:inline-flex;align-items:center}
     .panel .lnk{padding:.6rem 0}
     .panel .srcs a{display:inline-block;padding:.5rem 0}
+    ol.steps li{grid-template-columns:1fr;gap:2px;padding-bottom:6px}
+    ol.steps .tm:empty{display:none}
     .leaflet-touch .leaflet-bar a{width:40px;height:40px;line-height:40px}
   }
   /* phones: keep the map pinned while the card scrolls beneath it */
@@ -708,6 +710,10 @@
   }
   .maphint{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;text-align:center;background:rgba(20,22,26,.5);color:#fff;font:italic 500 .95rem 'Shippori Mincho',serif;pointer-events:none;opacity:0;transition:opacity .25s;z-index:800}
   .maphint.on{opacity:1}
+  /* phones held sideways: a taller map that scrolls with the page */
+  @media (max-width:900px) and (max-height:520px){
+    .plate{position:relative;height:78vh;min-height:220px}
+  }
   /* search: a hairline field at the end of the key, results open above it */
   .srch{position:relative;display:inline-flex;align-items:center}
   .srch input{font:italic 500 .86rem/1 'Shippori Mincho',serif;color:var(--ink);background:none;border:none;border-bottom:1px solid var(--line);border-radius:0;padding:.3rem .1rem;width:11.5rem;outline:none;transition:border-color .3s var(--ease);-webkit-appearance:none;appearance:none}
@@ -2624,7 +2630,7 @@ function render(){
   el.innerHTML="<div class='pwrap'>"+(state.place?placeHTML():state.hood?hoodHTML():state.ward?wardHTML():cityHTML())+"</div>";
   el.scrollTop=0;
   plateTitle();
-  if(innerWidth<=900&&window.__rendered&&(state.ward||state.hood||state.place)){var pl=$(".plate"),top=el.getBoundingClientRect().top+scrollY-(pl?pl.getBoundingClientRect().height:0);setTimeout(function(){window.scrollTo({top:Math.max(0,top),behavior:"smooth"})},60)}
+  if(innerWidth<=900&&window.__rendered&&(state.ward||state.hood||state.place)){var pl=$(".plate"),top=el.getBoundingClientRect().top+scrollY-(pl&&getComputedStyle(pl).position==="sticky"?pl.getBoundingClientRect().height:0);setTimeout(function(){window.scrollTo({top:Math.max(0,top),behavior:"smooth"})},60)}
   window.__rendered=1;
 }
 function plateTitle(){

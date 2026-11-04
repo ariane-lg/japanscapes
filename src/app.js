@@ -349,7 +349,7 @@ function render(){
   el.innerHTML="<div class='pwrap'>"+(state.place?placeHTML():state.hood?hoodHTML():state.ward?wardHTML():cityHTML())+"</div>";
   el.scrollTop=0;
   plateTitle();
-  if(innerWidth<=900&&window.__rendered&&(state.ward||state.hood||state.place)){var pl=$(".plate"),top=el.getBoundingClientRect().top+scrollY-(pl?pl.getBoundingClientRect().height:0);setTimeout(function(){window.scrollTo({top:Math.max(0,top),behavior:"smooth"})},60)}
+  if(innerWidth<=900&&window.__rendered&&(state.ward||state.hood||state.place)){var pl=$(".plate"),top=el.getBoundingClientRect().top+scrollY-(pl&&getComputedStyle(pl).position==="sticky"?pl.getBoundingClientRect().height:0);setTimeout(function(){window.scrollTo({top:Math.max(0,top),behavior:"smooth"})},60)}
   window.__rendered=1;
 }
 function plateTitle(){
